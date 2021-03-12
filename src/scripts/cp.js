@@ -736,14 +736,17 @@ CoursePresentation.prototype.resetRatio = function () {
  * @return {undefined}
  */
 CoursePresentation.prototype.resize = function () {
+  debugger;
   var fullscreenOn = this.$container.hasClass('h5p-fullscreen') || this.$container.hasClass('h5p-semi-fullscreen');
-  
+  console.log(this.slides[this.$current.index()].aspectRatio);
+  console.log(this.ratio)
   if (this.ignoreResize) {
     return; // When printing.
   }
 
   this.resetRatio();
-
+  console.log(this.slides[this.$current.index()].aspectRatio);
+  console.log(this.ratio)
   // Fill up all available width
   this.$wrapper.css('width', 'auto');
   var width = this.$container.width();
@@ -779,7 +782,7 @@ CoursePresentation.prototype.resize = function () {
   if (this.editor !== undefined) {
     this.editor.setContainerEm(this.fontSize * widthRatio * 0.75);
   }
-
+  console.log(style);
   this.$wrapper.css(style);
 
   this.swipeThreshold = widthRatio * 100; // Default swipe threshold is 50px.
@@ -797,6 +800,7 @@ CoursePresentation.prototype.resize = function () {
   }
 
   this.fitCT();
+  debugger;
 };
 
 /**
