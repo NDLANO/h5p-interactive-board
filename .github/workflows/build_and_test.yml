@@ -4,21 +4,25 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
         with:
           path: h5p-course-presentation
+
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: "15.x"
+
       - run: |
           cd h5p-course-presentation
           npm ci
           npm run validate-types
           npm run build
+
       - run: |
 
           mkdir -p dist
@@ -66,17 +70,25 @@ jobs:
           git clone https://github.com/NDLANO/h5p-drag-question.git && pushd h5p-drag-question && npm ci && npm run build && popd
 
           cp -r ../h5p-course-presentation .
+
       - run: |
           cd dist
           ls
           npm install -g h5p
           h5p pack -r h5p-course-presentation interaktiv_tavle.h5p
           h5p validate interaktiv_tavle.h5p
-      - name: Archive code coverage results
+
+      - name: Upload packed file as artifact
         uses: actions/upload-artifact@v2
         with:
           name: interaktiv_tavle.h5p
           path: dist/interaktiv_tavle.h5p
+  
+  release:
+    name: Create release
+    runs-on: ubuntu-latest
+  
+    steps:
       - name: Load library.json
         id: set_library
         run: |
@@ -86,7 +98,9 @@ jobs:
           JSON="${JSON//$'\n'/%0A}"
           JSON="${JSON//$'\r'/%0D}"
           echo "::set-output name=library::${JSON}"
-      - uses: "marvinpinto/action-automatic-releases@latest" # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
+
+      - name: Release
+        uses: "marvinpinto/action-automatic-releases@latest" # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
