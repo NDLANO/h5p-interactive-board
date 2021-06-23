@@ -70,13 +70,13 @@ jobs:
           cd dist
           ls
           npm install -g h5p
-          h5p pack -r h5p-course-presentation interaktiv_tavle.h5p
-          h5p validate interaktiv_tavle.h5p
+          h5p pack -r h5p-course-presentation course-presentation.h5p
+          h5p validate course-presentation.h5p
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: interaktiv_tavle.h5p
-          path: dist/interaktiv_tavle.h5p
+          name: course-presentation.h5p
+          path: dist/course-presentation.h5p
       - name: Load library.json
         id: set_library
         run: |
@@ -101,4 +101,4 @@ jobs:
             }}
           prerelease: false
           files: |
-            dist/interaktiv_tavle.h5p
+            dist/course-presentation.h5p
