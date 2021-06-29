@@ -62,7 +62,7 @@ jobs:
           git clone https://github.com/edh5p/h5p-editor-radio-selector.git
 
           # Clone and build override projects with build scripts
-          git clone https://github.com/NDLANO/h5p-editor-course-presentation.git && pushd h5p-editor-course-presentation && npm ci && npm run build && popd
+          git clone https://github.com/NDLANO/h5p-editor-course-presentation.git -b 'meta/rename-interaktiv-tavle-course-presentation' && pushd h5p-editor-course-presentation && npm ci && npm run build && popd
           git clone https://github.com/NDLANO/h5p-drag-question.git && pushd h5p-drag-question && npm ci && npm run build && popd
 
           cp -r ../h5p-course-presentation .
