@@ -6,7 +6,9 @@
   "scripts": {
     "build": "cross-env NODE_ENV='production' webpack -p",
     "watch": "webpack --watch",
-    "validate-types": "tsc --noEmit"
+    "validate-types": "tsc",
+    "format:fix": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "file-loader": "^0.11.2",
     "h5p-lib-controls": "0.0.13",
     "h5p-parent": "0.0.2",
+    "prettier": "^2.7.1",
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.32.8",
     "sass-loader": "^7.3.1",
