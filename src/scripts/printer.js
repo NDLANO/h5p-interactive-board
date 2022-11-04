@@ -18,7 +18,7 @@ const Printer = (function ($) {
    */
   Printer.supported = function () {
     // Need window.print to be available
-    return (typeof window.print === 'function');
+    return typeof window.print === 'function';
   };
 
   /**
@@ -33,7 +33,7 @@ const Printer = (function ($) {
    */
   Printer.print = function (cp, $wrapper, allSlides) {
     // Let CP know we are about to print
-    cp.trigger('printing', {finished: false, allSlides: allSlides});
+    cp.trigger('printing', { finished: false, allSlides: allSlides });
 
     // Find height of a slide:
     var $currentSlide = $('.h5p-slide.h5p-current');
@@ -43,14 +43,14 @@ const Printer = (function ($) {
     // Use 670px as width when printing. We can't use 100% percent, since user can
     // change between landscape and portrait without us ever knowing about it.
     // More info: http://stackoverflow.com/a/11084797/2797106
-    var ratio = slideWidth/670;
+    var ratio = slideWidth / 670;
 
     var $slides = $('.h5p-slide');
 
     $slides.css({
-      height: slideHeight/ratio + 'px',
+      height: slideHeight / ratio + 'px',
       width: '670px',
-      fontSize: Math.floor(100/ratio) + '%'
+      fontSize: Math.floor(100 / ratio) + '%',
     });
 
     var wrapperHeight = $wrapper.height();
@@ -69,12 +69,12 @@ const Printer = (function ($) {
       $slides.css({
         height: '',
         width: '',
-        fontSize: ''
+        fontSize: '',
       });
-      $wrapper.css('height', wrapperHeight+'px');
+      $wrapper.css('height', wrapperHeight + 'px');
 
       // Let CP know we are finished printing
-      cp.trigger('printing', {finished: true});
+      cp.trigger('printing', { finished: true });
     }, 500);
   };
 
@@ -96,7 +96,9 @@ const Printer = (function ($) {
                       <div role="dialog" aria-labelledby="${dialogTitleId}" aria-describedby="${ingressId}" tabindex="-1" class="h5p-inner">
                         <h2 id="${dialogTitleId}">${texts.printTitle}</h2>
                         <div class="h5p-scroll-content"></div>
-                        <div class="h5p-close" role="button" tabindex="0" title="${H5P.t('close')}">
+                        <div class="h5p-close" role="button" tabindex="0" title="${H5P.t(
+                          'close',
+                        )}">
                       </div>
                     </div>`)
       .insertAfter($element)
@@ -110,32 +112,36 @@ const Printer = (function ($) {
       })
       .end();
 
-    addClickAndKeyboardListeners($dialog.find('.h5p-close'), () => self.close());
+    addClickAndKeyboardListeners($dialog.find('.h5p-close'), () =>
+      self.close(),
+    );
 
     var $content = $dialog.find('.h5p-scroll-content');
 
-    $content.append($('<div>', {
-      'class': 'h5p-cp-print-ingress',
-      id: ingressId,
-      html: texts.printIngress
-    }));
+    $content.append(
+      $('<div>', {
+        class: 'h5p-cp-print-ingress',
+        id: ingressId,
+        html: texts.printIngress,
+      }),
+    );
 
     H5P.JoubelUI.createButton({
       html: texts.printAllSlides,
-      'class': 'h5p-cp-print-all-slides',
+      class: 'h5p-cp-print-all-slides',
       click: function () {
         self.close();
         callback(true);
-      }
+      },
     }).appendTo($content);
 
     H5P.JoubelUI.createButton({
       html: texts.printCurrentSlide,
-      'class': 'h5p-cp-print-current-slide',
+      class: 'h5p-cp-print-current-slide',
       click: function () {
         self.close();
         callback(false);
-      }
+      },
     }).appendTo($content);
 
     this.open = function () {
@@ -159,7 +165,6 @@ const Printer = (function ($) {
   };
 
   return Printer;
-
 })(H5P.jQuery);
 
 export default Printer;

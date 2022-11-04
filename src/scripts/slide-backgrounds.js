@@ -13,20 +13,24 @@ export default class SlideBackground {
     var params = cp.presentation;
 
     // Extend defaults
-    params = $.extend(true, {
-      globalBackgroundSelector: {
-        fillGlobalBackground: "",
-        imageGlobalBackground: {}
+    params = $.extend(
+      true,
+      {
+        globalBackgroundSelector: {
+          fillGlobalBackground: '',
+          imageGlobalBackground: {},
+        },
+        slides: [
+          {
+            slideBackgroundSelector: {
+              fillSlideBackground: '',
+              imageSlideBackground: {},
+            },
+          },
+        ],
       },
-      slides: [
-        {
-          slideBackgroundSelector: {
-            fillSlideBackground: "",
-            imageSlideBackground: {}
-          }
-        }
-      ]
-    }, params);
+      params,
+    );
 
     /**
      * Set global background
@@ -34,7 +38,10 @@ export default class SlideBackground {
      */
     var setGlobalBackground = function () {
       var globalSettings = params.globalBackgroundSelector;
-      setBackground(globalSettings.fillGlobalBackground, globalSettings.imageGlobalBackground);
+      setBackground(
+        globalSettings.fillGlobalBackground,
+        globalSettings.imageGlobalBackground,
+      );
     };
 
     /**
@@ -45,7 +52,11 @@ export default class SlideBackground {
       params.slides.forEach(function (slideParams, idx) {
         var bgParams = slideParams.slideBackgroundSelector;
         if (bgParams) {
-          setBackground(bgParams.fillSlideBackground, bgParams.imageSlideBackground, idx);
+          setBackground(
+            bgParams.fillSlideBackground,
+            bgParams.imageSlideBackground,
+            idx,
+          );
         }
       });
     };
@@ -59,25 +70,29 @@ export default class SlideBackground {
      * @param {number} [index] Optional target slide index, otherwise all slides.
      */
     var setBackground = function (fillSettings, imageSettings, index) {
-      var $updateSlides = cp.$slidesWrapper.children().filter(':not(.h5p-summary-slide)');
+      var $updateSlides = cp.$slidesWrapper
+        .children()
+        .filter(':not(.h5p-summary-slide)');
 
       if (index !== undefined) {
         $updateSlides = $updateSlides.eq(index);
       }
 
-      if (fillSettings && fillSettings !== "") {
-
+      if (fillSettings && fillSettings !== '') {
         // Fill with background color
-        $updateSlides.addClass('has-background')
+        $updateSlides
+          .addClass('has-background')
           .css('background-image', '')
           .css('background-color', fillSettings);
-      }
-      else if (imageSettings && imageSettings.path) {
-
+      } else if (imageSettings && imageSettings.path) {
         // Fill with image
-        $updateSlides.addClass('has-background')
+        $updateSlides
+          .addClass('has-background')
           .css('background-color', '')
-          .css('background-image', 'url(' + H5P.getPath(imageSettings.path, cp.contentId) + ')');
+          .css(
+            'background-image',
+            'url(' + H5P.getPath(imageSettings.path, cp.contentId) + ')',
+          );
       }
     };
 

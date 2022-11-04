@@ -19,3 +19,6 @@ package.json
 package-lock.json
 worknotes
 crowdin.yml
+.prettierrc
+.prettierignore
+build_info

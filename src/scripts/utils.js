@@ -1,4 +1,4 @@
-import { jQuery as $ } from "./globals";
+import { jQuery as $ } from './globals';
 
 /**
  * Flattens a nested array
@@ -16,7 +16,7 @@ export const flattenArray = (arr) => arr.concat.apply([], arr);
  *
  * @param {Function|*} f
  */
-export const isFunction = (f) => typeof f === "function";
+export const isFunction = (f) => typeof f === 'function';
 
 /**
  * Makes a string kebab case
@@ -24,7 +24,7 @@ export const isFunction = (f) => typeof f === "function";
  * @param {string} str
  * @return {string}
  */
-export const kebabCase = (str) => str.replace(/[\W]/g, "-");
+export const kebabCase = (str) => str.replace(/[\W]/g, '-');
 
 /**
  * Is true if the users device is an ipad
@@ -83,7 +83,7 @@ export const keyCode = {
 export const addClickAndKeyboardListeners = function (
   $element,
   callback,
-  scope
+  scope,
 ) {
   $element.click(function (event) {
     callback.call(scope || this, event);
@@ -100,7 +100,7 @@ export const addClickAndKeyboardListeners = function (
 /**
  * @const {H5P.jQuery}
  */
-const $STRIP_HTML_HELPER = $("<div>");
+const $STRIP_HTML_HELPER = $('<div>');
 
 /**
  * Strips the html from a string, using jquery
@@ -116,7 +116,7 @@ export const stripHTML = (str) => $STRIP_HTML_HELPER.html(str).text().trim();
  * @returns {number | null}
  */
 export const getContentId = () => {
-  const h5pContentWrapper = document.querySelector(".h5p-content");
+  const h5pContentWrapper = document.querySelector('.h5p-content');
 
   if (!h5pContentWrapper) {
     return null;

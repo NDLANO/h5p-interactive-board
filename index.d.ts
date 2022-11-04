@@ -10,16 +10,16 @@ declare type Media = {
 declare type AnswerHotspot = {
   isChecked?: boolean;
   isTask?: boolean;
-  answerHotspotType?: "true" | "false"
+  answerHotspotType?: 'true' | 'false';
   resetTask?: () => void;
-}
+};
 
 declare type Image = Media & {
   height: number;
   width: number;
-}
+};
 
 declare type DialogHeaderContent = {
   dialogImage?: Image;
   dialogVideo?: Media[];
-}
+};

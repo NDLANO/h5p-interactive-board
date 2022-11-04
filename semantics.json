@@ -102,10 +102,7 @@
                     "type": "text",
                     "widget": "none",
                     "optional": true,
-                    "options": [
-                      "true",
-                      "false"
-                    ]
+                    "options": ["true", "false"]
                   },
                   {
                     "name": "solution",
@@ -185,30 +182,10 @@
                     "spectrum": {
                       "showPalette": true,
                       "palette": [
-                        [
-                          "#1d5cff",
-                          "black",
-                          "white",
-                          "gray"
-                        ],
-                        [
-                          "red",
-                          "blue",
-                          "yellow",
-                          "green"
-                        ],
-                        [
-                          "pink",
-                          "purple",
-                          "brown",
-                          "orange"
-                        ],
-                        [
-                          "lime",
-                          "violet",
-                          "magenta",
-                          "cyan"
-                        ]
+                        ["#1d5cff", "black", "white", "gray"],
+                        ["red", "blue", "yellow", "green"],
+                        ["pink", "purple", "brown", "orange"],
+                        ["lime", "violet", "magenta", "cyan"]
                       ]
                     }
                   },

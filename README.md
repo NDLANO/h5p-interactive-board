@@ -1,5 +1,4 @@
-NDLA H5P Interactive Board
-==========
+# NDLA H5P Interactive Board
 
 Combine texts, multimedia and tasks into a presentation.
 
@@ -31,4 +30,4 @@ npm test
 
 ## License
 
-*H5P Course Presentation* is [MIT licenced](LICENCE.md)
+_H5P Course Presentation_ is [MIT licenced](LICENCE.md)

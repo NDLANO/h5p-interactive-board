@@ -319,7 +319,9 @@
   padding: 0.5em;
 }
 
-.h5p-coursepresentation .h5p-popup-overlay.h5p-advanced-text .h5p-popup-container {
+.h5p-coursepresentation
+  .h5p-popup-overlay.h5p-advanced-text
+  .h5p-popup-container {
   padding: 2em 0;
 }
 
@@ -644,7 +646,9 @@
 .h5p-coursepresentation
   .h5p-element
   .h5p-element-outer.h5p-advancedtext-outer-element,
-.h5p-coursepresentation .h5p-element .h5p-element-outer.h5p-audio-outer-element {
+.h5p-coursepresentation
+  .h5p-element
+  .h5p-element-outer.h5p-audio-outer-element {
   overflow-y: hidden;
 }
 
@@ -689,7 +693,9 @@
 .h5p-coursepresentation
   .h5p-element.h5p-transparent
   .h5p-element-inner.h5p-advanced-text,
-.h5p-coursepresentation .h5p-element.h5p-transparent .h5p-element-inner.h5p-link {
+.h5p-coursepresentation
+  .h5p-element.h5p-transparent
+  .h5p-element-inner.h5p-link {
   padding: 0;
 }
 

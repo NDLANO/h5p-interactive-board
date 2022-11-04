@@ -6,50 +6,22 @@
 }
 
 .h5p-coursepresentation .h5p-summary-slide.h5p-summary-only-export {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
 /* Summary header */
 .h5p-coursepresentation .h5p-score-message {
-  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-  display: -ms-flexbox;      /* TWEENER - IE 10 */
-  display: -webkit-flex;     /* NEW - Chrome */
-  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+  display: flex;
   align-items: center;
-
-  -webkit-justify-content: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-
   padding: 1.5em 0;
   font-size: 0.8em;
 }
 
 .h5p-coursepresentation .h5p-score-message-percentage {
-  display: -moz-inline-box;
-  display: -ms-inline-flexbox;
-  display: -webkit-inline-flex;
   display: inline-flex;
-
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -202,13 +174,13 @@
 }
 
 .h5p-coursepresentation .h5p-summary-twitter-message:before {
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4";
   content: "\f099";
   padding-right: 0.5em;
 }
 
 .h5p-coursepresentation .h5p-summary-facebook-message:before {
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4";
   content: "\f09a";
   padding-right: 0.5em;
 }
@@ -216,19 +188,19 @@
 /* --------------------------------- Button styling ----------------------------------------------- */
 
 .h5p-coursepresentation .h5p-summary-slide .h5p-eta-export:before {
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4";
   content: "\f0f6";
   margin-right: 0.5em;
 }
 
 .h5p-coursepresentation .h5p-summary-slide .h5p-show-solutions:before {
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4";
   content: "\f06e";
   margin-right: 0.5em;
 }
 
 .h5p-coursepresentation .h5p-summary-slide .h5p-cp-retry-button:before {
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4";
   content: "\f021";
   margin-right: 0.5em;
 }
