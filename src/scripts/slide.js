@@ -50,8 +50,8 @@ function Slide(parameters) {
       'domChanged',
       {
         $target: $wrapper,
-        library: "NDLAInteractiveBoard",
-        key: "newSlide",
+        library: 'NDLAInteractiveBoard',
+        key: 'newSlide',
       },
       { bubbles: true, external: true },
     );
