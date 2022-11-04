@@ -72,20 +72,20 @@
   }
 
   &::before {
-    font-family: 'H5PFontIcons';
+    font-family: "H5PFontIcons";
     font-size: 1rem;
   }
 }
 
-[data-is-playing-audio='true'] .h5p-information-dialog-audio-button {
-  $pause-icon: '\e92e';
+[data-is-playing-audio="true"] .h5p-information-dialog-audio-button {
+  $pause-icon: "\e92e";
   &::before {
     content: $pause-icon;
   }
 }
 
-[data-is-playing-audio='false'] .h5p-information-dialog-audio-button {
-  $play-icon: '\e92d';
+[data-is-playing-audio="false"] .h5p-information-dialog-audio-button {
+  $play-icon: "\e92d";
 
   &::before {
     content: $play-icon;

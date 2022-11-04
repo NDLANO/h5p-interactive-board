@@ -92,10 +92,10 @@
     min-height: 10em;
   }
   .h5p-coursepresentation .h5p-element.h5p-video:before {
-    font-family: 'H5PFontAwesome4';
+    font-family: "H5PFontAwesome4";
     font-size: 4em;
     color: #666;
-    content: '\f03d';
+    content: "\f03d";
 
     display: inline-block;
     position: relative;
@@ -119,12 +119,12 @@
   margin: 1em 0 0 0;
 }
 .h5p-print-dialog .h5p-joubelui-button::before {
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4";
   margin-right: 0.5em;
 }
 .h5p-print-dialog .h5p-cp-print-all-slides::before {
-  content: '\f0c5';
+  content: "\f0c5";
 }
 .h5p-print-dialog .h5p-cp-print-current-slide::before {
-  content: '\f016';
+  content: "\f016";
 }
