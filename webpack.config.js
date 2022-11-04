@@ -1,9 +1,12 @@
-var path = require('path');
-var nodeEnv = process.env.NODE_ENV || 'development';
-var isDev = nodeEnv !== 'production';
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// @ts-check
 
-const extractStyles = new ExtractTextPlugin({
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isDev = nodeEnv !== 'production';
+
+const extractStyles = new MiniCssExtractPlugin({
   filename: 'h5p-course-presentation.css',
 });
 
@@ -24,25 +27,29 @@ var config = {
       {
         test: /\.css$/,
         include: path.resolve(__dirname, 'src'),
-        use: extractStyles.extract({
-          use: ['css-loader?sourceMap', 'resolve-url-loader'],
-          fallback: 'style-loader',
-        }),
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.scss$/,
-        use: extractStyles.extract({
-          use: [
-            'css-loader?sourceMap',
-            'sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true',
-          ],
-          fallback: 'style-loader',
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         include: path.join(__dirname, 'src/fonts'),
-        loader: 'file-loader?name=fonts/[name].[ext]',
+        use: [
+          {
+            loader: 'file-loader?name=fonts/[name].[ext]',
+          },
+        ],
       },
     ],
   },
