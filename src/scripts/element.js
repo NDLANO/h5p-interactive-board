@@ -1,9 +1,9 @@
 // @ts-check
 
-import { jQuery as $ } from "./globals";
-import { initAnswerHotspot } from "./answer-hotspot";
-import InteractiveBoard from "./cp";
-import { Hotspot } from "./hotspot";
+import { jQuery as $ } from './globals';
+import { initAnswerHotspot } from './answer-hotspot';
+import InteractiveBoard from './cp';
+import { Hotspot } from './hotspot';
 
 const H5P = window.H5P || {};
 
@@ -231,12 +231,12 @@ Element.createHotspot = function (
   );
 
   if (!coursePresentation.isEditor()) {
-    hotspot.on("navigate", event => {
+    hotspot.on('navigate', (event) => {
       const index = event.data;
       coursePresentation.jumpToSlide(index);
     });
 
-    hotspot.on("navigate-to-last-slide", () => {
+    hotspot.on('navigate-to-last-slide', () => {
       coursePresentation.jumpToSlide(coursePresentation.slides.length - 1);
     });
   }

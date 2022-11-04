@@ -1,23 +1,23 @@
 /* DroidSans font by Steve Matteson licensed under Apache License, version 2.0 - See DroidSans/LICENSE.txt */
 @font-face {
-  font-family: "H5PDroidSans";
-  src: url("../fonts/DroidSans.ttf") format("truetype");
+  font-family: 'H5PDroidSans';
+  src: url('../fonts/DroidSans.ttf') format('truetype');
   font-weight: normal;
 }
 @font-face {
-  font-family: "H5PDroidSans";
-  src: url("../fonts/DroidSans-Bold.ttf") format("truetype");
+  font-family: 'H5PDroidSans';
+  src: url('../fonts/DroidSans-Bold.ttf') format('truetype');
   font-weight: bold;
 }
 
 /* IcoMoon font licensed under the GNU General Public License: http://www.gnu.org/licenses/gpl.html */
 @font-face {
-  font-family: "H5PInteractiveBoard";
-  src: url("../fonts/H5P.eot?7pqlet");
-  src: url("../fonts/H5P.eot?7pqlet#iefix") format("embedded-opentype"),
-    url("../fonts/H5P.ttf?7pqlet") format("truetype"),
-    url("../fonts/H5P.woff?7pqlet") format("woff"),
-    url("../fonts/H5P.svg?7pqlet#H5P") format("svg");
+  font-family: 'H5PInteractiveBoard';
+  src: url('../fonts/H5P.eot?7pqlet');
+  src: url('../fonts/H5P.eot?7pqlet#iefix') format('embedded-opentype'),
+    url('../fonts/H5P.ttf?7pqlet') format('truetype'),
+    url('../fonts/H5P.woff?7pqlet') format('woff'),
+    url('../fonts/H5P.svg?7pqlet#H5P') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -168,8 +168,8 @@
 }
 
 .h5p-coursepresentation .h5p-cp-show-solutions:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f06e";
+  font-family: 'H5PFontAwesome4';
+  content: '\f06e';
   margin-right: 0.5em;
 }
 
@@ -445,7 +445,7 @@
 
 .h5p-coursepresentation .h5p-element-button:before {
   text-decoration: none;
-  font-family: "H5PFontAwesome4";
+  font-family: 'H5PFontAwesome4';
   font-size: 0.875em;
 }
 
@@ -495,84 +495,84 @@
 .h5p-coursepresentation .h5p-dragtext-button:before,
 .h5p-coursepresentation .h5p-dialogcards-button:before,
 .h5p-coursepresentation .h5p-markthewords-button:before {
-  font-family: "H5PInteractiveBoard";
+  font-family: 'H5PInteractiveBoard';
 }
 
 .h5p-coursepresentation .h5p-advancedtext-button:before {
-  content: "\f05a";
+  content: '\f05a';
 }
 
 .h5p-coursepresentation .h5p-exportabletextarea-button:before {
-  content: "\e995";
+  content: '\e995';
 }
 
 .h5p-coursepresentation .h5p-table-button:before {
-  content: "\f0ce";
+  content: '\f0ce';
 }
 
 .h5p-coursepresentation .h5p-link-button:before {
-  content: "\f0c1";
+  content: '\f0c1';
 }
 
 .h5p-coursepresentation .h5p-text-button:before {
-  content: "\f15c";
+  content: '\f15c';
 }
 
 .h5p-coursepresentation .h5p-image-button:before {
-  content: "\f03e";
+  content: '\f03e';
 }
 
 .h5p-coursepresentation .h5p-video-button:before {
-  content: "\f008";
+  content: '\f008';
 }
 
 .h5p-coursepresentation .h5p-audio-button:before {
-  content: "\f028";
+  content: '\f028';
 }
 
 .h5p-coursepresentation .h5p-blanks-button:before {
-  content: "\e994";
+  content: '\e994';
 }
 
 .h5p-coursepresentation .h5p-multichoice-button:before {
-  content: "\e603";
+  content: '\e603';
 }
 
 .h5p-coursepresentation .h5p-truefalse-button:before {
-  font-family: "H5PFontIcons";
+  font-family: 'H5PFontIcons';
   font-size: 1.2em;
-  content: "\e902";
+  content: '\e902';
 }
 
 .h5p-coursepresentation .h5p-dragquestion-button:before {
-  content: "\e991";
+  content: '\e991';
 }
 
 .h5p-coursepresentation .h5p-summary-button:before {
-  content: "\e992";
+  content: '\e992';
 }
 
 .h5p-coursepresentation .h5p-interactivevideo-button:before {
-  content: "\f03d";
+  content: '\f03d';
 }
 .h5p-coursepresentation .h5p-singlechoiceset-button:before {
-  content: "\e993";
+  content: '\e993';
 }
 .h5p-coursepresentation .h5p-dragtext-button:before {
-  content: "\e600";
+  content: '\e600';
 }
 .h5p-coursepresentation .h5p-dialogcards-button:before {
-  content: "\e900";
+  content: '\e900';
   vertical-align: middle;
 }
 .h5p-coursepresentation .h5p-markthewords-button:before {
-  content: "\e601";
+  content: '\e601';
 }
 .h5p-coursepresentation .h5p-twitteruserfeed-button:before {
-  content: "\f099";
+  content: '\f099';
 }
 .h5p-coursepresentation .h5p-chart-button:before {
-  content: "\f200";
+  content: '\f200';
 }
 
 .h5p-coursepresentation .h5p-no-solution {
@@ -596,8 +596,8 @@
 }
 
 .h5p-coursepresentation .h5p-close-popup:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f057";
+  font-family: 'H5PFontAwesome4';
+  content: '\f057';
   color: #757575;
   vertical-align: middle;
 }
@@ -758,7 +758,7 @@
 }
 
 .h5p-coursepresentation .h5p-copyinfo > dt:after {
-  content: ":";
+  content: ':';
 }
 
 .h5p-coursepresentation .h5p-copyinfo > dd {
@@ -803,12 +803,12 @@
   opacity: 0.6;
 }
 .h5p-coursepresentation .h5p-toggle-full-screen:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f065";
+  font-family: 'H5PFontAwesome4';
+  content: '\f065';
 }
 .h5p-coursepresentation.h5p-fullscreen .h5p-toggle-full-screen:before,
 .h5p-coursepresentation.h5p-semi-fullscreen .h5p-toggle-full-screen:before {
-  content: "\f066";
+  content: '\f066';
 }
 .h5p-coursepresentation .h5p-toggle-full-screen:focus,
 .h5p-coursepresentation .h5p-toggle-full-screen:hover {
@@ -856,8 +856,8 @@
 }
 
 .h5p-coursepresentation .h5p-dialog-title:before {
-  content: " ";
-  font-family: "H5PFontAwesome4";
+  content: ' ';
+  font-family: 'H5PFontAwesome4';
   color: #313131;
   margin-right: 0.5em;
   margin-left: 0.1em;

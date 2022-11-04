@@ -1,7 +1,7 @@
 // @ts-check
 
-import { jQuery as $, JoubelUI } from "./globals";
-import { addClickAndKeyboardListeners } from "./utils";
+import { jQuery as $, JoubelUI } from './globals';
+import { addClickAndKeyboardListeners } from './utils';
 
 const SummarySlide = (function () {
   /**
@@ -55,25 +55,25 @@ const SummarySlide = (function () {
       if (!isNaN(totalScores.totalPercentage)) {
         var totalScoreBar = JoubelUI.createScoreBar(
           totalScores.totalMaxScore,
-          "",
-          "",
-          "",
+          '',
+          '',
+          '',
         );
         totalScoreBar.setScore(totalScores.totalScore);
-        var $totalScore = $(".h5p-summary-total-score", this.$summarySlide);
+        var $totalScore = $('.h5p-summary-total-score', this.$summarySlide);
         totalScoreBar.appendTo($totalScore);
 
         setTimeout(() => {
           // Announce total score
           $totalScore.append(
-            $("<div/>", {
-              "aria-live": "polite",
-              class: "hidden-but-read",
+            $('<div/>', {
+              'aria-live': 'polite',
+              class: 'hidden-but-read',
               html: `${
                 this.cp.l10n.summary
               }. ${this.cp.l10n.accessibilityTotalScore
-                .replace("@score", totalScores.totalScore)
-                .replace("@maxScore", totalScores.totalMaxScore)}`,
+                .replace('@score', totalScores.totalScore)
+                .replace('@maxScore', totalScores.totalMaxScore)}`,
             }),
           );
         }, 100);
@@ -82,7 +82,7 @@ const SummarySlide = (function () {
       // Construct twitter share score link
       if (this.cp.enableTwitterShare == true) {
         var $twitterContainer = $(
-          ".h5p-summary-twitter-message",
+          '.h5p-summary-twitter-message',
           this.$summarySlide,
         );
         this.addTwitterScoreLinkTo($twitterContainer, totalScores);
@@ -91,29 +91,29 @@ const SummarySlide = (function () {
       // Construct facebook share score link
       if (this.cp.enableFacebookShare == true) {
         var $facebookContainer = $(
-          ".h5p-summary-facebook-message",
+          '.h5p-summary-facebook-message',
           this.$summarySlide,
         );
         this.addFacebookScoreLinkTo($facebookContainer, totalScores);
       }
 
       // Update slide links
-      var links = this.$summarySlide.find(".h5p-td > .h5p-slide-link");
+      var links = this.$summarySlide.find('.h5p-td > .h5p-slide-link');
       links.each((index, $slideLink) => {
-        $slideLink.click(event => {
-          this.cp.jumpToSlide(parseInt($slideLink.data("slide"), 10) - 1);
+        $slideLink.click((event) => {
+          this.cp.jumpToSlide(parseInt($slideLink.data('slide'), 10) - 1);
           event.preventDefault();
         });
       });
     }
 
     // Button container ref
-    var $summaryFooter = $(".h5p-summary-footer", this.$summarySlide);
+    var $summaryFooter = $('.h5p-summary-footer', this.$summarySlide);
 
     // Show solutions button
     if (this.cp.showSummarySlideSolutionButton) {
       JoubelUI.createButton({
-        class: "h5p-show-solutions",
+        class: 'h5p-show-solutions',
         html: this.cp.l10n.showSolutions,
         on: {
           click: () => {
@@ -128,7 +128,7 @@ const SummarySlide = (function () {
     // Show solutions button
     if (this.cp.showSummarySlideRetryButton) {
       JoubelUI.createButton({
-        class: "h5p-cp-retry-button",
+        class: 'h5p-cp-retry-button',
         html: this.cp.l10n.retry,
         on: {
           click: () => {
@@ -143,7 +143,7 @@ const SummarySlide = (function () {
     // Only make export button if there is an export area in CP
     if (this.cp.hasAnswerElements) {
       JoubelUI.createButton({
-        class: "h5p-eta-export",
+        class: 'h5p-eta-export',
         html: this.cp.l10n.exportAnswers,
         on: {
           click: () => {
@@ -166,15 +166,15 @@ const SummarySlide = (function () {
    */
   SummarySlide.prototype.outputScoreStats = function (slideScores) {
     if (slideScores === undefined) {
-      this.$summarySlide.addClass("h5p-summary-only-export");
+      this.$summarySlide.addClass('h5p-summary-only-export');
       return '<div class="h5p-summary-footer"></div>';
     }
 
     let totalScore = 0;
     let totalMaxScore = 0;
-    let tableRows = "";
+    let tableRows = '';
     let slidePercentageScore = 0;
-    let slideDescription = "";
+    let slideDescription = '';
 
     for (let i = 0; i < slideScores.length; i += 1) {
       slideDescription = this.getSlideDescription(slideScores[i]);
@@ -197,11 +197,11 @@ const SummarySlide = (function () {
         slideScores[i].slide
       }: ${slideDescription.replace(
         /(<([^>]+)>)/gi,
-        "",
+        '',
       )} ${slidePercentageScore}%"
           data-slide="${slideScores[i].slide}"
           >${this.cp.l10n.slide} ${slideScores[i].slide}:
-          ${slideDescription.replace(/(<([^>]+)>)/gi, "")}</a
+          ${slideDescription.replace(/(<([^>]+)>)/gi, '')}</a
         >
       </td>
       <td class="h5p-td h5p-summary-score-bar">
@@ -220,15 +220,15 @@ const SummarySlide = (function () {
     const shareResultContainer =
       this.cp.enableTwitterShare || this.cp.enableFacebookShare
         ? `<span class="h5p-show-results-text">${this.cp.l10n.shareResult}</span>`
-        : "";
+        : '';
     const twitterContainer =
       this.cp.enableTwitterShare == true
         ? `<span class="h5p-summary-twitter-message" aria-label="${this.cp.l10n.shareTwitter}"></span>`
-        : "";
+        : '';
     const facebookContainer =
       this.cp.enableFacebookShare == true
         ? `<span class="h5p-summary-facebook-message" aria-label="${this.cp.l10n.shareFacebook}"></span>`
-        : "";
+        : '';
 
     return `<div class="h5p-summary-table-holder">
       <div class="h5p-summary-table-pages">
@@ -264,7 +264,7 @@ const SummarySlide = (function () {
 
   SummarySlide.prototype.getSlideDescription = function (slideScoresSlide) {
     // Get task description, task name or identify multiple tasks:
-    let slideDescription = "";
+    let slideDescription = '';
     let action;
 
     var slideElements = this.cp.slides[slideScoresSlide.slide - 1].elements;
@@ -278,7 +278,7 @@ const SummarySlide = (function () {
       if (
         typeof this.cp.elementInstances[slideScoresSlide.slide - 1][
           slideScoresSlide.indexes[0]
-        ].getTitle === "function"
+        ].getTitle === 'function'
       ) {
         slideDescription =
           this.cp.elementInstances[slideScoresSlide.slide - 1][
@@ -287,10 +287,10 @@ const SummarySlide = (function () {
       } else if (action.library !== undefined && action.library) {
         // Remove major, minor version and h5p prefix, Split on uppercase
         var humanReadableLibrary = action.library
-          .split(" ")[0]
-          .split(".")[1]
+          .split(' ')[0]
+          .split('.')[1]
           .split(/(?=[A-Z])/);
-        var humanReadableString = "";
+        var humanReadableString = '';
 
         // Make library human readable
         humanReadableLibrary.forEach((readableWord, index) => {
@@ -302,7 +302,7 @@ const SummarySlide = (function () {
 
           // Add space between words
           if (index <= humanReadableLibrary.length - 1) {
-            humanReadableString += " ";
+            humanReadableString += ' ';
           }
         });
         slideDescription = humanReadableString;
@@ -322,23 +322,23 @@ const SummarySlide = (function () {
     scores,
   ) {
     // Get data from the localization object.
-    var twitterShareStatement = this.cp.twitterShareStatement || "";
-    var twitterHashtagList = this.cp.twitterShareHashtags || "";
-    var twitterShareUrl = this.cp.twitterShareUrl || "";
+    var twitterShareStatement = this.cp.twitterShareStatement || '';
+    var twitterHashtagList = this.cp.twitterShareHashtags || '';
+    var twitterShareUrl = this.cp.twitterShareUrl || '';
 
     // Replace any placeholders with variables.
     twitterShareUrl = twitterShareUrl.replace(
-      "@currentpageurl",
+      '@currentpageurl',
       window.location.href,
     );
     twitterShareStatement = twitterShareStatement
-      .replace("@score", scores.totalScore)
-      .replace("@maxScore", scores.totalMaxScore)
-      .replace("@percentage", scores.totalPercentage + "%")
-      .replace("@currentpageurl", window.location.href);
+      .replace('@score', scores.totalScore)
+      .replace('@maxScore', scores.totalMaxScore)
+      .replace('@percentage', scores.totalPercentage + '%')
+      .replace('@currentpageurl', window.location.href);
 
     // Parse data from the localization object.
-    twitterHashtagList = twitterHashtagList.trim().replace(" ", "");
+    twitterHashtagList = twitterHashtagList.trim().replace(' ', '');
 
     // Encode components that may contain breaking characters.
     twitterShareStatement = encodeURIComponent(twitterShareStatement);
@@ -346,15 +346,15 @@ const SummarySlide = (function () {
     twitterShareUrl = encodeURIComponent(twitterShareUrl);
 
     // Add query strings to the URL based on settings.
-    var twitterString = "https://twitter.com/intent/tweet?";
+    var twitterString = 'https://twitter.com/intent/tweet?';
     twitterString +=
       twitterShareStatement.length > 0
-        ? "text=" + twitterShareStatement + "&"
-        : "";
+        ? 'text=' + twitterShareStatement + '&'
+        : '';
     twitterString +=
-      twitterShareUrl.length > 0 ? "url=" + twitterShareUrl + "&" : "";
+      twitterShareUrl.length > 0 ? 'url=' + twitterShareUrl + '&' : '';
     twitterString +=
-      twitterHashtagList.length > 0 ? "hashtags=" + twitterHashtagList : "";
+      twitterHashtagList.length > 0 ? 'hashtags=' + twitterHashtagList : '';
 
     var leftPos = window.innerWidth / 2;
     var topPos = window.innerHeight / 2;
@@ -362,19 +362,19 @@ const SummarySlide = (function () {
     var popupHeight = 300;
 
     // Create the new Twitter window.
-    $twitterContainer.attr("tabindex", "0").attr("role", "button");
+    $twitterContainer.attr('tabindex', '0').attr('role', 'button');
 
     addClickAndKeyboardListeners($twitterContainer, () => {
       window.open(
         twitterString,
         this.cp.l10n.shareTwitter,
-        "width=" +
+        'width=' +
           popupWidth +
-          ",height=" +
+          ',height=' +
           popupHeight +
-          ",left=" +
+          ',left=' +
           leftPos +
-          ",top=" +
+          ',top=' +
           topPos,
       );
       return false;
@@ -392,31 +392,31 @@ const SummarySlide = (function () {
     scores,
   ) {
     // Get data from the localization object.
-    var facebookShareUrl = this.cp.facebookShareUrl || "";
-    var facebookShareQuote = this.cp.facebookShareQuote || "";
+    var facebookShareUrl = this.cp.facebookShareUrl || '';
+    var facebookShareQuote = this.cp.facebookShareQuote || '';
 
     // Replace any placeholders with variables.
     facebookShareUrl = facebookShareUrl.replace(
-      "@currentpageurl",
+      '@currentpageurl',
       window.location.href,
     );
 
     facebookShareQuote = facebookShareQuote
-      .replace("@currentpageurl", window.location.href)
-      .replace("@percentage", scores.totalPercentage + "%")
-      .replace("@score", scores.totalScore)
-      .replace("@maxScore", scores.totalMaxScore);
+      .replace('@currentpageurl', window.location.href)
+      .replace('@percentage', scores.totalPercentage + '%')
+      .replace('@score', scores.totalScore)
+      .replace('@maxScore', scores.totalMaxScore);
 
     // Parse data from the localization object.
     facebookShareUrl = encodeURIComponent(facebookShareUrl);
     facebookShareQuote = encodeURIComponent(facebookShareQuote);
 
     // Add query strings to the URL based on settings.
-    var facebookUrl = "https://www.facebook.com/sharer/sharer.php?";
+    var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?';
     facebookUrl +=
-      facebookShareUrl.length > 0 ? "u=" + facebookShareUrl + "&" : "";
+      facebookShareUrl.length > 0 ? 'u=' + facebookShareUrl + '&' : '';
     facebookUrl +=
-      facebookShareQuote.length > 0 ? "quote=" + facebookShareQuote : "";
+      facebookShareQuote.length > 0 ? 'quote=' + facebookShareQuote : '';
 
     var popupWidth = 800;
     var popupHeight = 300;
@@ -424,19 +424,19 @@ const SummarySlide = (function () {
     var topPos = window.innerHeight / 2;
 
     // Create the new Facebook window.
-    $facebookContainer.attr("tabindex", "0").attr("role", "button");
+    $facebookContainer.attr('tabindex', '0').attr('role', 'button');
 
     addClickAndKeyboardListeners($facebookContainer, () => {
       window.open(
         facebookUrl,
         this.cp.l10n.shareFacebook,
-        "width=" +
+        'width=' +
           popupWidth +
-          ",height=" +
+          ',height=' +
           popupHeight +
-          ",left=" +
+          ',left=' +
           leftPos +
-          ",top=" +
+          ',top=' +
           topPos,
       );
 
@@ -491,12 +491,12 @@ const SummarySlide = (function () {
 
       // Update feedback icons in solution mode
       this.cp.setProgressBarFeedback(slideScores);
-      this.cp.$footer.addClass("h5p-footer-solution-mode");
-      this.cp.$boxWrapper.addClass("h5p-solution-mode");
+      this.cp.$footer.addClass('h5p-footer-solution-mode');
+      this.cp.$boxWrapper.addClass('h5p-solution-mode');
       this.setFooterSolutionModeText(this.cp.l10n.solutionModeText);
     } else {
-      this.cp.$footer.removeClass("h5p-footer-solution-mode");
-      this.cp.$boxWrapper.removeClass("h5p-solution-mode");
+      this.cp.$footer.removeClass('h5p-footer-solution-mode');
+      this.cp.$boxWrapper.removeClass('h5p-solution-mode');
       this.setFooterSolutionModeText();
       this.cp.setProgressBarFeedback();
     }
@@ -517,7 +517,7 @@ const SummarySlide = (function () {
     if (solutionModeText !== undefined && solutionModeText) {
       this.cp.$exitSolutionModeText.html(solutionModeText);
     } else if (this.cp.$exitSolutionModeText) {
-      this.cp.$exitSolutionModeText.html("");
+      this.cp.$exitSolutionModeText.html('');
     }
   };
 

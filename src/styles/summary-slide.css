@@ -174,33 +174,33 @@
 }
 
 .h5p-coursepresentation .h5p-summary-twitter-message:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f099";
+  font-family: 'H5PFontAwesome4';
+  content: '\f099';
   padding-right: 0.5em;
 }
 
 .h5p-coursepresentation .h5p-summary-facebook-message:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f09a";
+  font-family: 'H5PFontAwesome4';
+  content: '\f09a';
   padding-right: 0.5em;
 }
 
 /* --------------------------------- Button styling ----------------------------------------------- */
 
 .h5p-coursepresentation .h5p-summary-slide .h5p-eta-export:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f0f6";
+  font-family: 'H5PFontAwesome4';
+  content: '\f0f6';
   margin-right: 0.5em;
 }
 
 .h5p-coursepresentation .h5p-summary-slide .h5p-show-solutions:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f06e";
+  font-family: 'H5PFontAwesome4';
+  content: '\f06e';
   margin-right: 0.5em;
 }
 
 .h5p-coursepresentation .h5p-summary-slide .h5p-cp-retry-button:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f021";
+  font-family: 'H5PFontAwesome4';
+  content: '\f021';
   margin-right: 0.5em;
 }

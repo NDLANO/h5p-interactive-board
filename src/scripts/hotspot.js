@@ -1,8 +1,8 @@
 // @ts-check
 
-import { addClickAndKeyboardListeners } from "./utils";
-import { jQuery as $, EventDispatcher } from "./globals";
-import { InformationDialog } from "./information-dialog";
+import { addClickAndKeyboardListeners } from './utils';
+import { jQuery as $, EventDispatcher } from './globals';
+import { InformationDialog } from './information-dialog';
 
 /**
  * Enum containing possible navigation types
@@ -10,12 +10,12 @@ import { InformationDialog } from "./information-dialog";
  * @enum {string}
  */
 const hotspotType = {
-  GO_TO_SPECIFIED: "specified",
-  GO_TO_NEXT: "next",
-  GO_TO_PREVIOUS: "previous",
-  INFORMATION_DIALOG: "information-dialog",
-  NONE: "none",
-  GO_TO_SUMMARY_SLIDE: "go-to-summary-slide",
+  GO_TO_SPECIFIED: 'specified',
+  GO_TO_NEXT: 'next',
+  GO_TO_PREVIOUS: 'previous',
+  INFORMATION_DIALOG: 'information-dialog',
+  NONE: 'none',
+  GO_TO_SUMMARY_SLIDE: 'go-to-summary-slide',
 };
 
 export class Hotspot extends EventDispatcher {
@@ -67,7 +67,7 @@ export class Hotspot extends EventDispatcher {
 
     this.eventDispatcher = new EventDispatcher();
     const classes = `h5p-press-to-go ${
-      invisible ? "h5p-invisible" : "h5p-visible"
+      invisible ? 'h5p-invisible' : 'h5p-visible'
     }`;
     const tabindex = invisible ? -1 : 0;
 
@@ -79,19 +79,19 @@ export class Hotspot extends EventDispatcher {
         // No title so use the slide number, prev, or next.
         switch (goToSlideType) {
           case hotspotType.GO_TO_SPECIFIED:
-            title = l10n.goToSlide.replace(":num", goToSlide.toString());
+            title = l10n.goToSlide.replace(':num', goToSlide.toString());
             break;
           case hotspotType.GO_TO_NEXT:
-            title = l10n.goToSlide.replace(":num", l10n.nextSlide);
+            title = l10n.goToSlide.replace(':num', l10n.nextSlide);
             break;
           case hotspotType.GO_TO_PREVIOUS:
-            title = l10n.goToSlide.replace(":num", l10n.prevSlide);
+            title = l10n.goToSlide.replace(':num', l10n.prevSlide);
             break;
         }
       }
     }
 
-    this.action = "goToSlide";
+    this.action = 'goToSlide';
 
     const goToActions = [
       hotspotType.GO_TO_NEXT,
@@ -113,8 +113,8 @@ export class Hotspot extends EventDispatcher {
       );
     } else if (isInformationDialogTrigger) {
       this.$element = this.createButton(() => {
-        const horizontalOffset = "50%";
-        const verticalOffset = "50%";
+        const horizontalOffset = '50%';
+        const verticalOffset = '50%';
 
         this.dialog =
           this.dialog ||
@@ -122,7 +122,7 @@ export class Hotspot extends EventDispatcher {
             content: $(dialogContent).get(0),
             dialogHeaderContent,
             dialogAudio,
-            parent: this.$element.closest(".h5p-presentation-wrapper").get(0),
+            parent: this.$element.closest('.h5p-presentation-wrapper').get(0),
             l10n,
             horizontalOffset,
             verticalOffset,
@@ -134,8 +134,8 @@ export class Hotspot extends EventDispatcher {
     }
 
     this.$element.addClass(classes);
-    this.$element.attr("tabindex", tabindex);
-    this.$element.attr("title", title);
+    this.$element.attr('tabindex', tabindex);
+    this.$element.attr('title', title);
 
     if ($content) {
       this.attachContent($content);
@@ -176,17 +176,17 @@ export class Hotspot extends EventDispatcher {
     }
 
     // Create button that leads to another slide
-    const $element = $("<a/>", {
-      href: "#",
+    const $element = $('<a/>', {
+      href: '#',
     });
 
-    addClickAndKeyboardListeners($element, event => {
+    addClickAndKeyboardListeners($element, (event) => {
       const isGoToSummarySlideHotspot =
         goToSlideType === hotspotType.GO_TO_SUMMARY_SLIDE;
       if (isGoToSummarySlideHotspot) {
-        this.eventDispatcher.trigger("navigate-to-last-slide");
+        this.eventDispatcher.trigger('navigate-to-last-slide');
       } else {
-        this.eventDispatcher.trigger("navigate", goTo);
+        this.eventDispatcher.trigger('navigate', goTo);
       }
       event.preventDefault();
     });
@@ -199,8 +199,8 @@ export class Hotspot extends EventDispatcher {
    * @returns {$}
    */
   createButton(action) {
-    const $element = $("<button/>", {
-      type: "button",
+    const $element = $('<button/>', {
+      type: 'button',
     });
 
     if (action) {
@@ -217,7 +217,7 @@ export class Hotspot extends EventDispatcher {
    * @param {$} $container
    */
   attach($container) {
-    $container.html("").addClass("h5p-go-to-slide").append(this.$element);
+    $container.html('').addClass('h5p-go-to-slide').append(this.$element);
   }
 
   /**

@@ -10,7 +10,7 @@ declare type Media = {
 declare type AnswerHotspot = {
   isChecked?: boolean;
   isTask?: boolean;
-  answerHotspotType?: "true" | "false";
+  answerHotspotType?: 'true' | 'false';
   resetTask?: () => void;
 };
 

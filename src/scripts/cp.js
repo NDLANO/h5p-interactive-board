@@ -1,9 +1,9 @@
-import Parent from "h5p-parent";
-import SummarySlide from "./summary-slide";
-import NavigationLine from "./navigation-line";
-import SlideBackground from "./slide-backgrounds";
-import KeywordsMenu from "./keyword-menu";
-import { jQuery as $ } from "./globals";
+import Parent from 'h5p-parent';
+import SummarySlide from './summary-slide';
+import NavigationLine from './navigation-line';
+import SlideBackground from './slide-backgrounds';
+import KeywordsMenu from './keyword-menu';
+import { jQuery as $ } from './globals';
 import {
   flattenArray,
   addClickAndKeyboardListeners,
@@ -11,8 +11,8 @@ import {
   kebabCase,
   stripHTML,
   keyCode,
-} from "./utils";
-import Slide from "./slide.js";
+} from './utils';
+import Slide from './slide.js';
 
 /**
  * @type {string}
@@ -36,7 +36,7 @@ const KEYWORD_TITLE_SKIP = null;
 let InteractiveBoard = function (params, id, extras) {
   var that = this;
   this.presentation = params.presentation;
-  this.defaultAspectRatio = this.presentation.slides[0].aspectRatio || "4-3";
+  this.defaultAspectRatio = this.presentation.slides[0].aspectRatio || '4-3';
 
   /** @type {Slide[]} */
   this.slides = this.presentation.slides;
@@ -69,51 +69,51 @@ let InteractiveBoard = function (params, id, extras) {
 
   this.l10n = $.extend(
     {
-      slide: "Slide",
-      score: "Score",
-      yourScore: "Your score",
-      maxScore: "Max score",
-      total: "Total",
-      totalScore: "Total Score",
-      showSolutions: "Show solutions",
-      summary: "summary",
-      retry: "Retry",
-      exportAnswers: "Export text",
-      close: "Close",
-      hideKeywords: "Hide sidebar navigation menu",
-      showKeywords: "Show sidebar navigation menu",
-      fullscreen: "Fullscreen",
-      exitFullscreen: "Exit fullscreen",
-      prevSlide: "Previous slide",
-      nextSlide: "Next slide",
-      currentSlide: "Current slide",
-      lastSlide: "Last slide",
-      solutionModeTitle: "Exit solution mode",
-      solutionModeText: "Solution Mode",
-      summaryMultipleTaskText: "Multiple tasks",
-      scoreMessage: "You achieved:",
-      shareFacebook: "Share on Facebook",
-      shareTwitter: "Share on Twitter",
-      goToSlide: "Go to slide :num",
-      solutionsButtonTitle: "Show comments",
-      printTitle: "Print",
-      printIngress: "How would you like to print this presentation?",
-      printAllSlides: "Print all slides",
-      printCurrentSlide: "Print current slide",
-      noTitle: "No title",
+      slide: 'Slide',
+      score: 'Score',
+      yourScore: 'Your score',
+      maxScore: 'Max score',
+      total: 'Total',
+      totalScore: 'Total Score',
+      showSolutions: 'Show solutions',
+      summary: 'summary',
+      retry: 'Retry',
+      exportAnswers: 'Export text',
+      close: 'Close',
+      hideKeywords: 'Hide sidebar navigation menu',
+      showKeywords: 'Show sidebar navigation menu',
+      fullscreen: 'Fullscreen',
+      exitFullscreen: 'Exit fullscreen',
+      prevSlide: 'Previous slide',
+      nextSlide: 'Next slide',
+      currentSlide: 'Current slide',
+      lastSlide: 'Last slide',
+      solutionModeTitle: 'Exit solution mode',
+      solutionModeText: 'Solution Mode',
+      summaryMultipleTaskText: 'Multiple tasks',
+      scoreMessage: 'You achieved:',
+      shareFacebook: 'Share on Facebook',
+      shareTwitter: 'Share on Twitter',
+      goToSlide: 'Go to slide :num',
+      solutionsButtonTitle: 'Show comments',
+      printTitle: 'Print',
+      printIngress: 'How would you like to print this presentation?',
+      printAllSlides: 'Print all slides',
+      printCurrentSlide: 'Print current slide',
+      noTitle: 'No title',
       accessibilitySlideNavigationExplanation:
-        "Use left and right arrow to change slide in that direction whenever canvas is selected.",
-      containsNotCompleted: "@slideName contains not completed interaction",
-      containsCompleted: "@slideName contains completed interaction",
-      slideCount: "Slide @index of @total",
+        'Use left and right arrow to change slide in that direction whenever canvas is selected.',
+      containsNotCompleted: '@slideName contains not completed interaction',
+      containsCompleted: '@slideName contains completed interaction',
+      slideCount: 'Slide @index of @total',
       accessibilityCanvasLabel:
-        "Presentation canvas. Use left and right arrow to move between slides.",
-      containsOnlyCorrect: "@slideName only has correct answers",
-      containsIncorrectAnswers: "@slideName has incorrect answers",
-      shareResult: "Share Result",
-      accessibilityTotalScore: "You got @score of @maxScore points in total",
-      accessibilityEnteredFullscreen: "Entered fullscreen",
-      accessibilityExitedFullscreen: "Exited fullscreen",
+        'Presentation canvas. Use left and right arrow to move between slides.',
+      containsOnlyCorrect: '@slideName only has correct answers',
+      containsIncorrectAnswers: '@slideName has incorrect answers',
+      shareResult: 'Share Result',
+      accessibilityTotalScore: 'You got @score of @maxScore points in total',
+      accessibilityEnteredFullscreen: 'Entered fullscreen',
+      accessibilityExitedFullscreen: 'Exited fullscreen',
     },
     params.l10n !== undefined ? params.l10n : {},
   );
@@ -157,9 +157,9 @@ let InteractiveBoard = function (params, id, extras) {
   // Inheritance
   Parent.call(this, Slide, params.presentation.slides);
 
-  this.on("resize", this.resize, this);
+  this.on('resize', this.resize, this);
 
-  this.on("printing", function (event) {
+  this.on('printing', function (event) {
     that.ignoreResize = !event.data.finished;
 
     if (event.data.finished) {
@@ -199,7 +199,7 @@ InteractiveBoard.prototype.getCurrentState = function () {
         var instance = this.elementInstances[slide][element];
         if (
           instance.getCurrentState instanceof Function ||
-          typeof instance.getCurrentState === "function"
+          typeof instance.getCurrentState === 'function'
         ) {
           if (!state.answers[slide]) {
             state.answers[slide] = [];
@@ -223,8 +223,8 @@ InteractiveBoard.prototype.slideHasAnsweredTask = function (index) {
   const tasks = this.slidesWithSolutions[index] || [];
 
   return tasks
-    .filter(task => isFunction(task.getAnswerGiven))
-    .some(task => task.getAnswerGiven());
+    .filter((task) => isFunction(task.getAnswerGiven))
+    .some((task) => task.getAnswerGiven());
 };
 
 /**
@@ -277,22 +277,22 @@ InteractiveBoard.prototype.attach = function ($container) {
     </div>`;
 
   $container
-    .attr("role", "application")
-    .addClass("h5p-coursepresentation")
+    .attr('role', 'application')
+    .addClass('h5p-coursepresentation')
     .html(markup);
 
   this.$container = $container;
-  this.$slideAnnouncer = $container.find(".h5p-current-slide-announcer");
-  this.$fullscreenAnnouncer = $container.find(".h5p-fullscreen-announcer");
+  this.$slideAnnouncer = $container.find('.h5p-current-slide-announcer');
+  this.$fullscreenAnnouncer = $container.find('.h5p-fullscreen-announcer');
   this.$slideTop = this.$slideAnnouncer.next();
   this.$wrapper = $container
-    .children(".h5p-wrapper")
+    .children('.h5p-wrapper')
     .focus(function () {
       that.initKeyEvents();
     })
     .blur(function () {
       if (that.keydown !== undefined) {
-        H5P.jQuery("body").unbind("keydown", that.keydown);
+        H5P.jQuery('body').unbind('keydown', that.keydown);
         delete that.keydown;
       }
     })
@@ -305,13 +305,13 @@ InteractiveBoard.prototype.attach = function ($container) {
        */
       const isFocusableElement = that.belongsToTagName(
         event.target,
-        ["input", "textarea", "a", "button"],
+        ['input', 'textarea', 'a', 'button'],
         event.currentTarget,
       );
       // Does the target element have a tabIndex set?
       const hasTabIndex = event.target.tabIndex !== -1;
       // The dialog container (if within a dialog)
-      const $dialogParent = $target.closest(".h5p-popup-container");
+      const $dialogParent = $target.closest('.h5p-popup-container');
       // Is target within a dialog
       const isWithinDialog = $dialogParent.length !== 0;
 
@@ -321,14 +321,14 @@ InteractiveBoard.prototype.attach = function ($container) {
           that.$wrapper.focus();
         } else {
           // Find the closest tabbable parent element
-          const $tabbable = $target.closest("[tabindex]");
+          const $tabbable = $target.closest('[tabindex]');
           // Is the parent tabbable element inside the popup?
-          if ($tabbable.closest(".h5p-popup-container").length === 1) {
+          if ($tabbable.closest('.h5p-popup-container').length === 1) {
             // We'll set focus here
             $tabbable.focus();
           } else {
             // Fallback: set focus on close button
-            $dialogParent.find(".h5p-close-popup").focus();
+            $dialogParent.find('.h5p-close-popup').focus();
           }
         }
       }
@@ -337,27 +337,27 @@ InteractiveBoard.prototype.attach = function ($container) {
         that.presentation.keywordListEnabled &&
         !that.presentation.keywordListAlwaysShow &&
         that.presentation.keywordListAutoHide &&
-        !$target.is("textarea, .h5p-icon-pencil, span")
+        !$target.is('textarea, .h5p-icon-pencil, span')
       ) {
         that.hideKeywords(); // Auto-hide keywords
       }
     });
 
-  this.on("exitFullScreen", () => {
-    this.$footer.removeClass("footer-full-screen");
-    this.$fullScreenButton.attr("title", this.l10n.fullscreen);
+  this.on('exitFullScreen', () => {
+    this.$footer.removeClass('footer-full-screen');
+    this.$fullScreenButton.attr('title', this.l10n.fullscreen);
     this.$fullscreenAnnouncer.html(this.l10n.accessibilityExitedFullscreen);
   });
 
-  this.on("enterFullScreen", () => {
+  this.on('enterFullScreen', () => {
     this.$fullscreenAnnouncer.html(this.l10n.accessibilityEnteredFullscreen);
   });
 
   // Get intended base width from CSS.
-  const wrapperWidth = parseInt(this.$wrapper.css("width"));
+  const wrapperWidth = parseInt(this.$wrapper.css('width'));
   this.width = wrapperWidth || 640;
 
-  const wrapperHeight = parseInt(this.$wrapper.css("height"));
+  const wrapperHeight = parseInt(this.$wrapper.css('height'));
   this.height = wrapperHeight || 400;
 
   this.ratio = 16 / 9;
@@ -365,16 +365,16 @@ InteractiveBoard.prototype.attach = function ($container) {
   // by mobile browsers already. (The Android native browser does this.)
   this.fontSize = 16;
 
-  this.$boxWrapper = this.$wrapper.children(".h5p-box-wrapper");
+  this.$boxWrapper = this.$wrapper.children('.h5p-box-wrapper');
   const $presentationWrapper = this.$boxWrapper.children(
-    ".h5p-presentation-wrapper",
+    '.h5p-presentation-wrapper',
   );
-  this.$slidesWrapper = $presentationWrapper.children(".h5p-slides-wrapper");
+  this.$slidesWrapper = $presentationWrapper.children('.h5p-slides-wrapper');
   this.$keywordsWrapper = $presentationWrapper.children(
-    ".h5p-keywords-wrapper",
+    '.h5p-keywords-wrapper',
   );
-  this.$progressbar = this.$wrapper.find(".h5p-progressbar");
-  this.$footer = this.$wrapper.children(".h5p-footer");
+  this.$progressbar = this.$wrapper.find('.h5p-progressbar');
+  this.$footer = this.$wrapper.children('.h5p-footer');
 
   // Declare for type checking
   this.$exitSolutionModeText = this.$exitSolutionModeText || null;
@@ -386,7 +386,7 @@ InteractiveBoard.prototype.attach = function ($container) {
     this.editor !== undefined;
   if (this.activeSurface && this.editor === undefined) {
     this.initKeywords = false;
-    this.$boxWrapper.css("height", "100%");
+    this.$boxWrapper.css('height', '100%');
   }
   this.isSolutionMode = false;
 
@@ -404,7 +404,7 @@ InteractiveBoard.prototype.attach = function ($container) {
     this.showSummarySlide = !this.hideSummarySlide;
   } else {
     // Determine by checking for slides with tasks
-    this.slidesWithSolutions.forEach(slide => {
+    this.slidesWithSolutions.forEach((slide) => {
       this.showSummarySlide = slide.length;
     });
   }
@@ -423,7 +423,7 @@ InteractiveBoard.prototype.attach = function ($container) {
     $summarySlide = H5P.jQuery(Slide.createHTML(summarySlideParams)).appendTo(
       this.$slidesWrapper,
     );
-    $summarySlide.addClass("h5p-summary-slide");
+    $summarySlide.addClass('h5p-summary-slide');
 
     if (this.isCurrentSlide(this.slides.length - 1)) {
       this.$current = $summarySlide;
@@ -436,16 +436,18 @@ InteractiveBoard.prototype.attach = function ($container) {
   if (keywordMenuConfig.length > 0 || this.isEditor()) {
     // Initialize keyword titles
     this.keywordMenu.init(keywordMenuConfig);
-    this.keywordMenu.on("select", event => this.keywordClick(event.data.index));
-    this.keywordMenu.on("close", () => this.hideKeywords());
-    this.keywordMenu.on("select", () => {
-      this.$currentKeyword = this.$keywords.children(".h5p-current");
+    this.keywordMenu.on('select', (event) =>
+      this.keywordClick(event.data.index),
+    );
+    this.keywordMenu.on('close', () => this.hideKeywords());
+    this.keywordMenu.on('select', () => {
+      this.$currentKeyword = this.$keywords.children('.h5p-current');
     });
 
     this.$keywords = $(this.keywordMenu.getElement()).appendTo(
       this.$keywordsWrapper,
     );
-    this.$currentKeyword = this.$keywords.children(".h5p-current");
+    this.$currentKeyword = this.$keywords.children('.h5p-current');
 
     this.setKeywordsOpacity(
       this.presentation.keywordListOpacity === undefined
@@ -480,10 +482,10 @@ InteractiveBoard.prototype.attach = function ($container) {
 
     if (H5P.fullscreenSupported) {
       // Create full screen button
-      this.$fullScreenButton = H5P.jQuery("<div/>", {
-        class: "h5p-toggle-full-screen",
+      this.$fullScreenButton = H5P.jQuery('<div/>', {
+        class: 'h5p-toggle-full-screen',
         title: this.l10n.fullscreen,
-        role: "button",
+        role: 'button',
         tabindex: 0,
         appendTo: this.$wrapper,
       });
@@ -519,10 +521,10 @@ InteractiveBoard.prototype.belongsToTagName = function (node, tagNames, stop) {
   // Stop check at DOM tree root
   stop = stop || document.body;
 
-  if (typeof tagNames === "string") {
+  if (typeof tagNames === 'string') {
     tagNames = [tagNames];
   }
-  tagNames = tagNames.map(tagName => tagName.toLowerCase());
+  tagNames = tagNames.map((tagName) => tagName.toLowerCase());
 
   const tagName = node.tagName.toLowerCase();
   if (tagNames.indexOf(tagName) !== -1) {
@@ -561,7 +563,7 @@ InteractiveBoard.prototype.getKeywordMenuConfig = function () {
       subtitle: `${this.l10n.slide} ${index + 1}`,
       index,
     }))
-    .filter(config => config.title !== KEYWORD_TITLE_SKIP);
+    .filter((config) => config.title !== KEYWORD_TITLE_SKIP);
 };
 
 /**
@@ -631,8 +633,8 @@ InteractiveBoard.prototype.createSlides = function () {
 InteractiveBoard.prototype.hasScoreData = function (obj) {
   return (
     typeof obj !== typeof undefined &&
-    typeof obj.getScore === "function" &&
-    typeof obj.getMaxScore === "function"
+    typeof obj.getScore === 'function' &&
+    typeof obj.getMaxScore === 'function'
   );
 };
 
@@ -668,14 +670,14 @@ InteractiveBoard.prototype.getMaxScore = function () {
 InteractiveBoard.prototype.setProgressBarFeedback = function (slideScores) {
   if (slideScores) {
     // Set feedback icons for progress bar.
-    slideScores.forEach(singleSlide => {
+    slideScores.forEach((singleSlide) => {
       const $indicator = this.progressbarParts[singleSlide.slide - 1].find(
-        ".h5p-progressbar-part-has-task",
+        '.h5p-progressbar-part-has-task',
       );
 
-      if ($indicator.hasClass("h5p-answered")) {
+      if ($indicator.hasClass('h5p-answered')) {
         const isCorrect = singleSlide.score >= singleSlide.maxScore;
-        $indicator.addClass(isCorrect ? "h5p-is-correct" : "h5p-is-wrong");
+        $indicator.addClass(isCorrect ? 'h5p-is-correct' : 'h5p-is-wrong');
 
         this.navigationLine.updateSlideTitle(singleSlide.slide - 1);
       }
@@ -683,11 +685,11 @@ InteractiveBoard.prototype.setProgressBarFeedback = function (slideScores) {
   } else {
     if (this.progressbarParts) {
       // Remove all feedback icons.
-      this.progressbarParts.forEach(pbPart => {
+      this.progressbarParts.forEach((pbPart) => {
         pbPart
-          .find(".h5p-progressbar-part-has-task")
-          .removeClass("h5p-is-correct")
-          .removeClass("h5p-is-wrong");
+          .find('.h5p-progressbar-part-has-task')
+          .removeClass('h5p-is-correct')
+          .removeClass('h5p-is-wrong');
       });
     }
   }
@@ -697,22 +699,22 @@ InteractiveBoard.prototype.setProgressBarFeedback = function (slideScores) {
  * Toggle keywords list on/off depending on current state
  */
 InteractiveBoard.prototype.toggleKeywords = function () {
-  const keywordsAreShowing = this.$keywordsWrapper.hasClass("h5p-open");
-  this[keywordsAreShowing ? "hideKeywords" : "showKeywords"]();
+  const keywordsAreShowing = this.$keywordsWrapper.hasClass('h5p-open');
+  this[keywordsAreShowing ? 'hideKeywords' : 'showKeywords']();
 };
 
 /**
  * Hide keywords
  */
 InteractiveBoard.prototype.hideKeywords = function () {
-  if (this.$keywordsWrapper.hasClass("h5p-open")) {
+  if (this.$keywordsWrapper.hasClass('h5p-open')) {
     if (this.$keywordsButton !== undefined) {
-      this.$keywordsButton.attr("title", this.l10n.showKeywords);
-      this.$keywordsButton.attr("aria-label", this.l10n.showKeywords);
-      this.$keywordsButton.attr("aria-expanded", "false");
+      this.$keywordsButton.attr('title', this.l10n.showKeywords);
+      this.$keywordsButton.attr('aria-label', this.l10n.showKeywords);
+      this.$keywordsButton.attr('aria-expanded', 'false');
       this.$keywordsButton.focus();
     }
-    this.$keywordsWrapper.removeClass("h5p-open");
+    this.$keywordsWrapper.removeClass('h5p-open');
   }
 };
 
@@ -720,17 +722,17 @@ InteractiveBoard.prototype.hideKeywords = function () {
  * Show keywords
  */
 InteractiveBoard.prototype.showKeywords = function () {
-  if (this.$keywordsWrapper.hasClass("h5p-open")) {
+  if (this.$keywordsWrapper.hasClass('h5p-open')) {
     // Already showing
     return;
   }
 
   if (this.$keywordsButton !== undefined) {
-    this.$keywordsButton.attr("title", this.l10n.hideKeywords);
-    this.$keywordsButton.attr("aria-label", this.l10n.hideKeywords);
-    this.$keywordsButton.attr("aria-expanded", "true");
+    this.$keywordsButton.attr('title', this.l10n.hideKeywords);
+    this.$keywordsButton.attr('aria-label', this.l10n.hideKeywords);
+    this.$keywordsButton.attr('aria-expanded', 'true');
   }
-  this.$keywordsWrapper.addClass("h5p-open");
+  this.$keywordsWrapper.addClass('h5p-open');
 
   // Do not focus if always showing
   if (!this.presentation.keywordListAlwaysShow) {
@@ -745,10 +747,10 @@ InteractiveBoard.prototype.showKeywords = function () {
  */
 InteractiveBoard.prototype.setKeywordsOpacity = function (value) {
   const [red, green, blue] = this.$keywordsWrapper
-    .css("background-color")
+    .css('background-color')
     .match(/\d+/g);
   this.$keywordsWrapper.css(
-    "background-color",
+    'background-color',
     `rgba(${red}, ${green}, ${blue}, ${value / 100})`,
   );
 };
@@ -762,15 +764,15 @@ InteractiveBoard.prototype.fitCT = function () {
     return;
   }
 
-  this.$current.find(".h5p-ct").each(function () {
+  this.$current.find('.h5p-ct').each(function () {
     var percent = 100;
     var $ct = H5P.jQuery(this);
     var parentHeight = $ct.parent().height();
     while ($ct.outerHeight() > parentHeight) {
       percent--;
       $ct.css({
-        fontSize: percent + "%",
-        lineHeight: percent + 65 + "%",
+        fontSize: percent + '%',
+        lineHeight: percent + 65 + '%',
       });
 
       if (percent < 0) {
@@ -794,7 +796,7 @@ InteractiveBoard.prototype.resetRatio = function () {
     this.ratio = 16 / 9;
   } else {
     this.ratio =
-      slide.aspectRatio.split("-")[0] / slide.aspectRatio.split("-")[1];
+      slide.aspectRatio.split('-')[0] / slide.aspectRatio.split('-')[1];
   }
 };
 
@@ -805,8 +807,8 @@ InteractiveBoard.prototype.resize = function () {
   var self = this;
 
   var fullscreenOn =
-    this.$container.hasClass("h5p-fullscreen") ||
-    this.$container.hasClass("h5p-semi-fullscreen");
+    this.$container.hasClass('h5p-fullscreen') ||
+    this.$container.hasClass('h5p-semi-fullscreen');
 
   if (this.ignoreResize) {
     return; // When printing.
@@ -815,7 +817,7 @@ InteractiveBoard.prototype.resize = function () {
   this.resetRatio();
 
   // Fill up all available width
-  this.$wrapper.css("width", "auto");
+  this.$wrapper.css('width', 'auto');
   var width = this.$container.width();
   var style = {};
 
@@ -824,14 +826,14 @@ InteractiveBoard.prototype.resize = function () {
     if (width / maxHeight > this.ratio) {
       // Top and bottom would be cut off so scale down.
       width = maxHeight * this.ratio;
-      style.width = width + "px";
+      style.width = width + 'px';
     }
   }
 
   // TODO: Add support for -16 when content conversion script is created?
   var widthRatio = width / this.width;
-  style.height = width / this.ratio + "px";
-  style.fontSize = this.fontSize * widthRatio + "px";
+  style.height = width / this.ratio + 'px';
+  style.fontSize = this.fontSize * widthRatio + 'px';
 
   if (this.editor !== undefined) {
     this.editor.setContainerEm(this.fontSize * widthRatio);
@@ -841,7 +843,7 @@ InteractiveBoard.prototype.resize = function () {
 
   // Set h5p-box-wrapper height
   const navigationHeight =
-    this.$container.find(".h5p-cp-navigation").height() || 0;
+    this.$container.find('.h5p-cp-navigation').height() || 0;
   const footerHeight = this.$footer.height() || 0;
   this.$boxWrapper.css({
     height: `${width / this.ratio - navigationHeight - footerHeight - 10}px`,
@@ -859,9 +861,9 @@ InteractiveBoard.prototype.resize = function () {
 
       const isDialogCards =
         instance.libraryInfo &&
-        instance.libraryInfo.machineName === "H5P.Dialogcards";
+        instance.libraryInfo.machineName === 'H5P.Dialogcards';
       if (isDialogCards) {
-        instance.on("resize", function () {
+        instance.on('resize', function () {
           self.resizeDialogCard(this);
         });
       }
@@ -872,7 +874,7 @@ InteractiveBoard.prototype.resize = function () {
         instance.$ !== undefined &&
         !slideElements[i].displayAsButton
       ) {
-        H5P.trigger(instance, "resize");
+        H5P.trigger(instance, 'resize');
       }
     }
   }
@@ -888,8 +890,8 @@ InteractiveBoard.prototype.resize = function () {
 InteractiveBoard.prototype.resizeDialogCard = function (instance) {
   var self = this;
   // In order to resize each cards we need to make it visible first
-  instance.cards.forEach(card => {
-    card.$cardWrapper.css("display", "block");
+  instance.cards.forEach((card) => {
+    card.$cardWrapper.css('display', 'block');
     card.callbacks.onCardTurned = function (turned) {
       self.resizeDialogCard(instance);
     };
@@ -899,7 +901,7 @@ InteractiveBoard.prototype.resizeDialogCard = function (instance) {
   const cardWrapper = $(instance.cards[instance.currentCardId].$cardWrapper[0]);
   const $currentCardContent = instance.cards[instance.currentCardId]
     .getDOM()
-    .find(".h5p-dialogcards-card-content");
+    .find('.h5p-dialogcards-card-content');
   const dialog =
     instance.cards[instance.currentCardId].params.dialogs[
       instance.getCurrentSelectionIndex()
@@ -909,19 +911,19 @@ InteractiveBoard.prototype.resizeDialogCard = function (instance) {
     (dialog.image.height / dialog.image.width) *
     $currentCardContent.get(0).getBoundingClientRect().width;
   if (height > 0) {
-    height = height / parseFloat(instance.$inner.css("font-size"));
+    height = height / parseFloat(instance.$inner.css('font-size'));
     if (height > relativeImageHeight) {
       height = relativeImageHeight;
     }
     instance.cards[instance.currentCardId]
       .getImage()
       .parent()
-      .css("height", height + "em");
+      .css('height', height + 'em');
   }
 
   // Determine the height of content
-  const $content = $(".h5p-dialogcards-card-content", cardWrapper);
-  const $text = $(".h5p-dialogcards-card-text-inner-content", $content);
+  const $content = $('.h5p-dialogcards-card-content', cardWrapper);
+  const $text = $('.h5p-dialogcards-card-text-inner-content', $content);
 
   // Grab size with text
   const textHeight = $text[0].getBoundingClientRect().height;
@@ -931,7 +933,7 @@ InteractiveBoard.prototype.resizeDialogCard = function (instance) {
 
   // Grab size with answer
   let answerHeight = 0;
-  if ($content.hasClass("h5p-dialogcards-turned")) {
+  if ($content.hasClass('h5p-dialogcards-turned')) {
     currentCard.changeText(currentCard.getAnswer());
     answerHeight = $text[0].getBoundingClientRect().height;
   }
@@ -940,43 +942,43 @@ InteractiveBoard.prototype.resizeDialogCard = function (instance) {
   let useHeight = textHeight > answerHeight ? textHeight : answerHeight;
 
   // Min. limit
-  const minHeight = parseFloat($text.parent().parent().css("minHeight"));
+  const minHeight = parseFloat($text.parent().parent().css('minHeight'));
   if (useHeight < minHeight) {
     useHeight = minHeight;
   }
 
   // Convert to em
-  const fontSize = parseFloat($content.css("fontSize"));
+  const fontSize = parseFloat($content.css('fontSize'));
   useHeight /= fontSize;
 
   // Set height
-  $text.parent().css("height", useHeight + "em");
+  $text.parent().css('height', useHeight + 'em');
 
   // Reset card-wrapper-set height
-  $(instance.$cardwrapperSet[0]).css("height", "auto");
+  $(instance.$cardwrapperSet[0]).css('height', 'auto');
 
   // Card wrapper height
   let maxHeight = 0;
-  const wrapperHeight = cardWrapper.css("height", "initial").outerHeight();
-  cardWrapper.css("height", "inherit");
+  const wrapperHeight = cardWrapper.css('height', 'initial').outerHeight();
+  cardWrapper.css('height', 'inherit');
   maxHeight = wrapperHeight > maxHeight ? wrapperHeight : maxHeight;
 
   // Check height
   const initialHeight = cardWrapper
-    .find(".h5p-dialogcards-cardholder")
-    .css("height", "initial")
+    .find('.h5p-dialogcards-cardholder')
+    .css('height', 'initial')
     .outerHeight();
   maxHeight = initialHeight > maxHeight ? initialHeight : maxHeight;
-  cardWrapper.find(".h5p-dialogcards-cardholder").css("height", "inherit");
+  cardWrapper.find('.h5p-dialogcards-cardholder').css('height', 'inherit');
 
   const relativeMaxHeight =
-    maxHeight / parseFloat(cardWrapper.css("font-size"));
-  $(instance.$cardwrapperSet[0]).css("height", relativeMaxHeight + "em");
+    maxHeight / parseFloat(cardWrapper.css('font-size'));
+  $(instance.$cardwrapperSet[0]).css('height', relativeMaxHeight + 'em');
 
   // CP is setting scrollbar based on peer elements of cards which give unnecessary scrooll where it is not needed so hiden them
-  instance.cards.forEach(card => {
+  instance.cards.forEach((card) => {
     if (instance.currentCardId !== card.id) {
-      card.$cardWrapper.css("display", "none");
+      card.$cardWrapper.css('display', 'none');
     }
   });
 };
@@ -987,8 +989,8 @@ InteractiveBoard.prototype.resizeDialogCard = function (instance) {
 InteractiveBoard.prototype.toggleFullScreen = function () {
   if (
     H5P.isFullscreen ||
-    this.$container.hasClass("h5p-fullscreen") ||
-    this.$container.hasClass("h5p-semi-fullscreen")
+    this.$container.hasClass('h5p-fullscreen') ||
+    this.$container.hasClass('h5p-semi-fullscreen')
   ) {
     // Cancel fullscreen
     if (
@@ -1000,29 +1002,29 @@ InteractiveBoard.prototype.toggleFullScreen = function () {
       // Use old system
       if (H5P.fullScreenBrowserPrefix === undefined) {
         // Click button to disable fullscreen
-        H5P.jQuery(".h5p-disable-fullscreen").click();
+        H5P.jQuery('.h5p-disable-fullscreen').click();
       } else {
-        if (H5P.fullScreenBrowserPrefix === "") {
+        if (H5P.fullScreenBrowserPrefix === '') {
           window.top.document.exitFullScreen();
-        } else if (H5P.fullScreenBrowserPrefix === "ms") {
+        } else if (H5P.fullScreenBrowserPrefix === 'ms') {
           window.top.document.msExitFullscreen();
         } else {
           window.top.document[
-            H5P.fullScreenBrowserPrefix + "CancelFullScreen"
+            H5P.fullScreenBrowserPrefix + 'CancelFullScreen'
           ]();
         }
       }
     }
   } else {
     // Rescale footer buttons
-    this.$footer.addClass("footer-full-screen");
+    this.$footer.addClass('footer-full-screen');
 
-    this.$fullScreenButton.attr("title", this.l10n.exitFullscreen);
+    this.$fullScreenButton.attr('title', this.l10n.exitFullscreen);
 
     H5P.fullScreen(this.$container, this);
     if (H5P.fullScreenBrowserPrefix === undefined) {
       // Hide disable full screen button. We have our own!
-      H5P.jQuery(".h5p-disable-fullscreen").hide();
+      H5P.jQuery('.h5p-disable-fullscreen').hide();
     }
   }
 };
@@ -1074,13 +1076,13 @@ InteractiveBoard.prototype.setElementsOverride = function (override) {
     if (override.showSolutionButton) {
       // Override show solutions button
       this.elementsOverride.params.behaviour.enableSolutionsButton =
-        override.showSolutionButton === "on" ? true : false;
+        override.showSolutionButton === 'on' ? true : false;
     }
 
     if (override.retryButton) {
       // Override retry button
       this.elementsOverride.params.behaviour.enableRetry =
-        override.retryButton === "on" ? true : false;
+        override.retryButton === 'on' ? true : false;
     }
   }
 };
@@ -1104,11 +1106,11 @@ InteractiveBoard.prototype.attachElements = function ($slide, index) {
     }
   }
   this.trigger(
-    "domChanged",
+    'domChanged',
     {
       $target: $slide,
-      library: "NDLAInteractiveBoard",
-      key: "newSlide",
+      library: 'NDLAInteractiveBoard',
+      key: 'newSlide',
     },
     { bubbles: true, external: true },
   );
@@ -1135,15 +1137,15 @@ InteractiveBoard.prototype.attachElement = function (
   const overrideButtonSize = element.buttonSize !== undefined;
 
   const classes = [
-    "h5p-element",
-    displayAsButton && "h5p-element-button-wrapper",
+    'h5p-element',
+    displayAsButton && 'h5p-element-button-wrapper',
     overrideButtonSize && `h5p-element-button-${element.buttonSize}`,
-    showAsHotspot && "h5p-element-hotspot-wrapper",
+    showAsHotspot && 'h5p-element-hotspot-wrapper',
   ]
-    .filter(className => !!className)
-    .join(" ");
+    .filter((className) => !!className)
+    .join(' ');
 
-  const $elementContainer = H5P.jQuery("<div>", {
+  const $elementContainer = H5P.jQuery('<div>', {
     class: classes,
   });
 
@@ -1159,7 +1161,7 @@ InteractiveBoard.prototype.attachElement = function (
 
   const isTransparent =
     element.backgroundOpacity === undefined || element.backgroundOpacity === 0;
-  $elementContainer.toggleClass("h5p-transparent", isTransparent);
+  $elementContainer.toggleClass('h5p-transparent', isTransparent);
 
   if (displayAsButton) {
     const $button = this.createInteractionButton(element, instance);
@@ -1168,27 +1170,27 @@ InteractiveBoard.prototype.attachElement = function (
     const hasLibrary = element.action && element.action.library;
     const libTypePmz = hasLibrary
       ? this.getLibraryTypePmz(element.action.library)
-      : "other";
+      : 'other';
 
-    const $outerElementContainer = H5P.jQuery("<div>", {
+    const $outerElementContainer = H5P.jQuery('<div>', {
       class: `h5p-element-outer ${libTypePmz}-outer-element`,
     })
       .css({
         background:
-          "rgba(255,255,255," +
+          'rgba(255,255,255,' +
           (element.backgroundOpacity === undefined
             ? 0
             : element.backgroundOpacity / 100) +
-          ")",
+          ')',
       })
       .appendTo($elementContainer);
 
-    const $innerElementContainer = H5P.jQuery("<div>", {
-      class: "h5p-element-inner",
+    const $innerElementContainer = H5P.jQuery('<div>', {
+      class: 'h5p-element-inner',
     }).appendTo($outerElementContainer);
 
     // H5P.Shape sets it's own size when line in selected
-    instance.on("set-size", function (event) {
+    instance.on('set-size', function (event) {
       for (let property in event.data) {
         $elementContainer.get(0).style[property] = event.data[property];
       }
@@ -1197,16 +1199,16 @@ InteractiveBoard.prototype.attachElement = function (
     instance.attach($innerElementContainer);
     if (
       element.action !== undefined &&
-      element.action.library.substr(0, 24) === "H5P.NDLAInteractiveVideo"
+      element.action.library.substr(0, 24) === 'H5P.NDLAInteractiveVideo'
     ) {
       var handleIV = function () {
-        instance.$container.addClass("h5p-fullscreen");
+        instance.$container.addClass('h5p-fullscreen');
         if (instance.controls.$fullscreen) {
           instance.controls.$fullscreen.remove();
         }
         instance.hasFullScreen = true;
-        if (instance.controls.$play.hasClass("h5p-pause")) {
-          instance.$controls.addClass("h5p-autohide");
+        if (instance.controls.$play.hasClass('h5p-pause')) {
+          instance.$controls.addClass('h5p-autohide');
         } else {
           instance.enableAutoHide();
         }
@@ -1214,7 +1216,7 @@ InteractiveBoard.prototype.attachElement = function (
       if (instance.controls !== undefined) {
         handleIV();
       } else {
-        instance.on("controls", handleIV);
+        instance.on('controls', handleIV);
       }
     }
 
@@ -1243,11 +1245,11 @@ InteractiveBoard.prototype.attachElement = function (
  * Disables tab indexes behind a popup container
  */
 InteractiveBoard.prototype.disableTabIndexes = function () {
-  var $popupContainer = this.$container.find(".h5p-popup-container");
+  var $popupContainer = this.$container.find('.h5p-popup-container');
 
   this.$tabbables = this.$container
     .find(
-      "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]",
+      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]',
     )
     .filter(function () {
       var $tabbable = $(this);
@@ -1257,17 +1259,17 @@ InteractiveBoard.prototype.disableTabIndexes = function () {
       );
 
       // tabIndex has already been modified, keep it in the set.
-      if ($tabbable.data("tabindex")) {
+      if ($tabbable.data('tabindex')) {
         return true;
       }
 
       if (!insideContainer) {
         // Store current tabindex, so we can set it back when dialog closes
-        var tabIndex = $tabbable.attr("tabindex");
-        $tabbable.data("tabindex", tabIndex);
+        var tabIndex = $tabbable.attr('tabindex');
+        $tabbable.data('tabindex', tabIndex);
 
         // Make it non tabbable
-        $tabbable.attr("tabindex", "-1");
+        $tabbable.attr('tabindex', '-1');
         return true;
       }
 
@@ -1283,17 +1285,17 @@ InteractiveBoard.prototype.restoreTabIndexes = function () {
   if (this.$tabbables) {
     this.$tabbables.each(function () {
       var $element = $(this);
-      var tabindex = $element.data("tabindex");
+      var tabindex = $element.data('tabindex');
 
       // Specifically handle jquery ui slider, since it overwrites data in an inconsistent way
-      if ($element.hasClass("ui-slider-handle")) {
-        $element.attr("tabindex", 0);
-        $element.removeData("tabindex");
+      if ($element.hasClass('ui-slider-handle')) {
+        $element.attr('tabindex', 0);
+        $element.removeData('tabindex');
       } else if (tabindex !== undefined) {
-        $element.attr("tabindex", tabindex);
-        $element.removeData("tabindex");
+        $element.attr('tabindex', tabindex);
+        $element.removeData('tabindex');
       } else {
-        $element.removeAttr("tabindex");
+        $element.removeAttr('tabindex');
       }
     });
   }
@@ -1312,29 +1314,29 @@ InteractiveBoard.prototype.createInteractionButton = function (
   instance,
 ) {
   const autoPlay = element.action.params && element.action.params.cpAutoplay;
-  let label = element.action.metadata ? element.action.metadata.title : "";
-  if (label === "") {
+  let label = element.action.metadata ? element.action.metadata.title : '';
+  if (label === '') {
     label =
       (element.action.params && element.action.params.contentName) ||
-      element.action.library.split(" ")[0].split(".")[1];
+      element.action.library.split(' ')[0].split('.')[1];
   }
   const libTypePmz = this.getLibraryTypePmz(element.action.library);
 
   // When choosing another icon instead of the standard icon for the content-type,
   // one of these classes will get attached to the element and change the icons with css.
   const Icons = {
-    f05a: "h5p-advancedtext-button",
-    f008: "h5p-video-button",
-    f03e: "h5p-image-button",
-    f028: "h5p-audio-button",
-    f200: "h5p-chart-button",
-    f03d: "h5p-interactivevideo-button",
-    f099: "h5p-twitteruserfeed-button",
-    f0c1: "h5p-link-button",
-    f15c: "h5p-text-button",
+    f05a: 'h5p-advancedtext-button',
+    f008: 'h5p-video-button',
+    f03e: 'h5p-image-button',
+    f028: 'h5p-audio-button',
+    f200: 'h5p-chart-button',
+    f03d: 'h5p-interactivevideo-button',
+    f099: 'h5p-twitteruserfeed-button',
+    f0c1: 'h5p-link-button',
+    f15c: 'h5p-text-button',
   };
 
-  let iconClassNameForCSS = "";
+  let iconClassNameForCSS = '';
   const isDisplayAsButtonChecked = element.displayAsButton;
   const isUseDifferentIconChecked = element.useButtonIcon;
   if (isDisplayAsButtonChecked && isUseDifferentIconChecked) {
@@ -1348,35 +1350,35 @@ InteractiveBoard.prototype.createInteractionButton = function (
    * @param {jQuery} $btn
    * @return {Function}
    */
-  const setAriaExpandedFalse = $btn => () =>
-    $btn.attr("aria-expanded", "false");
+  const setAriaExpandedFalse = ($btn) => () =>
+    $btn.attr('aria-expanded', 'false');
 
-  const $button = $("<div>", {
-    role: "button",
+  const $button = $('<div>', {
+    role: 'button',
     tabindex: 0,
-    "aria-label": label,
-    "aria-popup": true,
-    "aria-expanded": false,
+    'aria-label': label,
+    'aria-popup': true,
+    'aria-expanded': false,
     class: `h5p-element-button h5p-element-button-${element.buttonSize} 
     ${
-      iconClassNameForCSS != "" ? iconClassNameForCSS : libTypePmz + "-button"
+      iconClassNameForCSS != '' ? iconClassNameForCSS : libTypePmz + '-button'
     }`,
   });
 
-  $button.css({ "background-color": element.buttonColor });
+  $button.css({ 'background-color': element.buttonColor });
 
   const $buttonElement = $('<div class="h5p-button-element"></div>');
   instance.attach($buttonElement);
 
   const parentPosition =
-    libTypePmz === "h5p-advancedtext"
+    libTypePmz === 'h5p-advancedtext'
       ? {
           x: element.x,
           y: element.y,
         }
       : null;
   addClickAndKeyboardListeners($button, () => {
-    $button.attr("aria-expanded", "true");
+    $button.attr('aria-expanded', 'true');
     this.showInteractionPopup(
       instance,
       $button,
@@ -1391,9 +1393,9 @@ InteractiveBoard.prototype.createInteractionButton = function (
 
   if (
     element.action !== undefined &&
-    element.action.library.substr(0, 24) === "H5P.NDLAInteractiveVideo"
+    element.action.library.substr(0, 24) === 'H5P.NDLAInteractiveVideo'
   ) {
-    instance.on("controls", function () {
+    instance.on('controls', function () {
       if (instance.controls.$fullscreen) {
         instance.controls.$fullscreen.remove();
       }
@@ -1423,12 +1425,12 @@ InteractiveBoard.prototype.showInteractionPopup = function (
 ) {
   // Handle exit fullscreen
   const exitFullScreen = () => {
-    instance.trigger("resize");
+    instance.trigger('resize');
   };
 
   if (!this.isEditor()) {
     // Listen for exit fullscreens not triggered by button, for instance using 'esc'
-    this.on("exitFullScreen", exitFullScreen);
+    this.on('exitFullScreen', exitFullScreen);
 
     this.showPopup(
       $buttonElement,
@@ -1437,17 +1439,17 @@ InteractiveBoard.prototype.showInteractionPopup = function (
       () => {
         // Specific to YT Iframe
         if (
-          instance.libraryInfo.machineName === "H5P.NDLAInteractiveVideo" &&
+          instance.libraryInfo.machineName === 'H5P.NDLAInteractiveVideo' &&
           instance.video.pressToPlay !== undefined
         ) {
           // YT iframe does not receive state change event when it opens in a dialog box second time
-          instance.video.on("ready", function (event) {
+          instance.video.on('ready', function (event) {
             const videoInstance = this;
             var playerState = 0;
             setInterval(function () {
               var state = videoInstance.getPlayerState();
               if (playerState !== state) {
-                videoInstance.trigger("stateChange", state);
+                videoInstance.trigger('stateChange', state);
                 playerState = state;
               }
             }, 10);
@@ -1458,30 +1460,30 @@ InteractiveBoard.prototype.showInteractionPopup = function (
         $buttonElement.detach();
 
         // Remove listener, we only need it for active popups
-        this.off("exitFullScreen", exitFullScreen);
+        this.off('exitFullScreen', exitFullScreen);
         closeCallback();
       },
       libTypePmz,
     );
 
-    H5P.trigger(instance, "resize");
+    H5P.trigger(instance, 'resize');
 
     // Resize images to fit popup dialog
-    if (libTypePmz === "h5p-image") {
+    if (libTypePmz === 'h5p-image') {
       this.resizePopupImage($buttonElement);
     }
 
-    var $container = $buttonElement.closest(".h5p-popup-container");
+    var $container = $buttonElement.closest('.h5p-popup-container');
 
     // Focus directly on content when popup is opened
     setTimeout(() => {
       var $tabbables = $buttonElement
-        .find(":input")
-        .add($buttonElement.find("[tabindex]"));
+        .find(':input')
+        .add($buttonElement.find('[tabindex]'));
       if ($tabbables.length) {
         $tabbables[0].focus();
       } else {
-        $buttonElement.attr("tabindex", 0);
+        $buttonElement.attr('tabindex', 0);
         $buttonElement.focus();
       }
     }, 200);
@@ -1507,8 +1509,8 @@ InteractiveBoard.prototype.showInteractionPopup = function (
  * @param {string} library
  * @return {string}
  */
-InteractiveBoard.prototype.getLibraryTypePmz = library =>
-  kebabCase(library.split(" ")[0]).toLowerCase();
+InteractiveBoard.prototype.getLibraryTypePmz = (library) =>
+  kebabCase(library.split(' ')[0]).toLowerCase();
 
 /**
  * Resize image inside popup dialog.
@@ -1518,8 +1520,8 @@ InteractiveBoard.prototype.getLibraryTypePmz = library =>
  */
 InteractiveBoard.prototype.resizePopupImage = function ($wrapper) {
   // Get fontsize, needed for scale
-  var fontSize = Number($wrapper.css("fontSize").replace("px", ""));
-  var $img = $wrapper.find("img");
+  var fontSize = Number($wrapper.css('fontSize').replace('px', ''));
+  var $img = $wrapper.find('img');
 
   /**
    * Resize image to fit inside popup.
@@ -1543,7 +1545,7 @@ InteractiveBoard.prototype.resizePopupImage = function ($wrapper) {
 
   if (!$img.height()) {
     // Wait for image to load
-    $img.one("load", function () {
+    $img.one('load', function () {
       resize(this.width, this.height);
     });
   } else {
@@ -1566,16 +1568,16 @@ InteractiveBoard.prototype.addElementSolutionButton = function (
 ) {
   elementInstance.showCPComments = () => {
     if (
-      $elementContainer.children(".h5p-element-solution").length === 0 &&
+      $elementContainer.children('.h5p-element-solution').length === 0 &&
       stripHTML(element.solution).length > 0
     ) {
-      const $commentButton = $("<div/>", {
-        role: "button",
+      const $commentButton = $('<div/>', {
+        role: 'button',
         tabindex: 0,
         title: this.l10n.solutionsButtonTitle,
-        "aria-popup": true,
-        "aria-expanded": false,
-        class: "h5p-element-solution",
+        'aria-popup': true,
+        'aria-expanded': false,
+        class: 'h5p-element-solution',
       })
         .append(
           '<span class="joubel-icon-comment-normal"><span class="h5p-icon-shadow"></span><span class="h5p-icon-speech-bubble"></span><span class="h5p-icon-question"></span></span>',
@@ -1619,7 +1621,7 @@ InteractiveBoard.prototype.showPopup = function (
   $focusOnClose,
   parentPosition = null,
   remove,
-  classes = "h5p-popup-comment-field",
+  classes = 'h5p-popup-comment-field',
 ) {
   var self = this;
   var doNotClose;
@@ -1640,8 +1642,8 @@ InteractiveBoard.prototype.showPopup = function (
       }, 100);
     }
     event.preventDefault();
-    $popup.addClass("h5p-animate");
-    $popup.find(".h5p-popup-container").addClass("h5p-animate");
+    $popup.addClass('h5p-animate');
+    $popup.find('.h5p-popup-container').addClass('h5p-animate');
 
     setTimeout(function () {
       $popup.remove();
@@ -1660,29 +1662,29 @@ InteractiveBoard.prototype.showPopup = function (
       '<div role="button" tabindex="0" class="h5p-close-popup" title="' +
       this.l10n.close +
       '"></div>' +
-      "</div>" +
+      '</div>' +
       '<div class="h5p-popup-wrapper" role="document"></div>' +
-      "</div>" +
-      "</div>",
+      '</div>' +
+      '</div>',
   );
 
-  const $popupWrapper = $popup.find(".h5p-popup-wrapper");
+  const $popupWrapper = $popup.find('.h5p-popup-wrapper');
   if (popupContent instanceof H5P.jQuery) {
     $popupWrapper.append(popupContent);
   } else {
     $popupWrapper.html(popupContent);
   }
 
-  const $popupContainer = $popup.find(".h5p-popup-container");
+  const $popupContainer = $popup.find('.h5p-popup-container');
 
   const resizePopup = ($popup, $popupContainer, parentPosition) => {
     // Workaround for NDLA's way of changing height of the slide
-    if ($popupContainer.find(".h5p-button-element.h5p-video > video")) {
-      $popupWrapper.css("max-height", "inherit");
-      $popupContainer.css("min-height", "inherit");
+    if ($popupContainer.find('.h5p-button-element.h5p-video > video')) {
+      $popupWrapper.css('max-height', 'inherit');
+      $popupContainer.css('min-height', 'inherit');
     } else {
-      $popupWrapper.css("max-height", "");
-      $popupContainer.css("min-height", "");
+      $popupWrapper.css('max-height', '');
+      $popupContainer.css('min-height', '');
     }
 
     if (!parentPosition) {
@@ -1690,7 +1692,7 @@ InteractiveBoard.prototype.showPopup = function (
     }
 
     // Do not show until we have finished calculating position
-    $popupContainer.css({ visibility: "hidden" });
+    $popupContainer.css({ visibility: 'hidden' });
     $popup.prependTo(this.$wrapper);
 
     let popupHeight = $popupContainer.height();
@@ -1716,7 +1718,7 @@ InteractiveBoard.prototype.showPopup = function (
       // Make the popup quadratic
       widthPercentage = Math.sqrt(widthPercentage * heightPercentage);
       $popupContainer.css({
-        width: widthPercentage + "%",
+        width: widthPercentage + '%',
       });
     }
 
@@ -1743,27 +1745,27 @@ InteractiveBoard.prototype.showPopup = function (
     // Reset and prepare to animate in
     $popup.detach();
     $popupContainer.css({
-      left: leftPos + "%",
-      top: topPos + "%",
+      left: leftPos + '%',
+      top: topPos + '%',
     });
   };
 
   resizePopup($popup, $popupContainer, parentPosition);
-  $popup.addClass("h5p-animate");
+  $popup.addClass('h5p-animate');
   $popupContainer
     .css({
-      visibility: "",
+      visibility: '',
     })
-    .addClass("h5p-animate");
+    .addClass('h5p-animate');
 
   // Insert popup ready for use
   $popup
     .prependTo(this.$wrapper)
     .focus()
-    .removeClass("h5p-animate")
+    .removeClass('h5p-animate')
     .click(close)
-    .find(".h5p-popup-container")
-    .removeClass("h5p-animate")
+    .find('.h5p-popup-container')
+    .removeClass('h5p-animate')
     .click(function () {
       doNotClose = true;
     })
@@ -1774,7 +1776,7 @@ InteractiveBoard.prototype.showPopup = function (
     })
     .end();
 
-  addClickAndKeyboardListeners($popup.find(".h5p-close-popup"), event =>
+  addClickAndKeyboardListeners($popup.find('.h5p-close-popup'), (event) =>
     close(event),
   );
 
@@ -1841,7 +1843,7 @@ InteractiveBoard.prototype.initKeyEvents = function () {
     }
   };
 
-  H5P.jQuery("body").keydown(this.keydown);
+  H5P.jQuery('body').keydown(this.keydown);
 };
 
 /**
@@ -1859,10 +1861,10 @@ InteractiveBoard.prototype.initTouchEvents = function () {
       transform: value,
     };
   };
-  var reset = transform("");
+  var reset = transform('');
 
   this.$slidesWrapper
-    .bind("touchstart", function (event) {
+    .bind('touchstart', function (event) {
       isTouchJump = false;
       // Set start positions
       lastX = startX = event.originalEvent.touches[0].pageX;
@@ -1876,12 +1878,12 @@ InteractiveBoard.prototype.initTouchEvents = function () {
       scroll = null;
       touchStarted = true;
     })
-    .bind("touchmove", function (event) {
+    .bind('touchmove', function (event) {
       var touches = event.originalEvent.touches;
 
       if (touchStarted) {
-        that.$current.prev().addClass("h5p-touch-move");
-        that.$current.next().addClass("h5p-touch-move");
+        that.$current.prev().addClass('h5p-touch-move');
+        that.$current.next().addClass('h5p-touch-move');
         touchStarted = false;
       }
 
@@ -1910,16 +1912,16 @@ InteractiveBoard.prototype.initTouchEvents = function () {
           // Move previous slide
           that.$current
             .prev()
-            .css(transform("translateX(" + (prevX - movedX) + "px"));
+            .css(transform('translateX(' + (prevX - movedX) + 'px'));
         } else {
           // Move next slide
           that.$current
             .next()
-            .css(transform("translateX(" + (nextX - movedX) + "px)"));
+            .css(transform('translateX(' + (nextX - movedX) + 'px)'));
         }
 
         // Move current slide
-        that.$current.css(transform("translateX(" + -movedX + "px)"));
+        that.$current.css(transform('translateX(' + -movedX + 'px)'));
       }
       // TODO: Jumping over multiple slides disabled until redesigned.
 
@@ -1936,7 +1938,7 @@ InteractiveBoard.prototype.initTouchEvents = function () {
       that.updateTouchPopup(that.$slidesWrapper, nextSlide, startX, startY);
     }*/
     })
-    .bind("touchend", function () {
+    .bind('touchend', function () {
       if (!scroll) {
         // If we're not scrolling detemine if we're changing slide
         var moved = startX - lastX;
@@ -1948,7 +1950,7 @@ InteractiveBoard.prototype.initTouchEvents = function () {
         }
       }
       // Reset.
-      that.$slidesWrapper.children().css(reset).removeClass("h5p-touch-move");
+      that.$slidesWrapper.children().css(reset).removeClass('h5p-touch-move');
     });
 };
 
@@ -1973,23 +1975,23 @@ InteractiveBoard.prototype.updateTouchPopup = function (
     return;
   }
 
-  var keyword = "";
+  var keyword = '';
   var yPosAdjustment = 0.15; // Adjust y-position 15% higher for visibility
 
   if (
     this.$keywords !== undefined &&
     this.$keywords
-      .children(":eq(" + slideNumber + ")")
-      .find("span")
+      .children(':eq(' + slideNumber + ')')
+      .find('span')
       .html() !== undefined
   ) {
     keyword += this.$keywords
-      .children(":eq(" + slideNumber + ")")
-      .find("span")
+      .children(':eq(' + slideNumber + ')')
+      .find('span')
       .html();
   } else {
     var slideIndexToNumber = slideNumber + 1;
-    keyword += this.l10n.slide + " " + slideIndexToNumber;
+    keyword += this.l10n.slide + ' ' + slideIndexToNumber;
   }
 
   // Summary slide keyword
@@ -2000,8 +2002,8 @@ InteractiveBoard.prototype.updateTouchPopup = function (
   }
 
   if (this.touchPopup === undefined) {
-    this.touchPopup = H5P.jQuery("<div/>", {
-      class: "h5p-touch-popup",
+    this.touchPopup = H5P.jQuery('<div/>', {
+      class: 'h5p-touch-popup',
     }).insertAfter($container);
   } else {
     this.touchPopup.insertAfter($container);
@@ -2015,7 +2017,7 @@ InteractiveBoard.prototype.updateTouchPopup = function (
   }
 
   this.touchPopup.css({
-    "max-width": $container.width() - xPos,
+    'max-width': $container.width() - xPos,
     left: xPos,
     top: yPos,
   });
@@ -2104,22 +2106,22 @@ InteractiveBoard.prototype.jumpToSlide = function (
   var that = this;
   if (this.editor === undefined && this.contentId) {
     // Content ID avoids crash when previewing in editor before saving
-    var progressedEvent = this.createXAPIEventTemplate("progressed");
+    var progressedEvent = this.createXAPIEventTemplate('progressed');
     progressedEvent.data.statement.object.definition.extensions[
-      "http://id.tincanapi.com/extension/ending-point"
+      'http://id.tincanapi.com/extension/ending-point'
     ] = slideNumber + 1;
     this.trigger(progressedEvent);
   }
 
-  if (this.$current.hasClass("h5p-animate")) {
+  if (this.$current.hasClass('h5p-animate')) {
     return;
   }
 
   // Jump to given slide and enable animation.
-  var $old = this.$current.addClass("h5p-animate");
+  var $old = this.$current.addClass('h5p-animate');
   var $slides = that.$slidesWrapper.children();
-  var $prevs = $slides.filter(":lt(" + slideNumber + ")");
-  this.$current = $slides.eq(slideNumber).addClass("h5p-animate");
+  var $prevs = $slides.filter(':lt(' + slideNumber + ')');
+  this.$current = $slides.eq(slideNumber).addClass('h5p-animate');
   var previousSlideIndex = this.currentSlideIndex;
   this.currentSlideIndex = slideNumber;
 
@@ -2154,16 +2156,16 @@ InteractiveBoard.prototype.jumpToSlide = function (
   setTimeout(
     function () {
       // Play animations
-      $old.removeClass("h5p-current");
+      $old.removeClass('h5p-current');
       $slides
         .css({
-          transform: "",
+          transform: '',
         })
-        .removeClass("h5p-touch-move")
-        .removeClass("h5p-previous");
-      $prevs.addClass("h5p-previous");
-      that.$current.addClass("h5p-current");
-      that.trigger("changedSlide", that.$current.index());
+        .removeClass('h5p-touch-move')
+        .removeClass('h5p-previous');
+      $prevs.addClass('h5p-previous');
+      that.$current.addClass('h5p-current');
+      that.trigger('changedSlide', that.$current.index());
     },
     animateTransition ? 1 : 0,
   );
@@ -2171,7 +2173,7 @@ InteractiveBoard.prototype.jumpToSlide = function (
   setTimeout(
     function () {
       // Done animating
-      that.$slidesWrapper.children().removeClass("h5p-animate");
+      that.$slidesWrapper.children().removeClass('h5p-animate');
 
       if (that.editor !== undefined) {
         return;
@@ -2189,7 +2191,7 @@ InteractiveBoard.prototype.jumpToSlide = function (
             instanceParams[i].action.params &&
             instanceParams[i].action.params.cpAutoplay &&
             !instanceParams[i].displayAsButton &&
-            typeof instances[i].play === "function"
+            typeof instances[i].play === 'function'
           ) {
             // Autoplay media if not button
             instances[i].play();
@@ -2197,8 +2199,8 @@ InteractiveBoard.prototype.jumpToSlide = function (
 
           if (
             !instanceParams[i].displayAsButton &&
-            typeof instances[i].setActivityStarted === "function" &&
-            typeof instances[i].getScore === "function"
+            typeof instances[i].setActivityStarted === 'function' &&
+            typeof instances[i].getScore === 'function'
           ) {
             instances[i].setActivityStarted();
           }
@@ -2211,7 +2213,7 @@ InteractiveBoard.prototype.jumpToSlide = function (
   // Jump keywords
   if (this.$keywords !== undefined) {
     this.keywordMenu.setCurrentSlideIndex(slideNumber);
-    this.$currentKeyword = this.$keywords.find(".h5p-current");
+    this.$currentKeyword = this.$keywords.find('.h5p-current');
 
     if (!noScroll) {
       this.keywordMenu.scrollToKeywords(slideNumber);
@@ -2255,7 +2257,7 @@ InteractiveBoard.prototype.jumpToSlide = function (
     this.editor.dnb.blurAll();
   }
 
-  this.trigger("resize"); // Triggered to resize elements.
+  this.trigger('resize'); // Triggered to resize elements.
   this.fitCT();
   return true;
 };
@@ -2269,23 +2271,23 @@ InteractiveBoard.prototype.setOverflowTabIndex = function () {
     return;
   }
 
-  this.$current.find(".h5p-element-inner").each(function () {
+  this.$current.find('.h5p-element-inner').each(function () {
     const $inner = $(this);
 
     // Currently, this rule is for tables only
     let innerHeight;
-    if (this.classList.contains("h5p-table")) {
-      innerHeight = $inner.find(".h5p-table").outerHeight();
+    if (this.classList.contains('h5p-table')) {
+      innerHeight = $inner.find('.h5p-table').outerHeight();
     }
 
     // Add tabindex if there's an overflow (scrollbar depending on CSS)
-    const outerHeight = $inner.closest(".h5p-element-outer").innerHeight();
+    const outerHeight = $inner.closest('.h5p-element-outer').innerHeight();
     if (
       innerHeight !== undefined &&
       outerHeight !== null &&
       innerHeight > outerHeight
     ) {
-      $inner.attr("tabindex", 0);
+      $inner.attr('tabindex', 0);
     }
   });
 };
@@ -2299,7 +2301,7 @@ InteractiveBoard.prototype.setSlideNumberAnnouncer = function (
   slideNumber,
   handleFocus = false,
 ) {
-  let slideTitle = "";
+  let slideTitle = '';
 
   if (!this.navigationLine) {
     return slideTitle;
@@ -2309,7 +2311,7 @@ InteractiveBoard.prototype.setSlideNumberAnnouncer = function (
   const slide = this.slides[slideNumber];
   const hasKeywords = slide.keywords && slide.keywords.length > 0;
   if (hasKeywords && !this.navigationLine.isSummarySlide(slideNumber)) {
-    slideTitle += this.l10n.slide + " " + (slideNumber + 1) + ": ";
+    slideTitle += this.l10n.slide + ' ' + (slideNumber + 1) + ': ';
   }
 
   slideTitle += this.navigationLine.createSlideTitle(slideNumber);
@@ -2341,7 +2343,7 @@ InteractiveBoard.prototype.resetTask = function () {
   }
 
   this.jumpToSlide(0, false);
-  this.$container.find(".h5p-popup-overlay").remove();
+  this.$container.find('.h5p-popup-overlay').remove();
 };
 
 /**
@@ -2354,12 +2356,14 @@ InteractiveBoard.prototype.showSolutions = function () {
   let jumpedToFirst = false;
   let hasScores = false;
 
-  const slidesWithSolutions = this.slidesWithSolutions.filter(slide => !!slide);
+  const slidesWithSolutions = this.slidesWithSolutions.filter(
+    (slide) => !!slide,
+  );
 
   for (let i = 0; i < slidesWithSolutions.length; i++) {
     if (!this.elementsAttached[i]) {
       // Attach elements before showing solutions
-      this.attachElements(this.$slidesWrapper.children(":eq(" + i + ")"), i);
+      this.attachElements(this.$slidesWrapper.children(':eq(' + i + ')'), i);
     }
     if (!jumpedToFirst) {
       this.jumpToSlide(i, false);
@@ -2436,7 +2440,7 @@ InteractiveBoard.prototype.getSlideScores = function (noJump) {
       const slideElements = this.slidesWithSolutions[i];
       if (!this.elementsAttached[i]) {
         // Attach elements before showing solutions
-        this.attachElements(this.$slidesWrapper.children(":eq(" + i + ")"), i);
+        this.attachElements(this.$slidesWrapper.children(':eq(' + i + ')'), i);
       }
       if (!jumpedToFirst) {
         this.jumpToSlide(i, false);
@@ -2461,10 +2465,10 @@ InteractiveBoard.prototype.getSlideScores = function (noJump) {
 
       /** @type {Slide} */
       const answerHotspotsConnectedToSlide = slideElements.filter(
-        element => element.answerHotspotType,
+        (element) => element.answerHotspotType,
       );
       for (const element of answerHotspotsConnectedToSlide) {
-        const isCorrectAnswer = element.answerHotspotType === "true";
+        const isCorrectAnswer = element.answerHotspotType === 'true';
         if (isCorrectAnswer) {
           slideMaxScore++;
 
@@ -2531,7 +2535,7 @@ InteractiveBoard.prototype.getCopyrights = function () {
 
   for (var slide = 0; slide < this.slides.length; slide++) {
     var slideInfo = new H5P.ContentCopyrights();
-    slideInfo.setLabel(this.l10n.slide + " " + (slide + 1));
+    slideInfo.setLabel(this.l10n.slide + ' ' + (slide + 1));
 
     // Check for a slide specific background image
     if (
@@ -2587,11 +2591,11 @@ InteractiveBoard.prototype.getCopyrights = function () {
         }
         var label = element + 1;
         if (params.contentName !== undefined) {
-          label += ": " + params.contentName;
+          label += ': ' + params.contentName;
         } else if (instance.getTitle !== undefined) {
-          label += ": " + instance.getTitle();
+          label += ': ' + instance.getTitle();
         } else if (params.l10n && params.l10n.name) {
-          label += ": " + params.l10n.name;
+          label += ': ' + params.l10n.name;
         }
         elementCopyrights.setLabel(label);
 
@@ -2618,12 +2622,12 @@ InteractiveBoard.prototype.pauseMedia = function (instance, params = null) {
     if (
       instance.pause !== undefined &&
       (instance.pause instanceof Function ||
-        typeof instance.pause === "function")
+        typeof instance.pause === 'function')
     ) {
       // Don't pause media if the source is not compatible
       if (
         params &&
-        instance.libraryInfo.machineName === "H5P.NDLAInteractiveVideo" &&
+        instance.libraryInfo.machineName === 'H5P.NDLAInteractiveVideo' &&
         instance.video.pressToPlay === undefined &&
         params.interactiveVideo.video.files &&
         H5P.VideoHtml5.canPlay(params.interactiveVideo.video.files)
@@ -2636,12 +2640,12 @@ InteractiveBoard.prototype.pauseMedia = function (instance, params = null) {
       instance.video !== undefined &&
       instance.video.pause !== undefined &&
       (instance.video.pause instanceof Function ||
-        typeof instance.video.pause === "function")
+        typeof instance.video.pause === 'function')
     ) {
       instance.video.pause();
     } else if (
       instance.stop !== undefined &&
-      (instance.stop instanceof Function || typeof instance.stop === "function")
+      (instance.stop instanceof Function || typeof instance.stop === 'function')
     ) {
       instance.stop();
     }
@@ -2658,16 +2662,16 @@ InteractiveBoard.prototype.pauseMedia = function (instance, params = null) {
  * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
  */
 InteractiveBoard.prototype.getXAPIData = function () {
-  var xAPIEvent = this.createXAPIEventTemplate("answered");
+  var xAPIEvent = this.createXAPIEventTemplate('answered');
 
   // Extend definition
   var definition = xAPIEvent.getVerifiedStatementValue([
-    "object",
-    "definition",
+    'object',
+    'definition',
   ]);
   H5P.jQuery.extend(definition, {
-    interactionType: "compound",
-    type: "http://adlnet.gov/expapi/activities/cmi.interaction",
+    interactionType: 'compound',
+    type: 'http://adlnet.gov/expapi/activities/cmi.interaction',
   });
 
   var score = this.getScore();
@@ -2675,12 +2679,12 @@ InteractiveBoard.prototype.getXAPIData = function () {
   xAPIEvent.setScoredResult(score, maxScore, this, true, score === maxScore);
 
   var childrenXAPIData = flattenArray(this.slidesWithSolutions)
-    .map(child => {
+    .map((child) => {
       if (child && child.getXAPIData) {
         return child.getXAPIData();
       }
     })
-    .filter(data => !!data);
+    .filter((data) => !!data);
 
   return {
     statement: xAPIEvent.data.statement,

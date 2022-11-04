@@ -14,14 +14,14 @@ H5PPresave['H5P.NDLAInteractiveBoard'] = function (content, finished) {
 
   if (isContentInvalid()) {
     throw new presave.exceptions.InvalidContentSemanticsException(
-      "Invalid Course Presentation Error",
+      'Invalid Course Presentation Error',
     );
   }
 
   var score = content.presentation.slides
     .map(function (value, index) {
       var slide = content.presentation.slides[index];
-      if (!slide.hasOwnProperty("elements")) {
+      if (!slide.hasOwnProperty('elements')) {
         return [];
       }
       return slide.elements;
@@ -33,14 +33,14 @@ H5PPresave['H5P.NDLAInteractiveBoard'] = function (content, finished) {
       return previous.concat(current);
     }, [])
     .map(function (element) {
-      if (element.hasOwnProperty("action")) {
+      if (element.hasOwnProperty('action')) {
         return element.action;
       }
       return {};
     })
     .filter(function (action) {
       return (
-        action.hasOwnProperty("library") && action.hasOwnProperty("params")
+        action.hasOwnProperty('library') && action.hasOwnProperty('params')
       );
     })
     .map(function (action) {
@@ -65,7 +65,7 @@ H5PPresave['H5P.NDLAInteractiveBoard'] = function (content, finished) {
     return (
       !presave.checkNestedRequirements(
         content,
-        "content.presentation.slides",
+        'content.presentation.slides',
       ) || !Array.isArray(content.presentation.slides)
     );
   }

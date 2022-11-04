@@ -1,5 +1,5 @@
 // @ts-check
-import { Hotspot } from "./hotspot";
+import { Hotspot } from './hotspot';
 
 /**
  *
@@ -13,8 +13,8 @@ export function initAnswerHotspot(element, answerType) {
     `h5p-hotspot-answer h5p-hotspot-answer--${answerType}`,
   );
 
-  const checkedClass = "h5p-hotspot-answer--checked";
-  element.$element.on("click", () => {
+  const checkedClass = 'h5p-hotspot-answer--checked';
+  element.$element.on('click', () => {
     const wasChecked = element.isChecked;
     if (wasChecked) {
       element.$element.removeClass(checkedClass);

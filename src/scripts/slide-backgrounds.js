@@ -1,4 +1,4 @@
-import { jQuery as $ } from "./globals";
+import { jQuery as $ } from './globals';
 
 /**
  * @class
@@ -17,13 +17,13 @@ export default class SlideBackground {
       true,
       {
         globalBackgroundSelector: {
-          fillGlobalBackground: "",
+          fillGlobalBackground: '',
           imageGlobalBackground: {},
         },
         slides: [
           {
             slideBackgroundSelector: {
-              fillSlideBackground: "",
+              fillSlideBackground: '',
               imageSlideBackground: {},
             },
           },
@@ -72,26 +72,26 @@ export default class SlideBackground {
     var setBackground = function (fillSettings, imageSettings, index) {
       var $updateSlides = cp.$slidesWrapper
         .children()
-        .filter(":not(.h5p-summary-slide)");
+        .filter(':not(.h5p-summary-slide)');
 
       if (index !== undefined) {
         $updateSlides = $updateSlides.eq(index);
       }
 
-      if (fillSettings && fillSettings !== "") {
+      if (fillSettings && fillSettings !== '') {
         // Fill with background color
         $updateSlides
-          .addClass("has-background")
-          .css("background-image", "")
-          .css("background-color", fillSettings);
+          .addClass('has-background')
+          .css('background-image', '')
+          .css('background-color', fillSettings);
       } else if (imageSettings && imageSettings.path) {
         // Fill with image
         $updateSlides
-          .addClass("has-background")
-          .css("background-color", "")
+          .addClass('has-background')
+          .css('background-color', '')
           .css(
-            "background-image",
-            "url(" + H5P.getPath(imageSettings.path, cp.contentId) + ")",
+            'background-image',
+            'url(' + H5P.getPath(imageSettings.path, cp.contentId) + ')',
           );
       }
     };

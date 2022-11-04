@@ -1,4 +1,4 @@
-import { addClickAndKeyboardListeners } from "./utils";
+import { addClickAndKeyboardListeners } from './utils';
 
 const Printer = (function ($) {
   let nextPrinterDialogId = 0;
@@ -18,7 +18,7 @@ const Printer = (function ($) {
    */
   Printer.supported = function () {
     // Need window.print to be available
-    return typeof window.print === "function";
+    return typeof window.print === 'function';
   };
 
   /**
@@ -33,10 +33,10 @@ const Printer = (function ($) {
    */
   Printer.print = function (cp, $wrapper, allSlides) {
     // Let CP know we are about to print
-    cp.trigger("printing", { finished: false, allSlides: allSlides });
+    cp.trigger('printing', { finished: false, allSlides: allSlides });
 
     // Find height of a slide:
-    var $currentSlide = $(".h5p-slide.h5p-current");
+    var $currentSlide = $('.h5p-slide.h5p-current');
     var slideHeight = $currentSlide.height();
     var slideWidth = $currentSlide.width();
 
@@ -45,20 +45,20 @@ const Printer = (function ($) {
     // More info: http://stackoverflow.com/a/11084797/2797106
     var ratio = slideWidth / 670;
 
-    var $slides = $(".h5p-slide");
+    var $slides = $('.h5p-slide');
 
     $slides.css({
-      height: slideHeight / ratio + "px",
-      width: "670px",
-      fontSize: Math.floor(100 / ratio) + "%",
+      height: slideHeight / ratio + 'px',
+      width: '670px',
+      fontSize: Math.floor(100 / ratio) + '%',
     });
 
     var wrapperHeight = $wrapper.height();
-    $wrapper.css("height", "auto");
+    $wrapper.css('height', 'auto');
 
     // Let printer css know which slides to print:
-    $slides.toggleClass("doprint", allSlides === true);
-    $currentSlide.addClass("doprint");
+    $slides.toggleClass('doprint', allSlides === true);
+    $currentSlide.addClass('doprint');
 
     // Need timeout for some browsers.
     setTimeout(function () {
@@ -67,14 +67,14 @@ const Printer = (function ($) {
 
       // Reset CSS
       $slides.css({
-        height: "",
-        width: "",
-        fontSize: "",
+        height: '',
+        width: '',
+        fontSize: '',
       });
-      $wrapper.css("height", wrapperHeight + "px");
+      $wrapper.css('height', wrapperHeight + 'px');
 
       // Let CP know we are finished printing
-      cp.trigger("printing", { finished: true });
+      cp.trigger('printing', { finished: true });
     }, 500);
   };
 
@@ -97,7 +97,7 @@ const Printer = (function ($) {
                         <h2 id="${dialogTitleId}">${texts.printTitle}</h2>
                         <div class="h5p-scroll-content"></div>
                         <div class="h5p-close" role="button" tabindex="0" title="${H5P.t(
-                          "close",
+                          'close',
                         )}">
                       </div>
                     </div>`)
@@ -106,21 +106,21 @@ const Printer = (function ($) {
         self.close();
       })
       // prevent propagation inside inner
-      .children(".h5p-inner")
+      .children('.h5p-inner')
       .click(function () {
         return false;
       })
       .end();
 
-    addClickAndKeyboardListeners($dialog.find(".h5p-close"), () =>
+    addClickAndKeyboardListeners($dialog.find('.h5p-close'), () =>
       self.close(),
     );
 
-    var $content = $dialog.find(".h5p-scroll-content");
+    var $content = $dialog.find('.h5p-scroll-content');
 
     $content.append(
-      $("<div>", {
-        class: "h5p-cp-print-ingress",
+      $('<div>', {
+        class: 'h5p-cp-print-ingress',
         id: ingressId,
         html: texts.printIngress,
       }),
@@ -128,7 +128,7 @@ const Printer = (function ($) {
 
     H5P.JoubelUI.createButton({
       html: texts.printAllSlides,
-      class: "h5p-cp-print-all-slides",
+      class: 'h5p-cp-print-all-slides',
       click: function () {
         self.close();
         callback(true);
@@ -137,7 +137,7 @@ const Printer = (function ($) {
 
     H5P.JoubelUI.createButton({
       html: texts.printCurrentSlide,
-      class: "h5p-cp-print-current-slide",
+      class: 'h5p-cp-print-current-slide',
       click: function () {
         self.close();
         callback(false);
@@ -146,14 +146,14 @@ const Printer = (function ($) {
 
     this.open = function () {
       setTimeout(function () {
-        $dialog.addClass("h5p-open"); // Fade in
+        $dialog.addClass('h5p-open'); // Fade in
         // Triggering an event, in case something has to be done after dialog has been opened.
-        H5P.jQuery(self).trigger("dialog-opened", [$dialog]);
+        H5P.jQuery(self).trigger('dialog-opened', [$dialog]);
       }, 1);
     };
 
     this.close = function () {
-      $dialog.removeClass("h5p-open"); // Fade out
+      $dialog.removeClass('h5p-open'); // Fade out
       setTimeout(function () {
         $dialog.remove();
       }, 200);

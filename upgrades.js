@@ -61,20 +61,20 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
         delete parameters.l10n.scrollRight;
         delete parameters.l10n.goToSlide;
 
-        parameters.l10n.fullscreen = "fullscreen";
-        parameters.l10n.exitFullscreen = "Exit fullscreen";
-        parameters.l10n.prevSlide = "Previous slide";
-        parameters.l10n.nextSlide = "Next slide";
-        parameters.l10n.currentSlide = "Current slide";
-        parameters.l10n.lastSlide = "Last slide";
-        parameters.l10n.solutionModeTitle = "Exit solution mode";
-        parameters.l10n.solutionModeText = "Solution Mode:";
-        parameters.l10n.solutionModeUnderlined = "Close";
+        parameters.l10n.fullscreen = 'fullscreen';
+        parameters.l10n.exitFullscreen = 'Exit fullscreen';
+        parameters.l10n.prevSlide = 'Previous slide';
+        parameters.l10n.nextSlide = 'Next slide';
+        parameters.l10n.currentSlide = 'Current slide';
+        parameters.l10n.lastSlide = 'Last slide';
+        parameters.l10n.solutionModeTitle = 'Exit solution mode';
+        parameters.l10n.solutionModeText = 'Solution Mode:';
+        parameters.l10n.solutionModeUnderlined = 'Close';
         parameters.l10n.summaryMultipleTaskText =
-          "Text when multiple tasks on a page";
-        parameters.l10n.scoreMessage = "You achieved:";
-        parameters.l10n.shareFacebook = "Share on Facebook";
-        parameters.l10n.shareTwitter = "Share on Twitter";
+          'Text when multiple tasks on a page';
+        parameters.l10n.scoreMessage = 'You achieved:';
+        parameters.l10n.shareFacebook = 'Share on Facebook';
+        parameters.l10n.shareTwitter = 'Share on Twitter';
 
         finished(null, parameters);
       },
@@ -90,11 +90,11 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
                 // NOTE: We avoid using H5P.createUUID since this is an upgrade script and H5P function may change in the
                 // future
                 slides[i].elements[j].action.subContentId =
-                  "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+                  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
                     /[xy]/g,
                     function (char) {
                       var random = (Math.random() * 16) | 0,
-                        newChar = char === "x" ? random : (random & 0x3) | 0x8;
+                        newChar = char === 'x' ? random : (random & 0x3) | 0x8;
                       return newChar.toString(16);
                     },
                   );
@@ -128,9 +128,9 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
               if (
                 element.action &&
                 element.action.library &&
-                element.action.library.split(" ")[0] === "H5P.Text"
+                element.action.library.split(' ')[0] === 'H5P.Text'
               ) {
-                element.action.library = "H5P.AdvancedText 1.0";
+                element.action.library = 'H5P.AdvancedText 1.0';
               }
             }
           }
@@ -159,8 +159,8 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
               if (
                 element.action &&
                 element.action.library &&
-                (element.action.library.split(" ")[0] === "H5P.AdvancedText" ||
-                  element.action.library.split(" ")[0] === "H5P.ContinuousText")
+                (element.action.library.split(' ')[0] === 'H5P.AdvancedText' ||
+                  element.action.library.split(' ')[0] === 'H5P.ContinuousText')
               ) {
                 element.width += 1.7;
                 element.height += 3;
@@ -189,11 +189,11 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
             // Set new variables
             parameters.override.showSolutionButton = parameters.override
               .overrideShowSolutionButton
-              ? "on"
-              : "off";
+              ? 'on'
+              : 'off';
             parameters.override.retryButton = parameters.override.overrideRetry
-              ? "on"
-              : "off";
+              ? 'on'
+              : 'off';
           }
 
           // Remove old field variables
@@ -276,7 +276,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
               if (slide.elements) {
                 slide.elements.forEach(function (element) {
                   if (element.displayAsButton) {
-                    element.buttonSize = "small";
+                    element.buttonSize = 'small';
                   }
                 });
               }
@@ -302,11 +302,11 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
                 if (
                   element.action &&
                   element.action.library &&
-                  element.action.library.split(" ")[0] === "H5P.AppearIn"
+                  element.action.library.split(' ')[0] === 'H5P.AppearIn'
                 ) {
-                  element.action.library = "H5P.AdvancedText 1.1";
+                  element.action.library = 'H5P.AdvancedText 1.1';
 
-                  var roomName = "";
+                  var roomName = '';
 
                   element.action.params = element.action.params || {};
 
@@ -357,7 +357,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
                 // Old CPs should keep the previous default bgcolor
                 const bg = slide.slideBackgroundSelector;
                 if (!bg.fillSlideBackground && !bg.imageSlideBackground) {
-                  bg.fillSlideBackground = "#e8e6e7";
+                  bg.fillSlideBackground = '#e8e6e7';
                 }
               }
             });
@@ -394,7 +394,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
                 // Old CPs should keep the previous default bgcolor
                 const bg = slide.slideBackgroundSelector;
                 if (!bg.fillSlideBackground && !bg.imageSlideBackground) {
-                  bg.fillSlideBackground = "#e8e6e7";
+                  bg.fillSlideBackground = '#e8e6e7';
                 }
               }
             });
@@ -414,7 +414,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
        * @param {function} finished
        */
       23: function (parameters, finished) {
-        console.log("pre-upgrade", { parameters, finished });
+        console.log('pre-upgrade', { parameters, finished });
         const hasSlides =
           parameters &&
           parameters.presentation &&
@@ -424,28 +424,28 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
           return;
         }
 
-        parameters.presentation.slides.forEach(slide => {
+        parameters.presentation.slides.forEach((slide) => {
           const hasElements = !!slide.elements;
           if (!hasElements) {
             return;
           }
 
           slide.elements &&
-            slide.elements.forEach(element => {
+            slide.elements.forEach((element) => {
               const isGoToSlide = !element.action;
               if (isGoToSlide) {
                 element.action = {
-                  library: "H5P.Shape 1.1",
-                  metadata: { contentType: "Shapes" },
+                  library: 'H5P.Shape 1.1',
+                  metadata: { contentType: 'Shapes' },
                   params: {
                     shape: {
-                      borderColor: "#000",
+                      borderColor: '#000',
                       borderRadius: 0,
-                      borderStyle: "solid",
+                      borderStyle: 'solid',
                       borderWidth: 0,
-                      fillColor: "transparent",
+                      fillColor: 'transparent',
                     },
-                    type: "rectangle",
+                    type: 'rectangle',
                   },
                 };
 
@@ -454,7 +454,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
             });
         });
 
-        console.log("post-upgrade", { parameters });
+        console.log('post-upgrade', { parameters });
 
         finished(null, parameters);
       },

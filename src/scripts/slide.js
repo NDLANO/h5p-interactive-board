@@ -1,5 +1,5 @@
-import Element from "./element.js";
-import Parent from "h5p-parent";
+import Element from './element.js';
+import Parent from 'h5p-parent';
 
 /**
  * @class
@@ -29,7 +29,7 @@ function Slide(parameters) {
    * Make current slide
    */
   self.setCurrent = function () {
-    this.parent.$current = $wrapper.addClass("h5p-current");
+    this.parent.$current = $wrapper.addClass('h5p-current');
   };
 
   /**
@@ -47,7 +47,7 @@ function Slide(parameters) {
 
     self.parent.elementsAttached[self.index] = true;
     self.parent.trigger(
-      "domChanged",
+      'domChanged',
       {
         $target: $wrapper,
         library: "NDLAInteractiveBoard",
@@ -66,10 +66,10 @@ function Slide(parameters) {
  */
 Slide.createHTML = function (parameters) {
   const classNames = `h5p-slide ${
-    parameters.aspectRatio ? ` h5p-slide-${parameters.aspectRatio}` : ""
+    parameters.aspectRatio ? ` h5p-slide-${parameters.aspectRatio}` : ''
   }`;
   const style = `${
-    parameters.background ? `style="background:${parameters.background}"` : ""
+    parameters.background ? `style="background:${parameters.background}"` : ''
   }`;
 
   return `<div
@@ -80,7 +80,7 @@ Slide.createHTML = function (parameters) {
 };
 
 Slide.prototype.showSolutions = function () {
-  const answerButtons = this.getElement().find(".h5p-hotspot-answer");
+  const answerButtons = this.getElement().find('.h5p-hotspot-answer');
   const slideHasAnswerButtons = answerButtons.length > 0;
   if (slideHasAnswerButtons) {
     this.isTask = true;

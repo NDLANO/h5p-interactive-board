@@ -1,6 +1,6 @@
 // @ts-check
-import { createFocusTrap } from "focus-trap";
-import { getContentId } from "./utils";
+import { createFocusTrap } from 'focus-trap';
+import { getContentId } from './utils';
 
 export class InformationDialog {
   /**
@@ -14,7 +14,7 @@ export class InformationDialog {
       {
         sources: [params],
         visuals: {
-          fit: params.mime !== "video/YouTube", // Might need adjustment for other handlers like BrightCove
+          fit: params.mime !== 'video/YouTube', // Might need adjustment for other handlers like BrightCove
           controls: true,
         },
         playback: {
@@ -30,16 +30,16 @@ export class InformationDialog {
    * @param {Image} image
    */
   static createImageEmbed(image) {
-    const img = document.createElement("img");
-    img.setAttribute("src", H5P.getPath(image.path, getContentId()));
-    img.setAttribute("alt", "");
+    const img = document.createElement('img');
+    img.setAttribute('src', H5P.getPath(image.path, getContentId()));
+    img.setAttribute('alt', '');
 
     if (image.height) {
-      img.setAttribute("height", image.height.toString());
+      img.setAttribute('height', image.height.toString());
     }
 
     if (image.width) {
-      img.setAttribute("width", image.width.toString());
+      img.setAttribute('width', image.width.toString());
     }
 
     return img;
@@ -50,21 +50,21 @@ export class InformationDialog {
    * @param {(event: Event) => void} onEndCallback
    */
   static createAudioPlayer(audioSources, onEndCallback) {
-    const audioElement = document.createElement("audio");
+    const audioElement = document.createElement('audio');
 
     if (audioElement.canPlayType !== undefined) {
       for (const audioSource of audioSources) {
-        var source = document.createElement("source");
+        var source = document.createElement('source');
         source.src = H5P.getPath(audioSource.path, getContentId());
         source.type = audioSource.mime;
         audioElement.appendChild(source);
       }
     }
 
-    audioElement.preload = "auto";
+    audioElement.preload = 'auto';
     audioElement.load();
 
-    audioElement.addEventListener("ended", onEndCallback);
+    audioElement.addEventListener('ended', onEndCallback);
 
     return audioElement;
   }
@@ -137,18 +137,18 @@ export class InformationDialog {
     horizontalOffset,
     verticalOffset,
   ) {
-    const container = document.createElement("div");
-    container.className = "h5p-information-dialog-container";
-    container.setAttribute("hidden", "true");
-    container.addEventListener("click", event => {
+    const container = document.createElement('div');
+    container.className = 'h5p-information-dialog-container';
+    container.setAttribute('hidden', 'true');
+    container.addEventListener('click', (event) => {
       const backdropWasClicked = event.target === event.currentTarget;
       if (backdropWasClicked) {
         this.hide();
       }
     });
 
-    this.modalElement = document.createElement("section");
-    this.modalElement.className = "h5p-information-dialog";
+    this.modalElement = document.createElement('section');
+    this.modalElement.className = 'h5p-information-dialog';
     this.modalElement.style.left = horizontalOffset;
     this.modalElement.style.top = verticalOffset;
     this.focusTrap = createFocusTrap(this.modalElement, {
@@ -156,8 +156,8 @@ export class InformationDialog {
     });
     container.appendChild(this.modalElement);
 
-    const mainContainer = document.createElement("div");
-    mainContainer.className = "h5p-information-dialog-main";
+    const mainContainer = document.createElement('div');
+    mainContainer.className = 'h5p-information-dialog-main';
 
     if (dialogHeaderContent) {
       const { dialogImage, dialogVideo } = dialogHeaderContent;
@@ -171,9 +171,9 @@ export class InformationDialog {
          */
         this.videoInstance = InformationDialog.createVideoInstance(video);
 
-        this.videoEmbedElement = document.createElement("div");
+        this.videoEmbedElement = document.createElement('div');
         this.videoEmbedElement.classList.add(
-          "h5p-information-dialog-video-container",
+          'h5p-information-dialog-video-container',
         );
         mainContainer.appendChild(this.videoEmbedElement);
       } else if (dialogImage) {
@@ -201,20 +201,20 @@ export class InformationDialog {
 
     this.modalElement.appendChild(mainContainer);
 
-    const closeButton = document.createElement("button");
-    closeButton.type = "button";
-    closeButton.className = "h5p-information-dialog-close-button";
-    closeButton.addEventListener("click", () => this.onCloseClick());
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'h5p-information-dialog-close-button';
+    closeButton.addEventListener('click', () => this.onCloseClick());
     this.modalElement.appendChild(closeButton);
 
-    const closeButtonIcon = document.createElement("span");
-    closeButtonIcon.setAttribute("aria-hidden", "true");
-    closeButtonIcon.innerHTML = "&times;";
+    const closeButtonIcon = document.createElement('span');
+    closeButtonIcon.setAttribute('aria-hidden', 'true');
+    closeButtonIcon.innerHTML = '&times;';
     closeButton.appendChild(closeButtonIcon);
 
-    const closeButtonLabel = document.createElement("span");
+    const closeButtonLabel = document.createElement('span');
     closeButtonLabel.textContent = this.l10n.informationDialogClose;
-    closeButtonLabel.classList.add("hidden-but-read");
+    closeButtonLabel.classList.add('hidden-but-read');
     closeButton.appendChild(closeButtonLabel);
 
     return container;
@@ -228,7 +228,7 @@ export class InformationDialog {
    * Adds the modal to the DOM
    */
   show() {
-    this.modal.removeAttribute("hidden");
+    this.modal.removeAttribute('hidden');
     this.focusTrap.activate();
 
     if (this.videoEmbedElement && this.videoInstance) {
@@ -239,10 +239,10 @@ export class InformationDialog {
   }
 
   hide() {
-    this.modal.setAttribute("hidden", "true");
+    this.modal.setAttribute('hidden', 'true');
     this.focusTrap.deactivate();
 
-    if (this.videoInstance && typeof this.videoInstance.pause === "function") {
+    if (this.videoInstance && typeof this.videoInstance.pause === 'function') {
       this.videoInstance.pause();
     }
 
@@ -259,7 +259,7 @@ export class InformationDialog {
         this.audioElement.currentTime = 0;
       }
       this.audioElement.play();
-      this.modal.dataset.isPlayingAudio = "true";
+      this.modal.dataset.isPlayingAudio = 'true';
       this.isPlayingAudio = true;
       this.setPlayPauseButtonLabel(this.audioPlayPauseButton);
     }
@@ -269,7 +269,7 @@ export class InformationDialog {
     const hasAudio = !!this.audioElement;
     if (hasAudio) {
       this.audioElement.pause();
-      this.modal.dataset.isPlayingAudio = "false";
+      this.modal.dataset.isPlayingAudio = 'false';
       this.isPlayingAudio = false;
       this.setPlayPauseButtonLabel(this.audioPlayPauseButton);
     }
@@ -279,13 +279,13 @@ export class InformationDialog {
    * @returns {HTMLButtonElement}
    */
   createPlayPauseButton() {
-    const playPauseButton = document.createElement("button");
-    playPauseButton.type = "button";
-    playPauseButton.className = "h5p-information-dialog-audio-button";
+    const playPauseButton = document.createElement('button');
+    playPauseButton.type = 'button';
+    playPauseButton.className = 'h5p-information-dialog-audio-button';
 
     this.setPlayPauseButtonLabel(playPauseButton);
 
-    playPauseButton.addEventListener("click", () => {
+    playPauseButton.addEventListener('click', () => {
       if (this.isPlayingAudio) {
         this.pauseAudio();
       } else {
@@ -301,7 +301,7 @@ export class InformationDialog {
    */
   setPlayPauseButtonLabel(button) {
     button.setAttribute(
-      "aria-label",
+      'aria-label',
       this.isPlayingAudio
         ? this.l10n.informationDialogPauseAudio
         : this.l10n.informationDialogPlayAudio,
