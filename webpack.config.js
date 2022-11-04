@@ -45,11 +45,15 @@ var config = {
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         include: path.join(__dirname, 'src/fonts'),
-        use: [
-          {
-            loader: 'file-loader?name=fonts/[name].[ext]',
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024,
           },
-        ],
+        },
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
       },
     ],
   },
