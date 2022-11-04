@@ -3,17 +3,32 @@ name: Node.js CI
 on: [push, workflow_dispatch]
 
 jobs:
+  check-format:
+    name: Check format
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Install dependency
+        uses: bahmutov/npm-install@v1
+
+      - name: Check format
+        run: npm run format:check
+
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           path: h5p-interactive-board
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "15.x"
+          node-version: "16.x"
       - run: |
           cd h5p-interactive-board
           npm ci
