@@ -46,7 +46,7 @@ export class Hotspot extends EventDispatcher {
       dialogHeaderContent,
     },
     { l10n, currentIndex },
-    $content = null
+    $content = null,
   ) {
     super(
       {
@@ -62,7 +62,7 @@ export class Hotspot extends EventDispatcher {
         l10n,
         currentIndex,
       },
-      $content
+      $content,
     );
 
     this.eventDispatcher = new EventDispatcher();
@@ -109,7 +109,7 @@ export class Hotspot extends EventDispatcher {
       this.$element = this.createGoToLink(
         goToSlide,
         goToSlideType,
-        currentIndex
+        currentIndex,
       );
     } else if (isInformationDialogTrigger) {
       this.$element = this.createButton(() => {
@@ -180,7 +180,7 @@ export class Hotspot extends EventDispatcher {
       href: "#",
     });
 
-    addClickAndKeyboardListeners($element, (event) => {
+    addClickAndKeyboardListeners($element, event => {
       const isGoToSummarySlideHotspot =
         goToSlideType === hotspotType.GO_TO_SUMMARY_SLIDE;
       if (isGoToSummarySlideHotspot) {

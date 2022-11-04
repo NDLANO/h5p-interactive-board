@@ -9,14 +9,14 @@ import { jQuery as $ } from "./globals";
  * @param {Array} arr A nested array
  * @returns {Array} A flattened array
  */
-export const flattenArray = (arr) => arr.concat.apply([], arr);
+export const flattenArray = arr => arr.concat.apply([], arr);
 
 /**
  * Returns true if the argument is a function
  *
  * @param {Function|*} f
  */
-export const isFunction = (f) => typeof f === "function";
+export const isFunction = f => typeof f === "function";
 
 /**
  * Makes a string kebab case
@@ -24,7 +24,7 @@ export const isFunction = (f) => typeof f === "function";
  * @param {string} str
  * @return {string}
  */
-export const kebabCase = (str) => str.replace(/[\W]/g, "-");
+export const kebabCase = str => str.replace(/[\W]/g, "-");
 
 /**
  * Is true if the users device is an ipad
@@ -83,7 +83,7 @@ export const keyCode = {
 export const addClickAndKeyboardListeners = function (
   $element,
   callback,
-  scope
+  scope,
 ) {
   $element.click(function (event) {
     callback.call(scope || this, event);
@@ -108,7 +108,7 @@ const $STRIP_HTML_HELPER = $("<div>");
  * @param {string} str
  * @return {string}
  */
-export const stripHTML = (str) => $STRIP_HTML_HELPER.html(str).text().trim();
+export const stripHTML = str => $STRIP_HTML_HELPER.html(str).text().trim();
 
 /**
  * Returns the ID of the current course presentation.

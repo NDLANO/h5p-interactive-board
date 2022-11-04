@@ -7,8 +7,11 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
         // Allows overriding of buttons for subcontent.
         parameters.override = {
           overrideButtons: true,
-          overrideShowSolutionButton: parameters.showSolutions === undefined ? true : parameters.showSolutions,
-          overrideRetry: true
+          overrideShowSolutionButton:
+            parameters.showSolutions === undefined
+              ? true
+              : parameters.showSolutions,
+          overrideRetry: true,
         };
         delete parameters.showSolutions;
 
@@ -46,7 +49,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
           keywordListEnabled: !keywordsRemoved,
           keywordListAlwaysShow: true,
           keywordListAutoHide: false,
-          keywordListOpacity: 90
+          keywordListOpacity: 90,
         };
         delete parameters.slides;
         finished(null, parameters);
@@ -58,19 +61,20 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
         delete parameters.l10n.scrollRight;
         delete parameters.l10n.goToSlide;
 
-        parameters.l10n.fullscreen = 'fullscreen';
-        parameters.l10n.exitFullscreen = 'Exit fullscreen';
-        parameters.l10n.prevSlide = 'Previous slide';
-        parameters.l10n.nextSlide = 'Next slide';
-        parameters.l10n.currentSlide = 'Current slide';
-        parameters.l10n.lastSlide = 'Last slide';
-        parameters.l10n.solutionModeTitle = 'Exit solution mode';
-        parameters.l10n.solutionModeText = 'Solution Mode:';
-        parameters.l10n.solutionModeUnderlined = 'Close';
-        parameters.l10n.summaryMultipleTaskText = 'Text when multiple tasks on a page';
-        parameters.l10n.scoreMessage = 'You achieved:';
-        parameters.l10n.shareFacebook = 'Share on Facebook';
-        parameters.l10n.shareTwitter = 'Share on Twitter';
+        parameters.l10n.fullscreen = "fullscreen";
+        parameters.l10n.exitFullscreen = "Exit fullscreen";
+        parameters.l10n.prevSlide = "Previous slide";
+        parameters.l10n.nextSlide = "Next slide";
+        parameters.l10n.currentSlide = "Current slide";
+        parameters.l10n.lastSlide = "Last slide";
+        parameters.l10n.solutionModeTitle = "Exit solution mode";
+        parameters.l10n.solutionModeText = "Solution Mode:";
+        parameters.l10n.solutionModeUnderlined = "Close";
+        parameters.l10n.summaryMultipleTaskText =
+          "Text when multiple tasks on a page";
+        parameters.l10n.scoreMessage = "You achieved:";
+        parameters.l10n.shareFacebook = "Share on Facebook";
+        parameters.l10n.shareTwitter = "Share on Twitter";
 
         finished(null, parameters);
       },
@@ -79,13 +83,21 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
         for (var i = 0; i < slides.length; i++) {
           if (slides[i].elements !== undefined) {
             for (var j = 0; j < slides[i].elements.length; j++) {
-              if (slides[i].elements[j].action && slides[i].elements[j].action.subContentId === undefined) {
+              if (
+                slides[i].elements[j].action &&
+                slides[i].elements[j].action.subContentId === undefined
+              ) {
                 // NOTE: We avoid using H5P.createUUID since this is an upgrade script and H5P function may change in the
                 // future
-                slides[i].elements[j].action.subContentId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (char) {
-                  var random = Math.random()*16|0, newChar = char === 'x' ? random : (random&0x3|0x8);
-                  return newChar.toString(16);
-                });
+                slides[i].elements[j].action.subContentId =
+                  "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+                    /[xy]/g,
+                    function (char) {
+                      var random = (Math.random() * 16) | 0,
+                        newChar = char === "x" ? random : (random & 0x3) | 0x8;
+                      return newChar.toString(16);
+                    },
+                  );
               }
             }
           }
@@ -113,9 +125,12 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
               var element = slides[i].elements[j];
 
               // Check if element type is text
-              if (element.action && element.action.library &&
-                  element.action.library.split(' ')[0] === 'H5P.Text') {
-                element.action.library = 'H5P.AdvancedText 1.0';
+              if (
+                element.action &&
+                element.action.library &&
+                element.action.library.split(" ")[0] === "H5P.Text"
+              ) {
+                element.action.library = "H5P.AdvancedText 1.0";
               }
             }
           }
@@ -141,10 +156,12 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
               var element = slides[i].elements[j];
 
               // Check if element type is text
-              if (element.action && element.action.library &&
-                  (element.action.library.split(' ')[0] === 'H5P.AdvancedText' ||
-                    element.action.library.split(' ')[0] === 'H5P.ContinuousText'
-                  )) {
+              if (
+                element.action &&
+                element.action.library &&
+                (element.action.library.split(" ")[0] === "H5P.AdvancedText" ||
+                  element.action.library.split(" ")[0] === "H5P.ContinuousText")
+              ) {
                 element.width += 1.7;
                 element.height += 3;
               }
@@ -167,14 +184,16 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
        * @params {function} finished
        */
       10: function (parameters, finished) {
-
         if (parameters.override) {
           if (parameters.override.overrideButtons) {
             // Set new variables
-            parameters.override.showSolutionButton =
-                (parameters.override.overrideShowSolutionButton ? 'on' : 'off');
-            parameters.override.retryButton =
-                (parameters.override.overrideRetry ? 'on' : 'off');
+            parameters.override.showSolutionButton = parameters.override
+              .overrideShowSolutionButton
+              ? "on"
+              : "off";
+            parameters.override.retryButton = parameters.override.overrideRetry
+              ? "on"
+              : "off";
           }
 
           // Remove old field variables
@@ -216,18 +235,21 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
        */
       12: function (parameters, finished) {
         if (parameters.presentation) {
-          if (parameters.presentation.globalBackgroundSelector &&
-              parameters.presentation.globalBackgroundSelector.fillGlobalBackground) {
-            parameters.presentation.globalBackgroundSelector.fillGlobalBackground =
-              `#${parameters.presentation.globalBackgroundSelector.fillGlobalBackground}`;
+          if (
+            parameters.presentation.globalBackgroundSelector &&
+            parameters.presentation.globalBackgroundSelector
+              .fillGlobalBackground
+          ) {
+            parameters.presentation.globalBackgroundSelector.fillGlobalBackground = `#${parameters.presentation.globalBackgroundSelector.fillGlobalBackground}`;
           }
 
           if (parameters.presentation.slides) {
             parameters.presentation.slides.forEach(function (slide) {
-              if (slide.slideBackgroundSelector &&
-                  slide.slideBackgroundSelector.fillSlideBackground) {
-                slide.slideBackgroundSelector.fillSlideBackground =
-                  `#${slide.slideBackgroundSelector.fillSlideBackground}`;
+              if (
+                slide.slideBackgroundSelector &&
+                slide.slideBackgroundSelector.fillSlideBackground
+              ) {
+                slide.slideBackgroundSelector.fillSlideBackground = `#${slide.slideBackgroundSelector.fillSlideBackground}`;
               }
             });
           }
@@ -247,7 +269,6 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
        * @param {function} finished
        */
       17: function (parameters, finished) {
-
         // Adds small as default for button size
         if (parameters.presentation) {
           if (parameters.presentation.slides) {
@@ -255,7 +276,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
               if (slide.elements) {
                 slide.elements.forEach(function (element) {
                   if (element.displayAsButton) {
-                    element.buttonSize = 'small';
+                    element.buttonSize = "small";
                   }
                 });
               }
@@ -264,7 +285,11 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
         }
 
         // Converts H5P.AppearIn to H5P.AdvancedText
-        if (parameters && parameters.presentation && parameters.presentation.slides) {
+        if (
+          parameters &&
+          parameters.presentation &&
+          parameters.presentation.slides
+        ) {
           var slides = parameters.presentation.slides;
 
           // Go through slides and elements
@@ -274,12 +299,14 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
                 var element = slides[i].elements[j];
 
                 // Check if element type is text
-                if (element.action && element.action.library &&
-                    element.action.library.split(' ')[0] === 'H5P.AppearIn') {
+                if (
+                  element.action &&
+                  element.action.library &&
+                  element.action.library.split(" ")[0] === "H5P.AppearIn"
+                ) {
+                  element.action.library = "H5P.AdvancedText 1.1";
 
-                  element.action.library = 'H5P.AdvancedText 1.1';
-
-                  var roomName = '';
+                  var roomName = "";
 
                   element.action.params = element.action.params || {};
 
@@ -287,7 +314,10 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
                     roomName = element.action.params.appearRoom;
                   }
 
-                  var userMessage = '<p>AppearIn support for embedded rooms has been deprecated and is no longer maintained. Access your room in a new tab with the following <a target="_blank" href="https://appear.in/' + roomName + '">link.</a></p>';
+                  var userMessage =
+                    '<p>AppearIn support for embedded rooms has been deprecated and is no longer maintained. Access your room in a new tab with the following <a target="_blank" href="https://appear.in/' +
+                    roomName +
+                    '">link.</a></p>';
 
                   element.action.params.text = userMessage;
                 }
@@ -309,13 +339,16 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
        * @param {Object} parameters
        * @param {function} finished
        */
-       21: function (parameters, finished) {
+      21: function (parameters, finished) {
         if (parameters && parameters.presentation) {
           const presentation = parameters.presentation;
 
           // Check for global background
-          const globalBackground = presentation && presentation.globalBackgroundSelector &&
-            (presentation.globalBackgroundSelector.fillGlobalBackground || presentation.globalBackgroundSelector.imageGlobalBackground);
+          const globalBackground =
+            presentation &&
+            presentation.globalBackgroundSelector &&
+            (presentation.globalBackgroundSelector.fillGlobalBackground ||
+              presentation.globalBackgroundSelector.imageGlobalBackground);
 
           if (globalBackground === undefined && presentation.slides) {
             const slides = presentation.slides;
@@ -324,7 +357,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
                 // Old CPs should keep the previous default bgcolor
                 const bg = slide.slideBackgroundSelector;
                 if (!bg.fillSlideBackground && !bg.imageSlideBackground) {
-                  bg.fillSlideBackground = '#e8e6e7';
+                  bg.fillSlideBackground = "#e8e6e7";
                 }
               }
             });
@@ -343,13 +376,16 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
        * @param {Object} parameters
        * @param {function} finished
        */
-       22: function (parameters, finished) {
+      22: function (parameters, finished) {
         if (parameters && parameters.presentation) {
           const presentation = parameters.presentation;
 
           // Check for global background
-          const globalBackground = presentation && presentation.globalBackgroundSelector &&
-            (presentation.globalBackgroundSelector.fillGlobalBackground || presentation.globalBackgroundSelector.imageGlobalBackground);
+          const globalBackground =
+            presentation &&
+            presentation.globalBackgroundSelector &&
+            (presentation.globalBackgroundSelector.fillGlobalBackground ||
+              presentation.globalBackgroundSelector.imageGlobalBackground);
 
           if (globalBackground === undefined && presentation.slides) {
             const slides = presentation.slides;
@@ -358,7 +394,7 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
                 // Old CPs should keep the previous default bgcolor
                 const bg = slide.slideBackgroundSelector;
                 if (!bg.fillSlideBackground && !bg.imageSlideBackground) {
-                  bg.fillSlideBackground = '#e8e6e7';
+                  bg.fillSlideBackground = "#e8e6e7";
                 }
               }
             });
@@ -378,8 +414,11 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
        * @param {function} finished
        */
       23: function (parameters, finished) {
-        console.log("pre-upgrade", {parameters, finished})
-        const hasSlides = parameters && parameters.presentation && !!parameters.presentation.slides;
+        console.log("pre-upgrade", { parameters, finished });
+        const hasSlides =
+          parameters &&
+          parameters.presentation &&
+          !!parameters.presentation.slides;
 
         if (!hasSlides) {
           return;
@@ -391,34 +430,35 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
             return;
           }
 
-          slide.elements && slide.elements.forEach(element => {
-            const isGoToSlide = !element.action;
-            if (isGoToSlide) {
-              element.action = {
-                library: "H5P.Shape 1.1",
-                metadata: {contentType: "Shapes"},
-                params: {
-                  shape: {
-                    borderColor: "#000",
-                    borderRadius: 0,
-                    borderStyle: "solid",
-                    borderWidth: 0,
-                    fillColor: "transparent"
+          slide.elements &&
+            slide.elements.forEach(element => {
+              const isGoToSlide = !element.action;
+              if (isGoToSlide) {
+                element.action = {
+                  library: "H5P.Shape 1.1",
+                  metadata: { contentType: "Shapes" },
+                  params: {
+                    shape: {
+                      borderColor: "#000",
+                      borderRadius: 0,
+                      borderStyle: "solid",
+                      borderWidth: 0,
+                      fillColor: "transparent",
+                    },
+                    type: "rectangle",
                   },
-                  type: "rectangle"
-                },
-              };
+                };
 
-              element.showAsHotspot = true;
-            }
-          });
+                element.showAsHotspot = true;
+              }
+            });
         });
 
-        console.log("post-upgrade", {parameters})
-        
+        console.log("post-upgrade", { parameters });
+
         finished(null, parameters);
       },
-      24: function(parameters, finished) {
+      24: function (parameters, finished) {
         if (parameters.presentation && parameters.presentation.slides) {
           parameters.presentation.slides.forEach(function (slide) {
             if (slide.elements) {
@@ -434,9 +474,9 @@ H5PUpgrades['H5P.NDLAInteractiveBoard'] = (function () {
             }
           });
         }
-        
+
         finished(null, parameters);
-      }
-    }
+      },
+    },
   };
 })();

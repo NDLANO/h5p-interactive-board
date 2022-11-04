@@ -65,7 +65,7 @@ jobs:
           git clone https://github.com/NDLA-H5P/h5p-editor-radio-selector.git
           git clone https://github.com/NDLANO/h5p-editor-show-when.git
           git clone https://github.com/NDLA-H5P/h5p-editor-interactive-video.git
-          
+
           # Clone and build override projects with build scripts
           git clone https://github.com/NDLANO/h5p-editor-interactive-board.git && pushd h5p-editor-interactive-board && npm ci && npm run build && popd
           git clone https://github.com/NDLA-H5P/h5p-drag-question.git && pushd h5p-drag-question && npm ci && npm run build && popd

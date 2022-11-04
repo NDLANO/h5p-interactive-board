@@ -11,7 +11,7 @@
   .h5p-coursepresentation .h5p-footer,
   /* Hide keywords */
   .h5p-coursepresentation .h5p-keywords-wrapper {
-    display:none;
+    display: none;
   }
   /* Make a border on bottom */
   .h5p-content {
@@ -64,12 +64,9 @@
   /* Summary slide - showing percents */
   .h5p-coursepresentation .h5p-summary-score-meter:before {
     content: attr(title);
-    font-size: .6em;
-    text-shadow:
-     -1px -1px 0 #fff,
-      1px -1px 0 #fff,
-      -1px 1px 0 #fff,
-       1px 1px 0 #fff;
+    font-size: 0.6em;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+      1px 1px 0 #fff;
     position: absolute;
     top: 0;
   }
@@ -95,10 +92,10 @@
     min-height: 10em;
   }
   .h5p-coursepresentation .h5p-element.h5p-video:before {
-    font-family: 'H5PFontAwesome4';
+    font-family: "H5PFontAwesome4";
     font-size: 4em;
     color: #666;
-    content: '\f03d';
+    content: "\f03d";
 
     display: inline-block;
     position: relative;
@@ -122,12 +119,12 @@
   margin: 1em 0 0 0;
 }
 .h5p-print-dialog .h5p-joubelui-button::before {
-  font-family: 'H5PFontAwesome4';
-  margin-right: .5em;
+  font-family: "H5PFontAwesome4";
+  margin-right: 0.5em;
 }
 .h5p-print-dialog .h5p-cp-print-all-slides::before {
-  content: '\f0c5';
+  content: "\f0c5";
 }
 .h5p-print-dialog .h5p-cp-print-current-slide::before {
-  content: '\f016';
+  content: "\f016";
 }

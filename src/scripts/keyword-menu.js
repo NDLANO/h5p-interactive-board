@@ -1,7 +1,7 @@
-import Controls from 'h5p-lib-controls/src/scripts/controls';
-import UIKeyboard from 'h5p-lib-controls/src/scripts/ui/keyboard';
-import { isIPad, defaultValue } from './utils';
-import { jQuery as $, EventDispatcher } from './globals';
+import Controls from "h5p-lib-controls/src/scripts/controls";
+import UIKeyboard from "h5p-lib-controls/src/scripts/ui/keyboard";
+import { isIPad, defaultValue } from "./utils";
+import { jQuery as $, EventDispatcher } from "./globals";
 
 /**
  * Select event.
@@ -42,18 +42,18 @@ export default class KeywordMenu {
      * @type {KeywordMenuState}
      */
     this.state = {
-      currentIndex: defaultValue(currentIndex, 0)
+      currentIndex: defaultValue(currentIndex, 0),
     };
     this.eventDispatcher = new EventDispatcher();
     this.controls = new Controls([new UIKeyboard()]);
 
     // on keyboard select
-    this.controls.on('select', event => {
+    this.controls.on("select", event => {
       this.onMenuItemSelect(getElementsDatasetIndex(event.element));
     });
 
     // propagate ESC event
-    this.controls.on('close', () => this.eventDispatcher.trigger('close'));
+    this.controls.on("close", () => this.eventDispatcher.trigger("close"));
 
     this.menuElement = this.createMenuElement();
     this.currentSlideMarkerElement = this.createCurrentSlideMarkerElement();
@@ -66,8 +66,12 @@ export default class KeywordMenu {
    * @returns {Element[]}
    */
   init(keywordConfigs) {
-    this.menuItemElements = keywordConfigs.map(config => this.createMenuItemElement(config));
-    this.menuItemElements.forEach(element => this.menuElement.appendChild(element));
+    this.menuItemElements = keywordConfigs.map(config =>
+      this.createMenuItemElement(config),
+    );
+    this.menuItemElements.forEach(element =>
+      this.menuElement.appendChild(element),
+    );
     this.menuItemElements.forEach(element => this.controls.addElement(element));
 
     this.setCurrentSlideIndex(this.state.currentIndex);
@@ -98,11 +102,10 @@ export default class KeywordMenu {
    * Removes all menu items
    */
   removeAllMenuItemElements() {
-    this.menuItemElements
-      .forEach(element => {
-        this.controls.removeElement(element);
-        this.menuElement.removeChild(element);
-      });
+    this.menuItemElements.forEach(element => {
+      this.controls.removeElement(element);
+      this.menuElement.removeChild(element);
+    });
 
     this.menuItemElements = [];
   }
@@ -112,9 +115,9 @@ export default class KeywordMenu {
    * @return {Element}
    */
   createMenuElement() {
-    const element = this.menuElement = document.createElement('ol');
-    element.setAttribute('role', 'menu');
-    element.classList.add('list-unstyled');
+    const element = (this.menuElement = document.createElement("ol"));
+    element.setAttribute("role", "menu");
+    element.classList.add("list-unstyled");
     return element;
   }
 
@@ -125,10 +128,10 @@ export default class KeywordMenu {
    * @return {Element}
    */
   createMenuItemElement(config) {
-    const element = document.createElement('li');
+    const element = document.createElement("li");
 
-    element.setAttribute('role', 'menuitem');
-    element.addEventListener('click', event => {
+    element.setAttribute("role", "menuitem");
+    element.addEventListener("click", event => {
       this.onMenuItemSelect(getElementsDatasetIndex(event.currentTarget));
     });
     this.applyConfigToMenuItemElement(element, config);
@@ -155,7 +158,7 @@ export default class KeywordMenu {
    */
   onMenuItemSelect(index) {
     this.setCurrentSlideIndex(index);
-    this.eventDispatcher.trigger('select', { index });
+    this.eventDispatcher.trigger("select", { index });
   }
 
   /**
@@ -164,7 +167,10 @@ export default class KeywordMenu {
    * @param {number} index
    */
   setCurrentSlideIndex(index) {
-    const selectedElement = this.getElementByIndex(this.menuItemElements, index);
+    const selectedElement = this.getElementByIndex(
+      this.menuItemElements,
+      index,
+    );
 
     if (selectedElement) {
       this.state.currentIndex = index;
@@ -181,8 +187,9 @@ export default class KeywordMenu {
    */
   updateCurrentlySelected(elements, state) {
     elements.forEach(element => {
-      const isSelected = state.currentIndex === getElementsDatasetIndex(element);
-      element.classList.toggle('h5p-current', isSelected);
+      const isSelected =
+        state.currentIndex === getElementsDatasetIndex(element);
+      element.classList.toggle("h5p-current", isSelected);
 
       if (isSelected) {
         element.appendChild(this.currentSlideMarkerElement);
@@ -204,8 +211,7 @@ export default class KeywordMenu {
 
       if (isIPad) {
         $menu.scrollTop(move);
-      }
-      else {
+      } else {
         $menu.stop().animate({ scrollTop: move }, 250);
       }
     }
@@ -218,7 +224,9 @@ export default class KeywordMenu {
    * @return {Element}
    */
   getFirstElementAfter(index) {
-    return this.menuItemElements.filter(element => getElementsDatasetIndex(element) >= index)[0];
+    return this.menuItemElements.filter(
+      element => getElementsDatasetIndex(element) >= index,
+    )[0];
   }
 
   /**
@@ -229,7 +237,9 @@ export default class KeywordMenu {
    * @return {Element}
    */
   getElementByIndex(elements, index) {
-    return elements.filter(element => getElementsDatasetIndex(element) === index)[0];
+    return elements.filter(
+      element => getElementsDatasetIndex(element) === index,
+    )[0];
   }
 
   /**
@@ -238,8 +248,8 @@ export default class KeywordMenu {
    * @return {Element}
    */
   createCurrentSlideMarkerElement() {
-    const element = document.createElement('div');
-    element.classList.add('hidden-but-read');
+    const element = document.createElement("div");
+    element.classList.add("hidden-but-read");
     element.innerHTML = this.l10n.currentSlide;
     return element;
   }

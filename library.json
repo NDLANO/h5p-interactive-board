@@ -6,9 +6,7 @@
   "patchVersion": 33,
   "runnable": 1,
   "fullscreen": 1,
-  "embedTypes": [
-    "iframe"
-  ],
+  "embedTypes": ["iframe"],
   "machineName": "H5P.NDLAInteractiveBoard",
   "author": "Joubel",
   "license": "MIT",

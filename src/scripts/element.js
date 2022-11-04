@@ -25,20 +25,20 @@ function Element(parameters) {
     const content = Element.createContent(
       slide,
       coursePresentation,
-      parameters
+      parameters,
     );
     this.instance = Element.createHotspot(
       parameters,
       coursePresentation.l10n,
       slide.index,
       coursePresentation,
-      content
+      content,
     );
   } else {
     const content = Element.createContent(
       slide,
       coursePresentation,
-      parameters
+      parameters,
     );
     this.instance = content;
   }
@@ -150,14 +150,14 @@ Element.createContent = function (slide, coursePresentation, parameters) {
       true,
       {},
       parameters.action,
-      coursePresentation.elementsOverride
+      coursePresentation.elementsOverride,
     );
   } else {
     // Add defaults
     h5pLibrary = H5P.jQuery.extend(
       true,
       parameters.action,
-      coursePresentation.elementsOverride
+      coursePresentation.elementsOverride,
     );
   }
 
@@ -188,7 +188,7 @@ Element.createContent = function (slide, coursePresentation, parameters) {
     true,
     {
       parent: coursePresentation,
-    }
+    },
   );
 
   if (instance.preventResize !== undefined) {
@@ -219,7 +219,7 @@ Element.createHotspot = function (
   l10n,
   currentIndex,
   coursePresentation,
-  content
+  content,
 ) {
   const hotspot = new Hotspot(
     parameters,
@@ -227,18 +227,18 @@ Element.createHotspot = function (
       l10n,
       currentIndex,
     },
-    content
+    content,
   );
 
   if (!coursePresentation.isEditor()) {
-    hotspot.on("navigate", (event) => {
+    hotspot.on("navigate", event => {
       const index = event.data;
       coursePresentation.jumpToSlide(index);
     });
 
     hotspot.on("navigate-to-last-slide", () => {
       coursePresentation.jumpToSlide(coursePresentation.slides.length - 1);
-    })
+    });
   }
 
   return hotspot;

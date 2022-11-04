@@ -10,17 +10,20 @@ export class InformationDialog {
    * @returns {object} Content instance (H5P.Video).
    */
   static createVideoInstance(params) {
-    return new H5P.Video({
-      sources: [params],
-      visuals: {
-        fit: params.mime !== 'video/YouTube', // Might need adjustment for other handlers like BrightCove
-        controls: true
+    return new H5P.Video(
+      {
+        sources: [params],
+        visuals: {
+          fit: params.mime !== "video/YouTube", // Might need adjustment for other handlers like BrightCove
+          controls: true,
+        },
+        playback: {
+          autoplay: false,
+          loop: false,
+        },
       },
-      playback: {
-        autoplay: false,
-        loop: false
-      }
-    }, getContentId());
+      getContentId(),
+    );
   }
 
   /**
@@ -95,7 +98,7 @@ export class InformationDialog {
       dialogHeaderContent,
       dialogAudio,
       horizontalOffset,
-      verticalOffset
+      verticalOffset,
     );
 
     /** @type {HTMLElement} */
@@ -132,12 +135,12 @@ export class InformationDialog {
     dialogHeaderContent,
     dialogAudio,
     horizontalOffset,
-    verticalOffset
+    verticalOffset,
   ) {
     const container = document.createElement("div");
     container.className = "h5p-information-dialog-container";
     container.setAttribute("hidden", "true");
-    container.addEventListener("click", (event) => {
+    container.addEventListener("click", event => {
       const backdropWasClicked = event.target === event.currentTarget;
       if (backdropWasClicked) {
         this.hide();
@@ -169,7 +172,9 @@ export class InformationDialog {
         this.videoInstance = InformationDialog.createVideoInstance(video);
 
         this.videoEmbedElement = document.createElement("div");
-        this.videoEmbedElement.classList.add("h5p-information-dialog-video-container");
+        this.videoEmbedElement.classList.add(
+          "h5p-information-dialog-video-container",
+        );
         mainContainer.appendChild(this.videoEmbedElement);
       } else if (dialogImage) {
         const imageElement = InformationDialog.createImageEmbed(dialogImage);
@@ -237,7 +242,7 @@ export class InformationDialog {
     this.modal.setAttribute("hidden", "true");
     this.focusTrap.deactivate();
 
-    if (this.videoInstance && typeof this.videoInstance.pause === 'function') {
+    if (this.videoInstance && typeof this.videoInstance.pause === "function") {
       this.videoInstance.pause();
     }
 
@@ -299,7 +304,7 @@ export class InformationDialog {
       "aria-label",
       this.isPlayingAudio
         ? this.l10n.informationDialogPauseAudio
-        : this.l10n.informationDialogPlayAudio
+        : this.l10n.informationDialogPlayAudio,
     );
   }
 
