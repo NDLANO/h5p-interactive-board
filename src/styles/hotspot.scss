@@ -71,6 +71,15 @@ $svg-stroke-width: 8px;
     z-index: 2;
   }
 
+  .h5p-box-wrapper:not(.h5p-solution-mode)
+    .ndla-h5p-svg-shape
+    .h5p-press-to-go.h5p-visible.h5p-hotspot-answer {
+    &:hover:not(.h5p-hotspot-answer--checked) svg polygon {
+      stroke: #ceddf0 !important;
+      stroke-width: $svg-stroke-width !important;
+    }
+  }
+
   .ndla-h5p-svg-shape {
     pointer-events: none;
 
@@ -87,13 +96,6 @@ $svg-stroke-width: 8px;
         }
 
         &.h5p-hotspot-answer {
-          &:hover:not(.h5p-hotspot-answer--checked, .h5p-hotspot-answer--true, .h5p-hotspot-answer--false)
-            svg
-            polygon {
-            stroke: #ceddf0 !important;
-            stroke-width: $svg-stroke-width !important;
-          }
-
           &:active svg polygon {
             stroke: #83abf7 !important;
             stroke-width: $svg-stroke-width !important;
