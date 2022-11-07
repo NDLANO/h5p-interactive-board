@@ -1223,16 +1223,16 @@ InteractiveBoard.prototype.attachElement = function (
     if (
       element &&
       element.action !== undefined &&
-      element.action.library.substr(0, 13) === "H5P.NDLAShape" &&
+      element.action.library.substr(0, 13) === 'H5P.NDLAShape' &&
       this.editor === undefined
     ) {
       const type = element.action.params.type;
 
-      if (type === "triangle" || type === "pentagon" || type === "hexagon") {
-        $elementContainer.addClass("ndla-h5p-svg-shape");
+      if (type === 'triangle' || type === 'pentagon' || type === 'hexagon') {
+        $elementContainer.addClass('ndla-h5p-svg-shape');
       }
-      if (type === "circle") {
-        $outerElementContainer.addClass("ndla-shape-circle-button");
+      if (type === 'circle') {
+        $outerElementContainer.addClass('ndla-shape-circle-button');
       }
     }
 

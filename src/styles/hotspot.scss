@@ -71,37 +71,43 @@ $svg-stroke-width: 8px;
     z-index: 2;
   }
 
-  .ndla-h5p-svg-shape .h5p-press-to-go {
-    &.h5p-visible {
-      background-color: transparent;
-      background-image: none;
-      outline: none;
-      box-shadow: none;
-      pointer-events: none;
+  .ndla-h5p-svg-shape {
+    pointer-events: none;
 
-      svg polygon {
-        pointer-events: visiblePainted;
-      }
+    .h5p-press-to-go {
+      &.h5p-visible {
+        background-color: transparent;
+        background-image: none;
+        outline: none;
+        box-shadow: none;
+        pointer-events: none;
 
-      &.h5p-hotspot-answer {
-        &:hover:not(.h5p-hotspot-answer--checked) svg polygon {
-          stroke: #ceddf0 !important;
-          stroke-width: $svg-stroke-width !important;
+        svg polygon {
+          pointer-events: visiblePainted;
         }
 
-        &:active svg polygon {
-          stroke: #83abf7 !important;
-          stroke-width: $svg-stroke-width !important;
+        &.h5p-hotspot-answer {
+          &:hover:not(.h5p-hotspot-answer--checked, .h5p-hotspot-answer--true, .h5p-hotspot-answer--false)
+            svg
+            polygon {
+            stroke: #ceddf0 !important;
+            stroke-width: $svg-stroke-width !important;
+          }
+
+          &:active svg polygon {
+            stroke: #83abf7 !important;
+            stroke-width: $svg-stroke-width !important;
+          }
         }
       }
-    }
 
-    &.h5p-hotspot-answer--checked {
-      border-color: transparent !important;
+      &.h5p-hotspot-answer--checked {
+        border-color: transparent !important;
 
-      svg polygon {
-        stroke: #79abfd !important;
-        stroke-width: $svg-stroke-width !important;
+        svg polygon {
+          stroke: #79abfd !important;
+          stroke-width: $svg-stroke-width !important;
+        }
       }
     }
   }
