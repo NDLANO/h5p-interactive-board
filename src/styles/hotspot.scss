@@ -1,4 +1,5 @@
 $navigation-element-background-color: #0580e2;
+$svg-stroke-width: 8px;
 
 .h5p-coursepresentation {
   .h5p-go-to-slide {
@@ -68,5 +69,71 @@ $navigation-element-background-color: #0580e2;
 
   .h5p-element.h5p-element-hotspot-wrapper:not(.h5p-hotspot-answer) {
     z-index: 2;
+  }
+
+  .ndla-h5p-svg-shape .h5p-press-to-go {
+    &.h5p-visible {
+      background-color: transparent;
+      background-image: none;
+      outline: none;
+      box-shadow: none;
+      pointer-events: none;
+
+      svg polygon {
+        pointer-events: visiblePainted;
+      }
+
+      &.h5p-hotspot-answer {
+        &:hover:not(.h5p-hotspot-answer--checked) svg polygon {
+          stroke: #ceddf0 !important;
+          stroke-width: $svg-stroke-width !important;
+        }
+
+        &:active svg polygon {
+          stroke: #83abf7 !important;
+          stroke-width: $svg-stroke-width !important;
+        }
+      }
+    }
+
+    &.h5p-hotspot-answer--checked {
+      border-color: transparent !important;
+
+      svg polygon {
+        stroke: #79abfd !important;
+        stroke-width: $svg-stroke-width !important;
+      }
+    }
+  }
+
+  .h5p-solution-mode .ndla-h5p-svg-shape .h5p-press-to-go {
+    &.h5p-hotspot-answer--true,
+    &.h5p-hotspot-answer--false {
+      border-color: transparent !important;
+
+      svg polygon {
+        stroke-width: $svg-stroke-width !important;
+      }
+    }
+
+    &.h5p-hotspot-answer--true svg polygon {
+      stroke: hsla(164, 95%, 43%, 1) !important;
+    }
+
+    &.h5p-hotspot-answer--false svg polygon {
+      stroke: hsla(345, 100%, 49%, 1) !important;
+    }
+  }
+
+  .ndla-shape-circle-button button {
+    border-radius: 50%;
+  }
+}
+
+/* Make sure svgs got focus when using keyboard */
+.h5p-content:not(.using-mouse) {
+  .ndla-h5p-svg-shape .h5p-press-to-go.h5p-visible:focus svg polygon {
+    stroke: #79abfd !important;
+    stroke-width: 4px !important;
   }
 }
