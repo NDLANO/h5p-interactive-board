@@ -1,4 +1,6 @@
-$navigation-element-background-color: #0580e2;
+$navigation-element-color: #0580e2;
+$answer-true-color: hsla(136, 31%, 39%, 1);
+$answer-false-color: hsla(345, 100%, 49%, 1);
 $svg-stroke-width: 8px;
 
 .h5p-coursepresentation {
@@ -12,19 +14,19 @@ $svg-stroke-width: 8px;
 
     &.h5p-visible {
       &:hover {
-        background-color: rgba($navigation-element-background-color, 0.2);
+        background-color: rgba($navigation-element-color, 0.2);
       }
 
       &:active {
-        background-color: rgba($navigation-element-background-color, 0.4);
+        background-color: rgba($navigation-element-color, 0.4);
       }
 
       &:focus {
-        outline: 2px solid #79abfd;
+        outline: 2px solid $navigation-element-color;
         outline-offset: -2px;
 
         /* box-shadow hack for IE11, since outline-offset isn't supported. */
-        box-shadow: inset 0 0 0 2px #79abfd;
+        box-shadow: inset 0 0 0 2px $navigation-element-color;
       }
     }
   }
@@ -56,15 +58,15 @@ $svg-stroke-width: 8px;
   }
 
   .h5p-press-to-go.h5p-hotspot-answer--checked {
-    border-color: #79abfd;
+    border-color: $navigation-element-color;
   }
 
   .h5p-solution-mode .h5p-press-to-go.h5p-hotspot-answer--true {
-    border-color: hsla(164, 95%, 43%, 1);
+    border-color: $answer-true-color;
   }
 
   .h5p-solution-mode .h5p-press-to-go.h5p-hotspot-answer--false {
-    border-color: hsla(345, 100%, 49%, 1);
+    border-color: $answer-false-color;
   }
 
   .h5p-element.h5p-element-hotspot-wrapper:not(.h5p-hotspot-answer) {
@@ -107,7 +109,7 @@ $svg-stroke-width: 8px;
         border-color: transparent !important;
 
         svg polygon {
-          stroke: #79abfd !important;
+          stroke: $navigation-element-color !important;
           stroke-width: $svg-stroke-width !important;
         }
       }
@@ -125,11 +127,11 @@ $svg-stroke-width: 8px;
     }
 
     &.h5p-hotspot-answer--true svg polygon {
-      stroke: hsla(164, 95%, 43%, 1) !important;
+      stroke: $answer-true-color !important;
     }
 
     &.h5p-hotspot-answer--false svg polygon {
-      stroke: hsla(345, 100%, 49%, 1) !important;
+      stroke: $answer-false-color !important;
     }
   }
 
@@ -150,7 +152,7 @@ $svg-stroke-width: 8px;
 /* Make sure svgs get focus when using keyboard */
 .h5p-content:not(.using-mouse) {
   .ndla-h5p-svg-shape .h5p-press-to-go.h5p-visible:focus svg polygon {
-    stroke: #79abfd !important;
+    stroke: $navigation-element-color !important;
     stroke-width: 4px !important;
   }
 }
