@@ -1237,7 +1237,7 @@ InteractiveBoard.prototype.attachElement = function (
       }
 
       if (!inEditor && type === 'circle') {
-        $outerElementContainer.addClass('ndla-shape-circle-button');
+        $elementContainer.addClass('ndla-h5p-circle-shape');
       }
     }
 

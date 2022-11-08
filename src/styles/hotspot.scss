@@ -133,12 +133,21 @@ $svg-stroke-width: 8px;
     }
   }
 
-  .ndla-shape-circle-button button {
-    border-radius: 50%;
+  .ndla-h5p-circle-shape {
+    pointer-events: none;
+
+    button,
+    a {
+      border-radius: 50%;
+
+      .h5p-shape-circle {
+        pointer-events: auto;
+      }
+    }
   }
 }
 
-/* Make sure svgs got focus when using keyboard */
+/* Make sure svgs get focus when using keyboard */
 .h5p-content:not(.using-mouse) {
   .ndla-h5p-svg-shape .h5p-press-to-go.h5p-visible:focus svg polygon {
     stroke: #79abfd !important;
