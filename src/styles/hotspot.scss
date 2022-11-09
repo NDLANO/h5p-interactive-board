@@ -86,16 +86,14 @@ $svg-stroke-width: 8px;
     pointer-events: none;
 
     .h5p-press-to-go {
+      svg polygon {
+        pointer-events: visiblePainted;
+      }
+
       &.h5p-visible {
         background-color: transparent;
-        background-image: none;
-        outline: none;
         box-shadow: none;
-        pointer-events: none;
-
-        svg polygon {
-          pointer-events: visiblePainted;
-        }
+        outline: none;
 
         &.h5p-hotspot-answer {
           &:active svg polygon {

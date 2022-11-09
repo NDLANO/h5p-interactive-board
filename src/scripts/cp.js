@@ -1221,7 +1221,6 @@ InteractiveBoard.prototype.attachElement = function (
     }
 
     if (
-      element &&
       element.action !== undefined &&
       element.action.library.substr(0, 13) === 'H5P.NDLAShape'
     ) {
