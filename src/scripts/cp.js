@@ -1220,6 +1220,26 @@ InteractiveBoard.prototype.attachElement = function (
       }
     }
 
+    if (
+      element.action !== undefined &&
+      element.action.library.substr(0, 13) === 'H5P.NDLAShape'
+    ) {
+      const type = element.action.params.type;
+      const inEditor = this.editor !== undefined;
+
+      if (type === 'triangle' || type === 'pentagon' || type === 'hexagon') {
+        $innerElementContainer.css({ overflowY: 'hidden' });
+
+        if (!inEditor) {
+          $elementContainer.addClass('ndla-h5p-svg-shape');
+        }
+      }
+
+      if (!inEditor && type === 'circle') {
+        $elementContainer.addClass('ndla-h5p-circle-shape');
+      }
+    }
+
     // For first slide
     this.setOverflowTabIndex();
   }
