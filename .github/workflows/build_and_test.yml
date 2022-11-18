@@ -3,21 +3,6 @@ name: Node.js CI
 on: [push, workflow_dispatch]
 
 jobs:
-  check-format:
-    name: Check format
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-
-      - name: Install dependency
-        uses: bahmutov/npm-install@v1
-
-      - name: Check format
-        run: npm run format:check
-
   build:
     runs-on: ubuntu-latest
 
