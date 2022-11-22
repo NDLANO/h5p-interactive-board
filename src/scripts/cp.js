@@ -1226,12 +1226,27 @@ InteractiveBoard.prototype.attachElement = function (
     ) {
       const type = element.action.params.type;
       const inEditor = this.editor !== undefined;
+      const isArrow = type === 'long-arrow-right' || 
+        type === 'long-arrow-left' ||
+        type === 'long-arrow-up' ||
+        type === 'long-arrow-down' ||
+        type === 'arrows-alt-h' ||
+        type === 'arrows-alt-v' ||
+        type === 'arrows-alt';
 
       if (type === 'triangle' || type === 'pentagon' || type === 'hexagon') {
         $innerElementContainer.css({ overflowY: 'hidden' });
 
         if (!inEditor) {
           $elementContainer.addClass('ndla-h5p-svg-shape');
+        }
+      }
+
+      if (isArrow) {
+        $innerElementContainer.css({ overflowY: 'hidden' });
+
+        if (!inEditor) {
+          $elementContainer.addClass('ndla-h5p-svg-arrow');
         }
       }
 
