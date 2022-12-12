@@ -147,6 +147,17 @@ $svg-arrow-stroke-width: 1.5px;
     }
   }
 
+  .h5p-box-wrapper:not(.h5p-solution-mode)
+    .ndla-h5p-svg-arrow
+    .h5p-press-to-go.h5p-visible.h5p-hotspot-answer {
+    &:hover:not(.h5p-hotspot-answer--checked) svg {
+      polygon, rect {
+        stroke: #ceddf0 !important;
+        stroke-width: $svg-arrow-stroke-width !important;
+      }
+    }
+  }
+
   .ndla-h5p-svg-arrow {
     pointer-events: none;
 
