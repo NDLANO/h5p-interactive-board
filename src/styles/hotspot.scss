@@ -2,7 +2,7 @@ $navigation-element-color: #0580e2;
 $answer-true-color: hsla(136, 31%, 39%, 1);
 $answer-false-color: hsla(345, 100%, 49%, 1);
 $svg-stroke-width: 8px;
-$svg-arrow-stroke-width: 2px;
+$svg-arrow-stroke-width: 1.5px;
 
 .h5p-coursepresentation {
   .h5p-go-to-slide {
@@ -154,22 +154,24 @@ $svg-arrow-stroke-width: 2px;
       paint-order: stroke;
     }
 
-    button.h5p-press-to-go {
+    button.h5p-press-to-go.h5p-hotspot-answer {
       /* make room for stroke */
-      padding: 8px !important;
+      padding: 6px !important;
     }
 
     .h5p-press-to-go {
-      .h5p-shape-long-arrow-up svg rect,
-      .h5p-shape-long-arrow-down svg rect  {
-        transform: translate(0, -0.04px);
+      &.h5p-hotspot-answer {
+        .h5p-shape-long-arrow-up svg rect,
+        .h5p-shape-long-arrow-down svg rect  {
+          transform: translate(0, -0.03px);
+        }
+  
+        .h5p-shape-long-arrow-right svg rect,
+        .h5p-shape-long-arrow-left svg rect {
+          transform: translate(0.04px, 0);
+        }
       }
-
-      .h5p-shape-long-arrow-right svg rect,
-      .h5p-shape-long-arrow-left svg rect {
-        transform: translate(0.05px, 0);
-      }
-
+      
       svg {
         &.arrow-head {
           overflow: visible;
