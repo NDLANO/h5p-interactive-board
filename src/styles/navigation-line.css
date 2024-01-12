@@ -50,13 +50,13 @@
 
 /* Prev slide */
 .h5p-coursepresentation .h5p-footer .h5p-footer-previous-slide:before {
-  font-family: "H5PFontAwesome4";
+  font-family: "H5PFontAwesome4", sans-serif;
   content: "\f0d9";
 }
 
 /* Next slide */
 .h5p-coursepresentation .h5p-footer .h5p-footer-next-slide:after {
-  font-family: "H5PFontAwesome4";
+  font-family: "H5PFontAwesome4", sans-serif;
   content: "\f0da";
 }
 
@@ -116,7 +116,7 @@
 /* --------------------------------------------- Footer elements ---------------------------------------- */
 
 .h5p-coursepresentation .h5p-footer-toggle-keywords .h5p-icon-menu:before {
-  font-family: "H5PFontIcons";
+  font-family: "H5PFontIcons", sans-serif;
   font-size: 1.3em;
   content: "\e90b";
   padding: 0 0 0 0.25em;
@@ -144,7 +144,7 @@
   .h5p-footer
   .h5p-footer-toggle-keywords
   .current-slide-title:before {
-  font-family: "h5p";
+  font-family: "h5p", sans-serif;
   font-size: 0.6em;
   content: "\e565";
   vertical-align: top;
@@ -166,7 +166,7 @@
 /* Print button and full screen button (in footer) */
 .h5p-coursepresentation .h5p-footer .h5p-footer-print:before,
 .h5p-coursepresentation .h5p-footer .h5p-footer-toggle-full-screen:before {
-  font-family: "H5PFontAwesome4";
+  font-family: "H5PFontAwesome4", sans-serif;
   content: "\f065";
   font-size: 1.2em;
 }
@@ -313,7 +313,7 @@
   line-height: 1em;
   border: 0.1em solid;
   cursor: auto;
-  font-family: "H5PFontAwesome4";
+  font-family: "H5PFontAwesome4", sans-serif;
   font-size: 0.6em;
 }
 

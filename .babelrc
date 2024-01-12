@@ -1,4 +1,8 @@
 {
-  "presets": ["latest"],
-  "plugins": ["transform-object-assign", "transform-object-rest-spread"]
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    ["@babel/plugin-transform-classes", {
+      "loose": true
+    }]
+  ]
 }

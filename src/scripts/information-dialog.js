@@ -1,11 +1,10 @@
 // @ts-check
 import { createFocusTrap } from 'focus-trap';
-import { getContentId } from './utils';
+import { getContentId } from './utils.js';
 
 export class InformationDialog {
   /**
    * Create H5P.Video from video parameters.
-   *
    * @param {object} params Video parameters from semantics.json/content.json.
    * @returns {object} Content instance (H5P.Video).
    */
@@ -121,14 +120,12 @@ export class InformationDialog {
   /**
    * Creates an aspect ratio modal.
    * The modal includes button to set the aspect ratio to either 4/3 or 3/4.
-   *
    * @param {HTMLElement[]} contents
    * @param {DialogHeaderContent} dialogHeaderContent
    * @param {Media[]} dialogAudio
    * @param {string} horizontalOffset Horizontal offset as a percentage of the container width
    * @param {string} verticalOffset Vertical offset as a percentage of the container height
-   *
-   * @return {HTMLDivElement}
+   * @returns {HTMLDivElement}
    */
   createDialog(
     contents,
@@ -176,7 +173,8 @@ export class InformationDialog {
           'h5p-information-dialog-video-container',
         );
         mainContainer.appendChild(this.videoEmbedElement);
-      } else if (dialogImage) {
+      }
+      else if (dialogImage) {
         const imageElement = InformationDialog.createImageEmbed(dialogImage);
         mainContainer.appendChild(imageElement);
       }
@@ -288,7 +286,8 @@ export class InformationDialog {
     playPauseButton.addEventListener('click', () => {
       if (this.isPlayingAudio) {
         this.pauseAudio();
-      } else {
+      }
+      else {
         this.playAudio({ resetTime: false });
       }
     });

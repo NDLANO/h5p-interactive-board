@@ -2,6 +2,7 @@ import Element from './element.js';
 import Parent from 'h5p-parent';
 
 /**
+ * @param parameters
  * @class
  */
 function Slide(parameters) {
@@ -15,8 +16,7 @@ function Slide(parameters) {
 
   /**
    * Create HTML
-   *
-   * @return {jQuery} Element
+   * @returns {jQuery} Element
    */
   self.getElement = function () {
     if (!$wrapper) {
@@ -60,8 +60,8 @@ function Slide(parameters) {
 
 /**
  * Creates the HTML for a single slide.
- *
- * @param {Object} params Slide parameters.
+ * @param {object} params Slide parameters.
+ * @param parameters
  * @returns {string} HTML.
  */
 Slide.createHTML = function (parameters) {

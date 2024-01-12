@@ -6,7 +6,7 @@ import '../styles/summary-slide.css';
 import '../styles/navigation-line.css';
 import '../styles/slide-background.css';
 import '../styles/print.css';
-import NDLAInteractiveBoard from '../scripts/cp';
+import NDLAInteractiveBoard from '../scripts/cp.js';
 
 // Load library
 H5P = H5P || {};

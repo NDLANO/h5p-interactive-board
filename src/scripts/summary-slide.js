@@ -1,14 +1,12 @@
-// @ts-check
-
-import { jQuery as $, JoubelUI } from './globals';
-import { addClickAndKeyboardListeners } from './utils';
+import { jQuery as $, JoubelUI } from './globals.js';
+import { addClickAndKeyboardListeners } from './utils.js';
 
 const SummarySlide = (function () {
   /**
    * Constructor for summary slide
    * @param {import("./cp").default} coursePresentation Course presentation parent of summary slide
-   * @param {jQuery} $summarySlide Summary slide element
-   * @constructor
+   * @param {H5P.jQuery} $summarySlide Summary slide element
+   * @class
    */
   function SummarySlide(coursePresentation, $summarySlide) {
     // Create summary slide if not an editor
@@ -18,7 +16,6 @@ const SummarySlide = (function () {
 
   /**
    * Updates the provided summary slide with current values.
-   *
    * @param {number} slideNumber Summary slide that will be updated
    * @param {boolean} noJump
    */
@@ -80,7 +77,7 @@ const SummarySlide = (function () {
       }
 
       // Construct twitter share score link
-      if (this.cp.enableTwitterShare == true) {
+      if (this.cp.enableTwitterShare === true) {
         var $twitterContainer = $(
           '.h5p-summary-twitter-message',
           this.$summarySlide,
@@ -89,7 +86,7 @@ const SummarySlide = (function () {
       }
 
       // Construct facebook share score link
-      if (this.cp.enableFacebookShare == true) {
+      if (this.cp.enableFacebookShare === true) {
         var $facebookContainer = $(
           '.h5p-summary-facebook-message',
           this.$summarySlide,
@@ -160,7 +157,6 @@ const SummarySlide = (function () {
 
   /**
    * Gets html for summary slide.
-   *
    * @param slideScores Scores for all pages
    * @returns {string} html
    */
@@ -194,11 +190,11 @@ const SummarySlide = (function () {
           href="#"
           class="h5p-slide-link"
           aria-label=" ${this.cp.l10n.slide} ${
-        slideScores[i].slide
-      }: ${slideDescription.replace(
-        /(<([^>]+)>)/gi,
-        '',
-      )} ${slidePercentageScore}%"
+    slideScores[i].slide
+  }: ${slideDescription.replace(
+    /(<([^>]+)>)/gi,
+    '',
+  )} ${slidePercentageScore}%"
           data-slide="${slideScores[i].slide}"
           >${this.cp.l10n.slide} ${slideScores[i].slide}:
           ${slideDescription.replace(/(<([^>]+)>)/gi, '')}</a
@@ -222,11 +218,11 @@ const SummarySlide = (function () {
         ? `<span class="h5p-show-results-text">${this.cp.l10n.shareResult}</span>`
         : '';
     const twitterContainer =
-      this.cp.enableTwitterShare == true
+      this.cp.enableTwitterShare === true
         ? `<span class="h5p-summary-twitter-message" aria-label="${this.cp.l10n.shareTwitter}"></span>`
         : '';
     const facebookContainer =
-      this.cp.enableFacebookShare == true
+      this.cp.enableFacebookShare === true
         ? `<span class="h5p-summary-facebook-message" aria-label="${this.cp.l10n.shareFacebook}"></span>`
         : '';
 
@@ -240,8 +236,8 @@ const SummarySlide = (function () {
               </th>
               <th class="h5p-summary-table-header score">
                 ${
-                  this.cp.l10n.score
-                }<span>/</span>${this.cp.l10n.total.toLowerCase()}
+  this.cp.l10n.score
+  }<span>/</span>${this.cp.l10n.total.toLowerCase()}
               </th>
             </tr>
           </thead>
@@ -270,7 +266,8 @@ const SummarySlide = (function () {
     var slideElements = this.cp.slides[slideScoresSlide.slide - 1].elements;
     if (slideScoresSlide.indexes.length > 1) {
       slideDescription = this.cp.l10n.summaryMultipleTaskText;
-    } else if (
+    }
+    else if (
       slideElements[slideScoresSlide.indexes[0]] !== undefined &&
       slideElements[0]
     ) {
@@ -284,7 +281,8 @@ const SummarySlide = (function () {
           this.cp.elementInstances[slideScoresSlide.slide - 1][
             slideScoresSlide.indexes[0]
           ].getTitle();
-      } else if (action.library !== undefined && action.library) {
+      }
+      else if (action.library !== undefined && action.library) {
         // Remove major, minor version and h5p prefix, Split on uppercase
         var humanReadableLibrary = action.library
           .split(' ')[0]
@@ -313,9 +311,8 @@ const SummarySlide = (function () {
 
   /**
    * Adds a link to the given container which will link achieved score to twitter.
-   *
    * @param {jQuery} $twitterContainer Container that should hold the twitter link.
-   * @param {Object} scores totalScores object to pull data from.
+   * @param {object} scores totalScores object to pull data from.
    */
   SummarySlide.prototype.addTwitterScoreLinkTo = function (
     $twitterContainer,
@@ -383,9 +380,8 @@ const SummarySlide = (function () {
 
   /**
    * Adds a link to the given container which will link achieved score to facebook.
-   *
    * @param {jQuery} $facebookContainer Container that should hold the facebook link.
-   * @param {Object} scores totalScores object to pull data from.
+   * @param {object} scores totalScores object to pull data from.
    */
   SummarySlide.prototype.addFacebookScoreLinkTo = function (
     $facebookContainer,
@@ -480,7 +476,6 @@ const SummarySlide = (function () {
 
   /**
    * Toggles solution mode on/off.
-   *
    * @param {boolean} enableSolutionMode Enable/disable solution mode
    */
   SummarySlide.prototype.toggleSolutionMode = function (enableSolutionMode) {
@@ -494,7 +489,8 @@ const SummarySlide = (function () {
       this.cp.$footer.addClass('h5p-footer-solution-mode');
       this.cp.$boxWrapper.addClass('h5p-solution-mode');
       this.setFooterSolutionModeText(this.cp.l10n.solutionModeText);
-    } else {
+    }
+    else {
       this.cp.$footer.removeClass('h5p-footer-solution-mode');
       this.cp.$boxWrapper.removeClass('h5p-solution-mode');
       this.setFooterSolutionModeText();
@@ -504,7 +500,6 @@ const SummarySlide = (function () {
 
   /**
    * Sets the solution mode button text in footer.
-   *
    * @param {string} [solutionModeText]
    */
   SummarySlide.prototype.setFooterSolutionModeText = function (
@@ -516,7 +511,8 @@ const SummarySlide = (function () {
 
     if (solutionModeText !== undefined && solutionModeText) {
       this.cp.$exitSolutionModeText.html(solutionModeText);
-    } else if (this.cp.$exitSolutionModeText) {
+    }
+    else if (this.cp.$exitSolutionModeText) {
       this.cp.$exitSolutionModeText.html('');
     }
   };

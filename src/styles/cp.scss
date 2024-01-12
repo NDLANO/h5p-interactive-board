@@ -22,185 +22,194 @@
   font-style: normal;
 }
 
-.h5p-coursepresentation.portrait:fullscreen {
-  height: 95% !important;
-}
-
 .h5p-container.h5p-coursepresentation {
   margin-bottom: 0;
 }
 
 .h5p-coursepresentation {
-  font-family: H5PDroidSans, sans-serif;
+  font-family: "H5PDroidSans", sans-serif;
   color: #323232;
   line-height: 1.25;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
+  h1 {
     line-height: 150%;
     padding: 0.5em;
   }
-}
 
-.h5p-coursepresentation h2 {
-  font-size: 1.667em;
-  font-weight: bold;
-  line-height: 1.5em;
-  padding: 0;
-  margin: 0 0 0.5em;
-}
-.h5p-coursepresentation h3 {
-  font-size: 1.333em;
-  font-weight: bold;
-  line-height: 1.5em;
-  padding: 0;
-  margin: 0 0 0.5em;
-}
-.h5p-coursepresentation p {
-  font-size: 1em;
-  font-weight: normal;
-  line-height: 1.25em;
-  padding: 0;
-  margin: 0 0 1em;
-}
-.h5p-coursepresentation p:last-child {
-  margin-bottom: 0;
-}
+  h2 {
+    font-size: 1.667em;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 0;
+    margin: 0 0 0.5em;
+  }
 
-.h5p-coursepresentation a:focus {
-  box-shadow: none;
-}
+  h3 {
+    font-size: 1.333em;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: 0;
+    margin: 0 0 0.5em;
+  }
+  h4 {
+    line-height: 150%;
+    padding: 0.5em;
+  }
+  h5 {
+    line-height: 150%;
+    padding: 0.5em;
+  }
+  h6 {
+    line-height: 150%;
+    padding: 0.5em;
+  }
+  p {
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 1.25em;
+    padding: 0;
+    margin: 0 0 1em;
 
-.h5p-coursepresentation ol.list-unstyled,
-.h5p-coursepresentation ul.list-unstyled {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-}
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 
-.h5p-coursepresentation .h5p-wrapper {
-  margin: 0 auto;
-  position: relative;
-  text-align: center;
-  font-size: min(18px, 8px + 1vw);
-  box-sizing: border-box;
-}
+  a {
+    &:focus {
+      box-shadow: none;
+    }
+  }
 
-.h5p-coursepresentation .h5p-wrapper:focus {
-  outline: none;
-}
+  ol.list-unstyled,
+  ul.list-unstyled {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 
-.h5p-coursepresentation .h5p-box-wrapper {
-  width: 100%;
-  overflow: hidden;
-  background: #666666;
-  box-shadow: 0 0 0.5em 0 rgba(105, 105, 105, 0.4);
-}
+  .h5p-wrapper {
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    font-size: min(18px, 8px + 1vw);
+    box-sizing: border-box;
 
-/* Disable fullscreen buttons inside Course Presentation when it is in full screen */
-.h5p-coursepresentation.h5p-fullscreen video .controlBar > .fullscreenButton,
-.h5p-coursepresentation.h5p-fullscreen
-  video::-webkit-media-controls-fullscreen-button {
-  display: none;
-}
-.h5p-coursepresentation .h5p-presentation-wrapper {
-  z-index: 1;
-  text-align: left;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  background: #f5f5f5;
-}
+    &:focus {
+      outline: none;
+    }
+  }
 
-.h5p-coursepresentation .h5p-slide {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: none;
-  transform: translateX(100%) translate3d(100%, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-.h5p-coursepresentation .h5p-slide.h5p-animate {
-  display: block;
-  transition: transform 0.25s ease-in-out;
-}
-.h5p-coursepresentation .h5p-slide.h5p-touch-move {
-  display: block;
-}
-.h5p-coursepresentation .h5p-current {
-  display: block;
-  transform: translateX(0) translateZ(0);
-  z-index: 2;
-}
-.h5p-coursepresentation .h5p-previous {
-  transform: translateX(-100%);
-}
+  .h5p-box-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background: #666666;
+    box-shadow: 0 0 0.5em 0 rgba(105, 105, 105, 0.4);
+  }
 
-.h5p-coursepresentation .h5p-action-foo {
-  position: absolute;
-  left: 0.5em;
-}
-.h5p-coursepresentation .h5p-action-bar {
-  position: absolute;
-  right: 0.5em;
-}
-.h5p-coursepresentation .h5p-action-bar a,
-.h5p-coursepresentation .h5p-action-foo a {
-  text-decoration: none;
-}
+  /* Disable fullscreen buttons inside Course Presentation when it is in full screen */
+  &.h5p-fullscreen video .controlBar > .fullscreenButton,
+  &.h5p-fullscreen video::-webkit-media-controls-fullscreen-button {
+    display: none;
+  }
 
-.h5p-coursepresentation .h5p-copyinfo-header {
-  font-size: 1.2em;
-  color: #555;
-  font-weight: bold;
-  margin-bottom: 0.4em;
-}
+  &.portrait:fullscreen {
+    height: 95% !important;
+  }
 
-.h5p-coursepresentation .h5p-cp-show-solutions:before {
-  font-family: "H5PFontAwesome4";
-  content: "\f06e";
-  margin-right: 0.5em;
-}
+  .h5p-presentation-wrapper {
+    z-index: 1;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
 
-.h5p-coursepresentation .h5p-cp-show-solutions {
-  display: inline-block;
-}
+  .h5p-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+    transform: translateX(100%) translate3d(100%, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 
-.h5p-coursepresentation .h5p-slide-button {
-  display: inline-block;
-  padding: 0;
-  margin: 0 0.2em;
-}
-.h5p-coursepresentation .h5p-slide-button a {
-  color: #323232;
-  padding: 0.3em;
-}
-.h5p-coursepresentation .h5p-slide-button.h5p-current a {
-  color: #ffffff;
-  background: #0097fd;
-  background-image: linear-gradient(to bottom, #0097fd, #096bcb);
-}
-.h5p-coursepresentation .h5p-slide-button a:hover {
-  color: #525252;
-}
-.h5p-coursepresentation .h5p-slide-button.h5p-current a:hover {
-  color: #ffffff;
-}
+    &.h5p-animate {
+      display: block;
+      transition: transform 0.25s ease-in-out;
+    }
 
-.h5p-coursepresentation .h5p-has-solutions a,
-.h5p-coursepresentation .h5p-has-solutions a:hover {
-  text-decoration: underline;
+    &.h5p-touch-move {
+      display: block;
+    }
+  }
+
+  .h5p-current {
+    display: block;
+    transform: translateX(0) translateZ(0);
+    z-index: 2;
+  }
+
+  .h5p-previous {
+    transform: translateX(-100%);
+  }
+
+  .h5p-action-foo, /* TODO: Is this actually used? */
+  .h5p-action-bar {
+    position: absolute;
+    left: 0.5em;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .h5p-has-solutions a,
+  .h5p-has-solutions a:hover {
+    text-decoration: underline;
+  }
+
+  .h5p-copyinfo-header {
+    font-size: 1.2em;
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 0.4em;
+  }
+
+  .h5p-coursepresentation .h5p-cp-show-solutions {
+    display: inline-block;
+
+    &::before {
+      font-family: "H5PFontAwesome4", sans-serif;
+      content: "\f06e";
+      margin-right: 0.5em;
+    }
+  }
+
+  .h5p-slide-button {
+    display: inline-block;
+    padding: 0;
+    margin: 0 0.2em;
+
+    .h5p-current a:hover {
+      color: #ffffff;
+    }
+
+    a {
+      color: #323232;
+      padding: 0.3em;
+
+      &:hover {
+        color: #525252;
+      }
+    }
+  }
 }
 
 .h5p-coursepresentation .h5p-element {
@@ -394,7 +403,6 @@
   display: block;
   width: 1.5em;
   height: 1.5em;
-  background: #00f;
   color: #fff;
   font-size: 1em;
   border-radius: 50%;
@@ -445,7 +453,7 @@
 
 .h5p-coursepresentation .h5p-element-button:before {
   text-decoration: none;
-  font-family: "H5PFontAwesome4";
+  font-family: "H5PFontAwesome4", sans-serif;
   font-size: 0.875em;
 }
 
@@ -495,7 +503,7 @@
 .h5p-coursepresentation .h5p-dragtext-button:before,
 .h5p-coursepresentation .h5p-dialogcards-button:before,
 .h5p-coursepresentation .h5p-markthewords-button:before {
-  font-family: "H5PInteractiveBoard";
+  font-family: "H5PInteractiveBoard", sans-serif;
 }
 
 .h5p-coursepresentation .h5p-advancedtext-button:before {
@@ -539,7 +547,7 @@
 }
 
 .h5p-coursepresentation .h5p-truefalse-button:before {
-  font-family: "H5PFontIcons";
+  font-family: "H5PFontIcons", sans-serif;
   font-size: 1.2em;
   content: "\e902";
 }
@@ -596,7 +604,7 @@
 }
 
 .h5p-coursepresentation .h5p-close-popup:before {
-  font-family: "H5PFontAwesome4";
+  font-family: "H5PFontAwesome4", sans-serif;
   content: "\f057";
   color: #757575;
   vertical-align: middle;
@@ -803,7 +811,7 @@
   opacity: 0.6;
 }
 .h5p-coursepresentation .h5p-toggle-full-screen:before {
-  font-family: "H5PFontAwesome4";
+  font-family: "H5PFontAwesome4", sans-serif;
   content: "\f065";
 }
 .h5p-coursepresentation.h5p-fullscreen .h5p-toggle-full-screen:before,
@@ -857,7 +865,7 @@
 
 .h5p-coursepresentation .h5p-dialog-title:before {
   content: " ";
-  font-family: "H5PFontAwesome4";
+  font-family: "H5PFontAwesome4", sans-serif;
   color: #313131;
   margin-right: 0.5em;
   margin-left: 0.1em;

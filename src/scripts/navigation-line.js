@@ -1,13 +1,13 @@
-import Printer from './printer';
-import Controls from 'h5p-lib-controls/src/scripts/controls';
-import UIKeyboard from 'h5p-lib-controls/src/scripts/ui/keyboard';
+import Printer from './printer.js';
+import Controls from 'h5p-lib-controls/src/scripts/controls.js';
+import UIKeyboard from 'h5p-lib-controls/src/scripts/ui/keyboard.js';
 import {
   defaultValue,
   contains,
   isFunction,
   addClickAndKeyboardListeners,
   isIOS,
-} from './utils';
+} from './utils.js';
 
 /**
  * Enum indicating which state a navigation bar part is in
@@ -25,6 +25,10 @@ const answeredState = {
  * @class
  */
 const NavigationLine = (function ($) {
+  /**
+   *
+   * @param coursePresentation
+   */
   function NavigationLine(coursePresentation) {
     this.cp = coursePresentation;
 
@@ -60,7 +64,8 @@ const NavigationLine = (function ($) {
             if (contains(['interacted', 'answered', 'attempted'], shortVerb)) {
               const isAnswered = this.cp.slideHasAnsweredTask(index);
               this.setTaskAnswered(index, isAnswered);
-            } else if (shortVerb === 'completed') {
+            }
+            else if (shortVerb === 'completed') {
               event.setVerb('answered');
             }
 
@@ -78,6 +83,7 @@ const NavigationLine = (function ($) {
 
   /**
    * Initialize progress bar
+   * @param slidesWithSolutions
    */
   NavigationLine.prototype.initProgressbar = function (slidesWithSolutions) {
     const that = this;
@@ -202,7 +208,6 @@ const NavigationLine = (function ($) {
 
   /**
    * Ensures that all of a popup is visible
-   *
    * @param {jQuery} $popup
    */
   NavigationLine.prototype.ensurePopupVisible = function ($popup) {
@@ -213,7 +218,8 @@ const NavigationLine = (function ($) {
     if (popupOffsetLeft < 0) {
       $popup.css('left', 0);
       $popup.css('transform', 'translateX(0)');
-    } else if (popupOffsetLeft + popupWidth > availableWidth) {
+    }
+    else if (popupOffsetLeft + popupWidth > availableWidth) {
       $popup.css('left', 'auto');
       $popup.css('right', 0);
       $popup.css('transform', 'translateX(0)');
@@ -222,7 +228,6 @@ const NavigationLine = (function ($) {
 
   /**
    * Displays a slide
-   *
    * @param {number} index
    */
   NavigationLine.prototype.displaySlide = function (index) {
@@ -243,9 +248,8 @@ const NavigationLine = (function ($) {
 
   /**
    * Generate tooltip for progress bar slides
-   *
    * @param {number} slideNumber
-   * @return {string}
+   * @returns {string}
    */
   NavigationLine.prototype.createSlideTitle = function (slideNumber) {
     const slide = this.cp.slides[slideNumber];
@@ -253,19 +257,20 @@ const NavigationLine = (function ($) {
 
     if (hasKeyWords) {
       return slide.keywords[0].main;
-    } else if (this.isSummarySlide(slideNumber)) {
+    }
+    else if (this.isSummarySlide(slideNumber)) {
       return this.cp.l10n.summary;
-    } else {
+    }
+    else {
       return this.cp.l10n.slide + ' ' + (slideNumber + 1);
     }
   };
 
   /**
    *
-   * Returns true if slide with given index is summary slide
-   *
+   *Returns true if slide with given index is summary slide
    * @param {number} index
-   * @return {boolean}
+   * @returns {boolean}
    */
   NavigationLine.prototype.isSummarySlide = function (index) {
     return !!(
@@ -464,6 +469,9 @@ const NavigationLine = (function ($) {
 
   /**
    * Updates progress bar.
+   * @param slideNumber
+   * @param prevSlideNumber
+   * @param solutionMode
    */
   NavigationLine.prototype.updateProgressBar = function (
     slideNumber,
@@ -477,7 +485,8 @@ const NavigationLine = (function ($) {
     for (i = 0; i < that.cp.progressbarParts.length; i += 1) {
       if (slideNumber + 1 > i) {
         that.cp.progressbarParts[i].addClass('h5p-progressbar-part-show');
-      } else {
+      }
+      else {
         that.cp.progressbarParts[i].removeClass('h5p-progressbar-part-show');
       }
     }
@@ -503,7 +512,6 @@ const NavigationLine = (function ($) {
 
   /**
    * Sets a part to be answered, or un answered
-   *
    * @param {number} index
    * @param {boolean} isAnswered
    */
@@ -520,7 +528,6 @@ const NavigationLine = (function ($) {
 
   /**
    * Updates a slides title with values from state, if overrides are not provided
-   *
    * @param {number} index
    * @param {object} [config]
    * @param {answeredState} [config.state]
@@ -538,7 +545,6 @@ const NavigationLine = (function ($) {
 
   /**
    * Sets a part to be answered, or un answered
-   *
    * @param {number} index
    * @param {answeredState} [state]
    * @param {boolean} [isCurrent]
@@ -564,9 +570,8 @@ const NavigationLine = (function ($) {
 
   /**
    * Returns the answered state of a given slide
-   *
    * @param {number} index
-   * @return {answeredState}
+   * @returns {answeredState}
    */
   NavigationLine.prototype.getAnsweredState = function (index) {
     const $part = this.cp.progressbarParts[index];
@@ -575,22 +580,25 @@ const NavigationLine = (function ($) {
 
     if (!hasTask) {
       return answeredState.NO_INTERACTIONS;
-    } else if ($part.find('.h5p-is-correct').length > 0) {
+    }
+    else if ($part.find('.h5p-is-correct').length > 0) {
       return answeredState.CORRECT;
-    } else if ($part.find('.h5p-is-wrong').length > 0) {
+    }
+    else if ($part.find('.h5p-is-wrong').length > 0) {
       return answeredState.INCORRECT;
-    } else if (isAnswered) {
+    }
+    else if (isAnswered) {
       return answeredState.ANSWERED;
-    } else {
+    }
+    else {
       return answeredState.NOT_ANSWERED;
     }
   };
 
   /**
    * Returns true if a slide was initiated with an interaction
-   *
    * @param {number} index
-   * @return {boolean}
+   * @returns {boolean}
    */
   NavigationLine.prototype.slideHasInteraction = function (index) {
     return (
@@ -601,8 +609,7 @@ const NavigationLine = (function ($) {
 
   /**
    * Update footer with current slide data
-   *
-   * @param {Number} slideNumber Current slide number
+   * @param {number} slideNumber Current slide number
    */
   NavigationLine.prototype.updateFooter = function (slideNumber) {
     // Update current slide number in footer
@@ -618,7 +625,8 @@ const NavigationLine = (function ($) {
     // Hide exit solution mode button on summary slide
     if (this.cp.isSolutionMode && slideNumber === this.cp.slides.length - 1) {
       this.cp.$footer.addClass('summary-slide');
-    } else {
+    }
+    else {
       this.cp.$footer.removeClass('summary-slide');
     }
 
@@ -631,7 +639,6 @@ const NavigationLine = (function ($) {
   /**
    * Disables previous button if on the first slide,
    * and disables the next button if on the last slide
-   *
    * @param {number} index
    */
   NavigationLine.prototype.toggleNextAndPreviousButtonDisabled = function (
@@ -653,8 +660,7 @@ const NavigationLine = (function ($) {
 
   /**
    * Update keyword in footer with current slide data
-   *
-   * @param {Number} slideNumber Current slide number
+   * @param {number} slideNumber Current slide number
    */
   NavigationLine.prototype.updateFooterKeyword = function (slideNumber) {
     const currentSlide = this.cp.slides[slideNumber];
