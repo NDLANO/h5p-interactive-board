@@ -44,7 +44,7 @@ jobs:
 
               pushd $dir
               echo -e "${COLOR_BLUE}Building $dir${COLOR_OFF}"
-              if [ test -f "package.json" ]; then
+              if [ -f "package.json" ]; then
                 npm ci
                 npm run build
               fi
