@@ -37,10 +37,10 @@ jobs:
           # Build distribution versions
           echo -e "${COLOR_BLUE}Building dependencies${COLOR_OFF}"
           for dir in */ ; do
-            if [ -d "$dir" ]; then
+            if [ -d "$dir" && ! "$dir" == "h5p-true-false"]; then
               pushd $dir
               echo -e "${COLOR_BLUE}Building $dir${COLOR_OFF}"
-              if test -f "package.json"; then
+              if [ test -f "package.json" ]; then
                 npm ci
                 npm run build
               fi
