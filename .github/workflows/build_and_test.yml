@@ -4,23 +4,27 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           path: h5p-interactive-board
+
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '15.x'
-      - run: |
+          node-version: '16'
+
+      - name: Build Interactive Board
+        run: |
           cd h5p-interactive-board
           npm ci
-          npm run validate-types
           npm run build
-      - run: |
 
+      - name: Get and build dependencies
+        run: |
           mkdir -p dist
           cd dist
 
@@ -46,11 +50,13 @@ jobs:
           npm install -g h5p
           h5p pack -r h5p-interactive-board h5p-editor-interactive-board interactive-board.h5p
           h5p validate interactive-board.h5p
+
       - name: Store packed H5P as an artifact
         uses: actions/upload-artifact@v2
         with:
           name: interactive-board.h5p
           path: dist/interactive-board.h5p
+
       - name: Load library.json
         id: set_library
         run: |
