@@ -37,7 +37,11 @@ jobs:
           # Build distribution versions
           echo -e "${COLOR_BLUE}Building dependencies${COLOR_OFF}"
           for dir in */ ; do
-            if [ -d "$dir" && "$dir" != "h5p-true-false"]; then
+            if [ -d "$dir" ]; then
+              if [ "$(basename $dir") == "h5p-true-false" ]; then
+                continue # Skip h5p-true-false, as it has no build script
+              fi
+
               pushd $dir
               echo -e "${COLOR_BLUE}Building $dir${COLOR_OFF}"
               if [ test -f "package.json" ]; then
