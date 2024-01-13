@@ -38,7 +38,7 @@ jobs:
           echo -e "${COLOR_BLUE}Building dependencies${COLOR_OFF}"
           for dir in */ ; do
             if [ -d "$dir" ]; then
-              if [ "$(basename $dir") == "h5p-true-false" ]; then
+              if [ "$(basename "$dir")" == "h5p-true-false" ]; then
                 continue # Skip h5p-true-false, as it has no build script
               fi
 
