@@ -1,11 +1,10 @@
-import { jQuery as $ } from './globals';
+import { jQuery as $ } from './globals.js';
 
 /**
  * Flattens a nested array
  *
  * Example:
  * [['a'], ['b']].flatten() -> ['a', 'b']
- *
  * @param {Array} arr A nested array
  * @returns {Array} A flattened array
  */
@@ -13,50 +12,44 @@ export const flattenArray = (arr) => arr.concat.apply([], arr);
 
 /**
  * Returns true if the argument is a function
- *
  * @param {Function|*} f
  */
 export const isFunction = (f) => typeof f === 'function';
 
 /**
  * Makes a string kebab case
- *
  * @param {string} str
- * @return {string}
+ * @returns {string}
  */
 export const kebabCase = (str) => str.replace(/[\W]/g, '-');
 
 /**
  * Is true if the users device is an ipad
- *
- * @const {boolean}
+ * @constant {boolean}
  */
 export const isIPad = navigator.userAgent.match(/iPad/i) !== null;
 
 /**
  * Is true if the users device is an iOS device
- *
- * @const {boolean}
+ * @constant {boolean}
  */
 export const isIOS = navigator.userAgent.match(/iPad|iPod|iPhone/i) !== null;
 
 /**
  * Returns true if the array contains the value
- *
  * @template T
  * @param {Array.<T>} arr
  * @param {T} val
- * @return {boolean}
+ * @returns {boolean}
  */
 export const contains = (arr, val) => arr.indexOf(val) !== -1;
 
 /**
  * Returns a default value if provided value is undefined
- *
  * @template T
  * @param {T} value
  * @param {T} fallback
- * @return {T}
+ * @returns {T}
  */
 export const defaultValue = (value, fallback) =>
   value !== undefined ? value : fallback;
@@ -75,7 +68,6 @@ export const keyCode = {
 /**
  * Make a non-button element behave as a button. I.e handle enter and space
  * keydowns as click
- *
  * @param  {H5P.jQuery} $element The "button" element
  * @param  {(event: MouseEvent | TouchEvent) => void} callback
  * @param  {*} [scope]
@@ -98,21 +90,19 @@ export const addClickAndKeyboardListeners = function (
 };
 
 /**
- * @const {H5P.jQuery}
+ * @constant {H5P.jQuery}
  */
 const $STRIP_HTML_HELPER = $('<div>');
 
 /**
  * Strips the html from a string, using jquery
- *
  * @param {string} str
- * @return {string}
+ * @returns {string}
  */
 export const stripHTML = (str) => $STRIP_HTML_HELPER.html(str).text().trim();
 
 /**
  * Returns the ID of the current course presentation.
- *
  * @returns {number | null}
  */
 export const getContentId = () => {

@@ -1,7 +1,7 @@
-import Controls from 'h5p-lib-controls/src/scripts/controls';
-import UIKeyboard from 'h5p-lib-controls/src/scripts/ui/keyboard';
-import { isIPad, defaultValue } from './utils';
-import { jQuery as $, EventDispatcher } from './globals';
+import Controls from 'h5p-lib-controls/src/scripts/controls.js';
+import UIKeyboard from 'h5p-lib-controls/src/scripts/ui/keyboard.js';
+import { isIPad, defaultValue } from './utils.js';
+import { jQuery as $, EventDispatcher } from './globals.js';
 
 /**
  * Select event.
@@ -21,9 +21,8 @@ import { jQuery as $, EventDispatcher } from './globals';
  */
 /**
  * Returns the index stored in a elements dataset
- *
  * @param {Element|EventTarget} element
- * @return {number}
+ * @returns {number}
  */
 const getElementsDatasetIndex = (element) => parseInt(element.dataset.index);
 
@@ -32,8 +31,10 @@ const getElementsDatasetIndex = (element) => parseInt(element.dataset.index);
  */
 export default class KeywordMenu {
   /**
-   * @constructor
+   * @class
+   * @param l10n.l10n
    * @param {object} l10n
+   * @param l10n.currentIndex
    * @param {number} currentIndex
    */
   constructor({ l10n, currentIndex }) {
@@ -61,7 +62,6 @@ export default class KeywordMenu {
 
   /**
    * Initializes the config
-   *
    * @param {KeywordMenuItemConfig[]} keywordConfigs
    * @returns {Element[]}
    */
@@ -83,7 +83,6 @@ export default class KeywordMenu {
 
   /**
    * Register an event listener
-   *
    * @param {string} name
    * @param {function} callback
    */
@@ -93,8 +92,7 @@ export default class KeywordMenu {
 
   /**
    * Returns the menu element
-   *
-   * @return {Element}
+   * @returns {Element}
    */
   getElement() {
     return this.menuElement;
@@ -114,7 +112,7 @@ export default class KeywordMenu {
 
   /**
    * Creates a menu element
-   * @return {Element}
+   * @returns {Element}
    */
   createMenuElement() {
     const element = (this.menuElement = document.createElement('ol'));
@@ -125,9 +123,8 @@ export default class KeywordMenu {
 
   /**
    * Creates a menuitem
-   *
    * @param {KeywordMenuItemConfig} config
-   * @return {Element}
+   * @returns {Element}
    */
   createMenuItemElement(config) {
     const element = document.createElement('li');
@@ -143,7 +140,6 @@ export default class KeywordMenu {
 
   /**
    * Applies a config to a menu item element
-   *
    * @param {Element} element
    * @param {KeywordMenuItemConfig} config
    */
@@ -154,7 +150,6 @@ export default class KeywordMenu {
 
   /**
    * Handles selecting menu item
-   *
    * @param {number} index
    * @fires KeywordMenu#select
    */
@@ -165,7 +160,6 @@ export default class KeywordMenu {
 
   /**
    * Sets the current slide index
-   *
    * @param {number} index
    */
   setCurrentSlideIndex(index) {
@@ -183,7 +177,6 @@ export default class KeywordMenu {
 
   /**
    * Updates the h5p-current class on the element list
-   *
    * @param {Element[]} elements
    * @param {KeywordMenuState} state
    */
@@ -201,7 +194,6 @@ export default class KeywordMenu {
 
   /**
    * Scroll to current keywords.
-   *
    * @param {number} index
    */
   scrollToKeywords(index) {
@@ -213,7 +205,8 @@ export default class KeywordMenu {
 
       if (isIPad) {
         $menu.scrollTop(move);
-      } else {
+      }
+      else {
         $menu.stop().animate({ scrollTop: move }, 250);
       }
     }
@@ -221,9 +214,8 @@ export default class KeywordMenu {
 
   /**
    * Returns the first element with an index larger then value
-   *
    * @param {number} index
-   * @return {Element}
+   * @returns {Element}
    */
   getFirstElementAfter(index) {
     return this.menuItemElements.filter(
@@ -233,10 +225,9 @@ export default class KeywordMenu {
 
   /**
    * Returns the element with a given index
-   *
    * @param {Element[]} elements
    * @param {number} index
-   * @return {Element}
+   * @returns {Element}
    */
   getElementByIndex(elements, index) {
     return elements.filter(
@@ -246,8 +237,7 @@ export default class KeywordMenu {
 
   /**
    * Creates a hidden element, that will read "Current slide"
-   *
-   * @return {Element}
+   * @returns {Element}
    */
   createCurrentSlideMarkerElement() {
     const element = document.createElement('div');

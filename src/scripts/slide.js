@@ -2,6 +2,7 @@ import Element from './element.js';
 import Parent from 'h5p-parent';
 
 /**
+ * @param parameters
  * @class
  */
 function Slide(parameters) {
@@ -15,8 +16,7 @@ function Slide(parameters) {
 
   /**
    * Create HTML
-   *
-   * @return {jQuery} Element
+   * @returns {jQuery} Element
    */
   self.getElement = function () {
     if (!$wrapper) {
@@ -65,18 +65,17 @@ function Slide(parameters) {
  * @returns {string} HTML.
  */
 Slide.createHTML = function (parameters) {
-  const classNames = `h5p-slide ${
-    parameters.aspectRatio ? ` h5p-slide-${parameters.aspectRatio}` : ''
-  }`;
-  const style = `${
-    parameters.background ? `style="background:${parameters.background}"` : ''
-  }`;
-
-  return `<div
-  	role="document"
-  	class="${classNames}"
-  	${style}
-  	></div>`;
+  return '<div ' +
+      'role="tabpanel" ' +
+      'id="slide-' + parameters.index + '" ' +
+      'aria-labelledby="progressbar-part-' + parameters.index + '" ' +
+      'class="h5p-slide"> ' +
+      '<div ' +
+        'role="document" ' +
+        'tabindex="0" ' +
+        (parameters.background !== undefined ? ' style="background:' + parameters.background + '"' : '') + '>' +
+      '</div>' +
+    '</div>';
 };
 
 Slide.prototype.showSolutions = function () {

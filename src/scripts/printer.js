@@ -1,4 +1,4 @@
-import { addClickAndKeyboardListeners } from './utils';
+import { addClickAndKeyboardListeners } from './utils.js';
 
 const Printer = (function ($) {
   let nextPrinterDialogId = 0;
@@ -11,10 +11,9 @@ const Printer = (function ($) {
 
   /**
    * Check if printing is supported
-   *
-   * @method supported
+   * @function supported
    * @static
-   * @return {boolean} True if supported, else false.
+   * @returns {boolean} True if supported, else false.
    */
   Printer.supported = function () {
     // Need window.print to be available
@@ -23,8 +22,7 @@ const Printer = (function ($) {
 
   /**
    * Do the actual printing
-   *
-   * @method print
+   * @function print
    * @static
    * @param  {H5P.InteraectiveBoard} cp Reference to cp instance
    * @param  {H5P.jQuery} $wrapper  The CP dom wrapper
@@ -80,11 +78,10 @@ const Printer = (function ($) {
 
   /**
    * Show the print dialog. Wanted to use H5P.Dialog, but it does not support getting a jQuery object as the content
-   *
-   * @method showDialog
+   * @function showDialog
    * @param  {object}       texts    Translated texts
    * @param  {H5P.jQuery}   $element Dom object to insert dialog after
-   * @param  {Function}     callback Function invoked when printing is done.
+   * @param  {function}     callback Function invoked when printing is done.
    */
   Printer.showDialog = function (texts, $element, callback) {
     var self = this;
@@ -97,8 +94,8 @@ const Printer = (function ($) {
                         <h2 id="${dialogTitleId}">${texts.printTitle}</h2>
                         <div class="h5p-scroll-content"></div>
                         <div class="h5p-close" role="button" tabindex="0" title="${H5P.t(
-                          'close',
-                        )}">
+    'close',
+  )}">
                       </div>
                     </div>`)
       .insertAfter($element)

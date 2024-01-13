@@ -1,5 +1,5 @@
 // @ts-check
-import { Hotspot } from './hotspot';
+import { Hotspot } from './hotspot.js';
 
 /**
  *
@@ -18,7 +18,8 @@ export function initAnswerHotspot(element, answerType) {
     const wasChecked = element.isChecked;
     if (wasChecked) {
       element.$element.removeClass(checkedClass);
-    } else {
+    }
+    else {
       element.$element.addClass(checkedClass);
     }
 

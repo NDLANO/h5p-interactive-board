@@ -4,6 +4,22 @@ $answer-false-color: hsla(345, 100%, 49%, 1);
 $svg-stroke-width: 8px;
 $svg-arrow-stroke-width: 1.5px;
 
+.h5p-content:not(.using-mouse) {
+  /* Make sure arrow svgs get focus when using keyboard */
+  .ndla-h5p-svg-arrow .h5p-press-to-go.h5p-visible:focus svg {
+    polygon, rect {
+      stroke: $navigation-element-color !important;
+      stroke-width: $svg-arrow-stroke-width !important;
+    }
+  }
+
+  /* Make sure svgs get focus when using keyboard */
+  .ndla-h5p-svg-shape .h5p-press-to-go.h5p-visible:focus svg polygon {
+    stroke: $navigation-element-color !important;
+    stroke-width: calc($svg-stroke-width / 2) !important;
+  }
+}
+
 .h5p-coursepresentation {
   .h5p-go-to-slide {
     z-index: 2;
@@ -176,13 +192,13 @@ $svg-arrow-stroke-width: 1.5px;
         .h5p-shape-long-arrow-down svg rect  {
           transform: translate(0, -0.03px);
         }
-  
+
         .h5p-shape-long-arrow-right svg rect,
         .h5p-shape-long-arrow-left svg rect {
           transform: translate(0.04px, 0);
         }
       }
-      
+
       svg {
         &.arrow-head {
           overflow: visible;
@@ -248,23 +264,5 @@ $svg-arrow-stroke-width: 1.5px;
         stroke: $answer-false-color !important;
       }
     }
-  }
-}
-
-/* Make sure arrow svgs get focus when using keyboard */
-.h5p-content:not(.using-mouse) {
-  .ndla-h5p-svg-arrow .h5p-press-to-go.h5p-visible:focus svg {
-    polygon, rect {
-      stroke: $navigation-element-color !important;
-      stroke-width: $svg-arrow-stroke-width !important;
-    }
-  }
-}
-
-/* Make sure svgs get focus when using keyboard */
-.h5p-content:not(.using-mouse) {
-  .ndla-h5p-svg-shape .h5p-press-to-go.h5p-visible:focus svg polygon {
-    stroke: $navigation-element-color !important;
-    stroke-width: calc(#{$svg-stroke-width / 2}) !important;
   }
 }

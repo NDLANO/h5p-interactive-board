@@ -1,8 +1,8 @@
 // @ts-check
 
-import { addClickAndKeyboardListeners } from './utils';
-import { jQuery as $, EventDispatcher } from './globals';
-import { InformationDialog } from './information-dialog';
+import { addClickAndKeyboardListeners } from './utils.js';
+import { jQuery as $, EventDispatcher } from './globals.js';
+import { InformationDialog } from './information-dialog.js';
 
 /**
  * Enum containing possible navigation types
@@ -21,8 +21,7 @@ const hotspotType = {
 export class Hotspot extends EventDispatcher {
   /**
    * Wrapper for elements with click actions
-   *
-   * @param {Object} semanticParameters
+   * @param {object} semanticParameters
    * @param {string} semanticParameters.title
    * @param {number} semanticParameters.goToSlide
    * @param {boolean} semanticParameters.invisible
@@ -30,8 +29,8 @@ export class Hotspot extends EventDispatcher {
    * @param {string} semanticParameters.dialogContent
    * @param {Media[]} semanticParameters.dialogAudio
    * @param {DialogHeaderContent} semanticParameters.dialogHeaderContent
-   * @param {Object} param1
-   * @param {Object} param1.l10n
+   * @param {object} param1
+   * @param {object} param1.l10n
    * @param {number} param1.currentIndex
    * @param {$<HTMLElement>} $content
    */
@@ -73,7 +72,8 @@ export class Hotspot extends EventDispatcher {
 
     if (invisible) {
       title = undefined;
-    } else {
+    }
+    else {
       const useDefaultTitle = !title;
       if (useDefaultTitle) {
         // No title so use the slide number, prev, or next.
@@ -111,7 +111,8 @@ export class Hotspot extends EventDispatcher {
         goToSlideType,
         currentIndex,
       );
-    } else if (isInformationDialogTrigger) {
+    }
+    else if (isInformationDialogTrigger) {
       this.$element = this.createButton(() => {
         const horizontalOffset = '50%';
         const verticalOffset = '50%';
@@ -129,7 +130,8 @@ export class Hotspot extends EventDispatcher {
           });
         this.dialog.show();
       });
-    } else if (isAnswerHotspotWithoutAction) {
+    }
+    else if (isAnswerHotspotWithoutAction) {
       this.$element = this.createButton();
     }
 
@@ -145,7 +147,6 @@ export class Hotspot extends EventDispatcher {
     this.on =
       /**
        * Register an event listener
-       *
        * @param {string} name
        * @param {function} callback
        */
@@ -185,7 +186,8 @@ export class Hotspot extends EventDispatcher {
         goToSlideType === hotspotType.GO_TO_SUMMARY_SLIDE;
       if (isGoToSummarySlideHotspot) {
         this.eventDispatcher.trigger('navigate-to-last-slide');
-      } else {
+      }
+      else {
         this.eventDispatcher.trigger('navigate', goTo);
       }
       event.preventDefault();
@@ -212,7 +214,6 @@ export class Hotspot extends EventDispatcher {
 
   /**
    * Attach element to the given container.
-   *
    * @public
    * @param {$} $container
    */

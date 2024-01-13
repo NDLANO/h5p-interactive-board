@@ -1,56 +1,82 @@
-var path = require('path');
-var nodeEnv = process.env.NODE_ENV || 'development';
-var isDev = nodeEnv !== 'production';
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+import { dirname, resolve as _resolve, join } from 'path';
+import { fileURLToPath } from 'url';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import TerserPlugin from 'terser-webpack-plugin'; // Provided by webpack
 
-const extractStyles = new ExtractTextPlugin({
-  filename: 'h5p-course-presentation.css',
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-var config = {
+const mode = process.argv.includes('--mode=production') ?
+  'production' :
+  'development';
+const libraryName = process.env.npm_package_name;
+
+export default {
+  mode: mode,
+  optimization: {
+    minimize: mode === 'production',
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          }
+        }
+      })
+    ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: `${libraryName}.css`
+    })
+  ],
   entry: {
-    dist: './src/entries/dist.js',
+    dist: './src/entries/dist.js'
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'h5p-course-presentation.js',
+    filename: `${libraryName}.js`,
+    path: _resolve(__dirname, 'dist'),
+    clean: true
   },
+  target: ['browserslist'],
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       {
-        test: /\.css$/,
-        include: path.resolve(__dirname, 'src'),
-        use: extractStyles.extract({
-          use: ['css-loader?sourceMap', 'resolve-url-loader'],
-          fallback: 'style-loader',
-        }),
+        test: /\.(s[ac]ss|css)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: ''
+            }
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
       },
       {
-        test: /\.scss$/,
-        use: extractStyles.extract({
-          use: [
-            'css-loader?sourceMap',
-            'sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true',
-          ],
-          fallback: 'style-loader',
-        }),
+        test: /\.svg|\.jpg|\.png$/,
+        include: join(__dirname, 'src/images'),
+        type: 'asset/resource'
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        include: path.join(__dirname, 'src/fonts'),
-        loader: 'file-loader?name=fonts/[name].[ext]',
-      },
-    ],
+        test: /\.woff$/,
+        include: join(__dirname, 'src/fonts'),
+        type: 'asset/resource'
+      }
+    ]
   },
-  plugins: [extractStyles],
+  stats: {
+    colors: true
+  },
+  ...(mode !== 'production' && { devtool: 'eval-cheap-module-source-map' })
 };
-
-if (isDev) {
-  config.devtool = 'inline-source-map';
-}
-
-module.exports = config;

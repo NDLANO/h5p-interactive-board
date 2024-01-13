@@ -1,9 +1,9 @@
 // @ts-check
 
-import { jQuery as $ } from './globals';
-import { initAnswerHotspot } from './answer-hotspot';
-import InteractiveBoard from './cp';
-import { Hotspot } from './hotspot';
+import { jQuery as $ } from './globals.js';
+import { initAnswerHotspot } from './answer-hotspot.js';
+import InteractiveBoard from './cp.js';
+import { Hotspot } from './hotspot.js';
 
 const H5P = window.H5P || {};
 
@@ -11,7 +11,6 @@ const H5P = window.H5P || {};
  * @class
  *
  * The Element class' `this` is an instance of `Slide`
- *
  * @param {*} parameters
  */
 function Element(parameters) {
@@ -34,7 +33,8 @@ function Element(parameters) {
       coursePresentation,
       content,
     );
-  } else {
+  }
+  else {
     const content = Element.createContent(
       slide,
       coursePresentation,
@@ -51,7 +51,8 @@ function Element(parameters) {
   const slideHasElements = !!coursePresentation.elementInstances[slide.index];
   if (slideHasElements) {
     coursePresentation.elementInstances[slide.index].push(this.instance);
-  } else {
+  }
+  else {
     coursePresentation.elementInstances[slide.index] = [this.instance];
   }
 
@@ -105,10 +106,12 @@ Element.overrideAutoplay = function (h5pLibrary) {
   if (params.autoplay) {
     h5pLibrary.params.autoplay = false;
     h5pLibrary.params.cpAutoplay = true;
-  } else if (params.playback && params.playback.autoplay) {
+  }
+  else if (params.playback && params.playback.autoplay) {
     h5pLibrary.params.playback.autoplay = false;
     h5pLibrary.params.cpAutoplay = true;
-  } else if (
+  }
+  else if (
     params.media &&
     params.media.params &&
     params.media.params.playback &&
@@ -117,7 +120,8 @@ Element.overrideAutoplay = function (h5pLibrary) {
     // Control libraries that has content with autoplay through CP
     h5pLibrary.params.media.params.playback.autoplay = false;
     h5pLibrary.params.cpAutoplay = true;
-  } else if (
+  }
+  else if (
     params.media &&
     params.media.params &&
     params.media.params.autoplay
@@ -125,7 +129,8 @@ Element.overrideAutoplay = function (h5pLibrary) {
     // Control libraries that has content with autoplay through CP
     h5pLibrary.params.media.params.autoplay = false;
     h5pLibrary.params.cpAutoplay = true;
-  } else if (params.override && params.override.autoplay) {
+  }
+  else if (params.override && params.override.autoplay) {
     // Control libraries that has content with autoplay through CP
     h5pLibrary.params.override.autoplay = false;
     h5pLibrary.params.cpAutoplay = true;
@@ -136,7 +141,7 @@ Element.overrideAutoplay = function (h5pLibrary) {
 
 /**
  *
- * @param {Object} slide
+ * @param {object} slide
  * @param {InteractiveBoard} coursePresentation
  * @param {*} parameters
  * @returns
@@ -152,7 +157,8 @@ Element.createContent = function (slide, coursePresentation, parameters) {
       parameters.action,
       coursePresentation.elementsOverride,
     );
-  } else {
+  }
+  else {
     // Add defaults
     h5pLibrary = H5P.jQuery.extend(
       true,
@@ -200,7 +206,7 @@ Element.createContent = function (slide, coursePresentation, parameters) {
 
 /**
  *
- * @param {Object} parameters
+ * @param {object} parameters
  * @param {string} parameters.title
  * @param {number} parameters.goToSlide
  * @param {boolean} parameters.invisible
@@ -208,7 +214,7 @@ Element.createContent = function (slide, coursePresentation, parameters) {
  * @param {string} parameters.dialogContent
  * @param {Media[]} parameters.dialogAudio
  * @param {DialogHeaderContent} parameters.dialogHeaderContent
- * @param {Object} l10n
+ * @param {object} l10n
  * @param {number} currentIndex
  * @param {InteractiveBoard} coursePresentation
  * @param {$<HTMLElement>} content

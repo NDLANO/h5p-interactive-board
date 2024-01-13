@@ -6,13 +6,6 @@
     "widget": "coursepresentation",
     "fields": [
       {
-        "name": "defaultAspectRatio",
-        "importance": "high",
-        "type": "text",
-        "optional": true,
-        "label": "Aspect Ratio"
-      },
-      {
         "name": "slides",
         "importance": "high",
         "type": "list",
@@ -21,13 +14,6 @@
           "importance": "high",
           "type": "group",
           "fields": [
-            {
-              "name": "aspectRatio",
-              "importance": "high",
-              "type": "text",
-              "optional": true,
-              "label": "Aspect Ratio"
-            },
             {
               "name": "elements",
               "importance": "high",
@@ -81,18 +67,20 @@
                       "H5P.NDLAShape 1.1",
                       "H5P.Video 1.5",
                       "H5P.Audio 1.4",
-                      "H5P.Blanks 1.12",
+                      "H5P.Blanks 1.16",
                       "H5P.SingleChoiceSet 1.11",
-                      "H5P.MultiChoice 1.14",
-                      "H5P.TrueFalse 1.6",
+                      "H5P.MultiChoice 1.16",
+                      "H5P.TrueFalse 1.8",
+                      "H5P.DragQuestion 1.14",
                       "H5P.Summary 1.10",
-                      "H5P.DragText 1.8",
-                      "H5P.MarkTheWords 1.9",
-                      "H5P.Dialogcards 1.8",
+                      "H5P.DragText 1.10",
+                      "H5P.MarkTheWords 1.11",
+                      "H5P.Dialogcards 1.9",
                       "H5P.ContinuousText 1.2",
                       "H5P.ExportableTextArea 1.3",
                       "H5P.NDLAChart 1.2",
-                      "H5P.Table 1.1"
+                      "H5P.Table 1.1",
+                      "H5P.InteractiveVideo 1.26"
                     ],
                     "optional": true
                   },
@@ -102,7 +90,10 @@
                     "type": "text",
                     "widget": "none",
                     "optional": true,
-                    "options": ["true", "false"]
+                    "options": [
+                      "true",
+                      "false"
+                    ]
                   },
                   {
                     "name": "solution",
@@ -182,10 +173,30 @@
                     "spectrum": {
                       "showPalette": true,
                       "palette": [
-                        ["#1d5cff", "black", "white", "gray"],
-                        ["red", "blue", "yellow", "green"],
-                        ["pink", "purple", "brown", "orange"],
-                        ["lime", "violet", "magenta", "cyan"]
+                        [
+                          "#1d5cff",
+                          "black",
+                          "white",
+                          "gray"
+                        ],
+                        [
+                          "red",
+                          "blue",
+                          "yellow",
+                          "green"
+                        ],
+                        [
+                          "pink",
+                          "purple",
+                          "brown",
+                          "orange"
+                        ],
+                        [
+                          "lime",
+                          "violet",
+                          "magenta",
+                          "cyan"
+                        ]
                       ]
                     }
                   },
@@ -200,55 +211,45 @@
                   {
                     "name": "buttonIcon",
                     "type": "select",
-                    "widget": "imageRadioGroup",
+                    "widget": "radioGroup",
                     "fontFamily": "H5PFontAwesome4",
                     "alignment": "horizontal",
                     "label": "Button icon",
-                    "default": "f05a",
                     "optional": false,
                     "options": [
                       {
-                        "fontIcon": "f05a",
                         "value": "f05a",
                         "label": "Information icon"
                       },
                       {
-                        "fontIcon": "f008",
                         "value": "f008",
                         "label": "Video icon"
                       },
                       {
-                        "fontIcon": "f03e",
                         "value": "f03e",
                         "label": "Image icon"
                       },
                       {
-                        "fontIcon": "f028",
                         "value": "f028",
                         "label": "Audio icon"
                       },
                       {
-                        "fontIcon": "f200",
                         "value": "f200",
                         "label": "Chart icon"
                       },
                       {
-                        "fontIcon": "f03d",
                         "value": "f03d",
                         "label": "Video icon"
                       },
                       {
-                        "fontIcon": "f099",
                         "value": "f099",
                         "label": "Twitter icon"
                       },
                       {
-                        "fontIcon": "f0c1",
                         "value": "f0c1",
                         "label": "Link icon"
                       },
                       {
-                        "fontIcon": "f15c",
                         "value": "f15c",
                         "label": "Text icon"
                       }
@@ -265,7 +266,7 @@
                     "optional": true,
                     "label": "Title",
                     "importance": "medium",
-                    "widget": "NDLAShowWhen",
+                    "widget": "showWhen",
                     "showWhen": {
                       "rules": [
                         {
@@ -308,7 +309,7 @@
                       }
                     ],
                     "default": "specified",
-                    "widget": "NDLAShowWhen",
+                    "widget": "showWhen",
                     "showWhen": {
                       "rules": [
                         {
@@ -326,7 +327,7 @@
                     "importance": "low",
                     "min": 1,
                     "optional": true,
-                    "widget": "NDLAShowWhen",
+                    "widget": "showWhen",
                     "showWhen": {
                       "rules": [
                         {
@@ -372,7 +373,7 @@
                     "label": "Dialog content",
                     "importance": "low",
                     "optional": true,
-                    "widget": "NDLAShowWhen",
+                    "widget": "showWhen",
                     "showWhen": {
                       "rules": [
                         {
@@ -404,7 +405,7 @@
                     "importance": "low",
                     "description": "Default cursor, no title and no tab index. Warning: Users with disabilities or keyboard only users will have trouble using this element.",
                     "default": false,
-                    "widget": "NDLAShowWhen",
+                    "widget": "showWhen",
                     "showWhen": {
                       "rules": [
                         {
@@ -858,6 +859,30 @@
         "default": "Exited fullscreen"
       },
       {
+        "name": "confirmDialogHeader",
+        "type": "text",
+        "label": "Header of submit result confirmation dialog",
+        "default": "Submit your answers"
+      },
+      {
+        "name": "confirmDialogText",
+        "type": "text",
+        "label": "Text of submit result confirmation dialog",
+        "default": "This will submit your results, do you want to continue?"
+      },
+      {
+        "name": "confirmDialogConfirmText",
+        "type": "text",
+        "label": "Confirmation button of submit result confirmation dialog",
+        "default": "Submit and see results"
+      },
+      {
+        "name": "slideshowNavigationLabel",
+        "type": "text",
+        "label": "Label for Slideshow navigation",
+        "default": "Slideshow navigation"
+      },
+      {
         "name": "informationDialogClose",
         "type": "text",
         "label": "Exit dialog action for assistive technologies",
@@ -947,7 +972,7 @@
         "description": "If enabled, the learner will be able to show the solutions for all question when they reach the summary slide",
         "default": true,
         "importance": "low",
-        "widget": "NDLAShowWhen",
+        "widget": "showWhen",
         "showWhen": {
           "rules": [
             {
@@ -964,7 +989,7 @@
         "description": "If enabled, the learner will be able to retry all questions when they reach the summary slide. Be advised that by refreshing the page the learners will be able to retry even if this button isn't showing.",
         "default": true,
         "importance": "low",
-        "widget": "NDLAShowWhen",
+        "widget": "showWhen",
         "showWhen": {
           "rules": [
             {
@@ -986,7 +1011,7 @@
         "name": "social",
         "type": "group",
         "label": "Social Settings",
-        "widget": "NDLAShowWhen",
+        "widget": "showWhen",
         "showWhen": {
           "rules": [
             {
@@ -1012,7 +1037,7 @@
             "type": "group",
             "expanded": true,
             "label": "Facebook share settings",
-            "widget": "NDLAShowWhen",
+            "widget": "showWhen",
             "showWhen": {
               "rules": [
                 {
@@ -1051,7 +1076,7 @@
             "type": "group",
             "expanded": true,
             "label": "Twitter share settings",
-            "widget": "NDLAShowWhen",
+            "widget": "showWhen",
             "showWhen": {
               "rules": [
                 {
