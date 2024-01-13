@@ -1,0 +1,78 @@
+name: Node.js CI
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: h5p-interactive-board
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '15.x'
+      - run: |
+          cd h5p-interactive-board
+          npm ci
+          npm run validate-types
+          npm run build
+      - run: |
+
+          mkdir -p dist
+          cd dist
+
+          # Clone dependencies
+          while read -r repo; do git clone ${repo}; done < ../h5p-interactive-board/build_info/repos
+
+          # Build distribution versions
+          for dir in */ ; do
+            if [ -d "$dir" ]; then
+              pushd $dir
+              if test -f "package.json"; then
+                npm ci
+                npm run build
+              fi
+              popd
+            fi
+          done
+
+          cp -r ../h5p-interactive-board .
+      - run: |
+          cd dist
+          ls
+          npm install -g h5p
+          h5p pack -r h5p-interactive-board h5p-editor-interactive-board interactive-board.h5p
+          h5p validate interactive-board.h5p
+      - name: Store packed H5P as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: interactive-board.h5p
+          path: dist/interactive-board.h5p
+      - name: Load library.json
+        id: set_library
+        run: |
+          ls
+          JSON=$(cat ./h5p-interactive-board/library.json)
+          JSON="${JSON//'%'/%25}"
+          JSON="${JSON//$'\n'/%0A}"
+          JSON="${JSON//$'\r'/%0D}"
+          echo "::set-output name=library::${JSON}"
+      - uses: 'marvinpinto/action-automatic-releases@latest' # https://github.com/marvinpinto/actions/tree/master/packages/automatic-releases
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          automatic_release_tag: |
+            ${{
+              format(
+                'v{0}.{1}.{2}',
+                fromJson(steps.set_library.outputs.library).majorVersion,
+                fromJson(steps.set_library.outputs.library).minorVersion,
+                fromJson(steps.set_library.outputs.library).patchVersion
+              )
+            }}
+          prerelease: false
+          files: |
+            dist/interactive-board.h5p
