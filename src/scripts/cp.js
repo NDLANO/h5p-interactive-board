@@ -33,7 +33,6 @@ const KEYWORD_TITLE_SKIP = null;
 let InteractiveBoard = function (params, id, extras) {
   var that = this;
   this.presentation = params.presentation;
-  this.defaultAspectRatio = this.presentation.slides[0].aspectRatio || '4-3';
 
   /** @type {Slide[]} */
   this.slides = this.presentation.slides;
@@ -237,52 +236,40 @@ InteractiveBoard.prototype.attach = function ($container) {
     this.setActivityStarted();
   }
 
-  /**
-   * When used to wrap template strings, this will let some code editors syntax highlight the text as HTML.
-   * The function itself returns the content of the template string without altering anything.
-   */
-  const html = String.raw;
-
-  const markup = html`<div class="h5p-keymap-explanation hidden-but-read">
-      ${this.l10n.accessibilitySlideNavigationExplanation}
-    </div>
-    <div
-      class="h5p-fullscreen-announcer hidden-but-read"
-      aria-live="polite"
-    ></div>
-    <div
-      class="h5p-wrapper"
-      tabindex="0"
-      aria-label="${this.l10n.accessibilityCanvasLabel}"
-    >
-      <div
-        class="h5p-current-slide-announcer hidden-but-read"
-        aria-live="polite"
-      ></div>
-      <div tabindex="-1"></div>
-      <div class="h5p-box-wrapper">
-        <div class="h5p-presentation-wrapper">
-          <div class="h5p-keywords-wrapper"></div>
-          <div class="h5p-slides-wrapper"></div>
-        </div>
-      </div>
-      <nav class="h5p-cp-navigation">
-        <ol class="h5p-progressbar list-unstyled"></ol>
-      </nav>
-      <div class="h5p-footer"></div>
-    </div>`;
+  var html =
+          '<div class="h5p-keymap-explanation hidden-but-read">' + (!this.activeSurface && this.l10n.accessibilitySlideNavigationExplanation) + '</div>' +
+          '<div class="h5p-fullscreen-announcer hidden-but-read" aria-live="polite"></div>' +
+          '<div class="h5p-wrapper" tabindex="0" role="region" aria-roledescription="carousel" aria-label="' + (!this.activeSurface && this.l10n.accessibilityCanvasLabel) + '">' +
+          '  <div class="h5p-current-slide-announcer hidden-but-read" aria-live="polite"></div>' +
+          '  <div tabindex="-1"></div>' +
+          '  <div class="h5p-box-wrapper">' +
+          '    <div class="h5p-presentation-wrapper">' +
+          '      <div class="h5p-keywords-wrapper"></div>' +
+          '     <div class="h5p-slides-wrapper"></div>' +
+          '    </div>' +
+          '  </div>' +
+          '  <nav class="h5p-cp-navigation" aria-label="' + this.l10n.slideshowNavigationLabel + '">' +
+          '    <div class="h5p-progressbar" role="tablist" aria-label="' + this.l10n.accessibilityProgressBarLabel + '"></div>' +
+          '  </nav>' +
+          '  <div class="h5p-footer"></div>' +
+          '</div>';
 
   $container
     .attr('role', 'application')
-    .addClass('h5p-coursepresentation')
-    .html(markup);
+    .addClass('h5p-course-presentation')
+    .html(html);
 
   this.$container = $container;
   this.$slideAnnouncer = $container.find('.h5p-current-slide-announcer');
   this.$fullscreenAnnouncer = $container.find('.h5p-fullscreen-announcer');
   this.$slideTop = this.$slideAnnouncer.next();
-  this.$wrapper = $container
-    .children('.h5p-wrapper')
+  this.$wrapper = $container.children('.h5p-wrapper');
+
+  if (this.activeSurface) {
+    this.$wrapper.addClass('h5p-course-presentation-active-surface');
+  }
+
+  this.$wrapper
     .focus(function () {
       that.initKeyEvents();
     })
@@ -774,24 +761,6 @@ InteractiveBoard.prototype.fitCT = function () {
 };
 
 /**
- * Set ratio from current slide.
- * @param {boolean} fullscreen
- * @returns {undefined}
- */
-InteractiveBoard.prototype.resetRatio = function () {
-  const slide = this.slides[this.$current.index()];
-
-  const validRatioRegex = /^\d+-\d+$/;
-  if (!validRatioRegex.test(slide.aspectRatio)) {
-    this.ratio = 16 / 9;
-  }
-  else {
-    this.ratio =
-      slide.aspectRatio.split('-')[0] / slide.aspectRatio.split('-')[1];
-  }
-};
-
-/**
  * Resize handling.
  */
 InteractiveBoard.prototype.resize = function () {
@@ -804,8 +773,6 @@ InteractiveBoard.prototype.resize = function () {
   if (this.ignoreResize) {
     return; // When printing.
   }
-
-  this.resetRatio();
 
   // Fill up all available width
   this.$wrapper.css('width', 'auto');
@@ -832,39 +799,15 @@ InteractiveBoard.prototype.resize = function () {
 
   this.$wrapper.css(style);
 
-  // Set h5p-box-wrapper height
-  const navigationHeight =
-    this.$container.find('.h5p-cp-navigation').height() || 0;
-  const footerHeight = this.$footer.height() || 0;
-  this.$boxWrapper.css({
-    height: `${width / this.ratio - navigationHeight - footerHeight - 10}px`,
-  });
-
   this.swipeThreshold = widthRatio * 100; // Default swipe threshold is 50px.
 
   // Resize elements
-  const instances = this.elementInstances[this.$current.index()];
+  var instances = this.elementInstances[this.$current.index()];
   if (instances !== undefined) {
-    const slideElements = this.slides[this.$current.index()].elements;
-
-    for (let i = 0; i < instances.length; i++) {
-      const instance = instances[i];
-
-      const isDialogCards =
-        instance.libraryInfo &&
-        instance.libraryInfo.machineName === 'H5P.Dialogcards';
-      if (isDialogCards) {
-        instance.on('resize', function () {
-          self.resizeDialogCard(this);
-        });
-      }
-
-      if (
-        (instance.preventResize === undefined ||
-          instance.preventResize === false) &&
-        instance.$ !== undefined &&
-        !slideElements[i].displayAsButton
-      ) {
+    var slideElements = this.slides[this.$current.index()].elements;
+    for (var i = 0; i < instances.length; i++) {
+      var instance = instances[i];
+      if ((instance.preventResize === undefined || instance.preventResize === false) && instance.$ !== undefined && !slideElements[i].displayAsButton) {
         H5P.trigger(instance, 'resize');
       }
     }
@@ -1118,12 +1061,7 @@ InteractiveBoard.prototype.attachElements = function ($slide, index) {
  * @param {number} index
  * @returns {jQuery}
  */
-InteractiveBoard.prototype.attachElement = function (
-  element,
-  instance,
-  $slide,
-  index,
-) {
+InteractiveBoard.prototype.attachElement = function (element, instance, $slide, index) {
   const { displayAsButton, showAsHotspot } = element;
   const overrideButtonSize = element.buttonSize !== undefined;
 
@@ -1148,10 +1086,10 @@ InteractiveBoard.prototype.attachElement = function (
       height: `${element.height}%`,
       transform: element.transform,
     })
-    .appendTo($slide);
+    .appendTo($slide.children('[role="document"]').first());
 
-  const isTransparent =
-    element.backgroundOpacity === undefined || element.backgroundOpacity === 0;
+  const isTransparent = element.backgroundOpacity === undefined ||
+    element.backgroundOpacity === 0;
   $elementContainer.toggleClass('h5p-transparent', isTransparent);
 
   if (displayAsButton) {
@@ -1160,22 +1098,20 @@ InteractiveBoard.prototype.attachElement = function (
   }
   else {
     const hasLibrary = element.action && element.action.library;
-    const libTypePmz = hasLibrary
-      ? this.getLibraryTypePmz(element.action.library)
-      : 'other';
+    const libTypePmz = hasLibrary ?
+      this.getLibraryTypePmz(element.action.library) :
+      'other';
 
     const $outerElementContainer = H5P.jQuery('<div>', {
       class: `h5p-element-outer ${libTypePmz}-outer-element`,
-    })
-      .css({
-        background:
-          'rgba(255,255,255,' +
-          (element.backgroundOpacity === undefined
-            ? 0
-            : element.backgroundOpacity / 100) +
-          ')',
-      })
-      .appendTo($elementContainer);
+    }).css({
+      background:
+        'rgba(255,255,255,' +
+        (element.backgroundOpacity === undefined
+          ? 0
+          : element.backgroundOpacity / 100) +
+        ')',
+    }).appendTo($elementContainer);
 
     const $innerElementContainer = H5P.jQuery('<div>', {
       class: 'h5p-element-inner',
@@ -1191,7 +1127,7 @@ InteractiveBoard.prototype.attachElement = function (
     instance.attach($innerElementContainer);
     if (
       element.action !== undefined &&
-      element.action.library.substr(0, 24) === 'H5P.NDLAInteractiveVideo'
+      element.action.library.substr(0, 20) === 'H5P.InteractiveVideo'
     ) {
       var handleIV = function () {
         instance.$container.addClass('h5p-fullscreen');
@@ -1422,7 +1358,7 @@ InteractiveBoard.prototype.createInteractionButton = function (
 
   if (
     element.action !== undefined &&
-    element.action.library.substr(0, 24) === 'H5P.NDLAInteractiveVideo'
+    element.action.library.substr(0, 20) === 'H5P.InteractiveVideo'
   ) {
     instance.on('controls', function () {
       if (instance.controls.$fullscreen) {
@@ -1469,7 +1405,7 @@ InteractiveBoard.prototype.showInteractionPopup = function (
       () => {
         // Specific to YT Iframe
         if (
-          instance.libraryInfo.machineName === 'H5P.NDLAInteractiveVideo' &&
+          instance.libraryInfo.machineName === 'H5P.InteractiveVideo' &&
           instance.video.pressToPlay !== undefined
         ) {
           // YT iframe does not receive state change event when it opens in a dialog box second time
@@ -2657,7 +2593,7 @@ InteractiveBoard.prototype.pauseMedia = function (instance, params = null) {
       // Don't pause media if the source is not compatible
       if (
         params &&
-        instance.libraryInfo.machineName === 'H5P.NDLAInteractiveVideo' &&
+        instance.libraryInfo.machineName === 'H5P.InteractiveVideo' &&
         instance.video.pressToPlay === undefined &&
         params.interactiveVideo.video.files &&
         H5P.VideoHtml5.canPlay(params.interactiveVideo.video.files)

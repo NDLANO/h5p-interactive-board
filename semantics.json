@@ -6,13 +6,6 @@
     "widget": "coursepresentation",
     "fields": [
       {
-        "name": "defaultAspectRatio",
-        "importance": "high",
-        "type": "text",
-        "optional": true,
-        "label": "Aspect Ratio"
-      },
-      {
         "name": "slides",
         "importance": "high",
         "type": "list",
@@ -21,13 +14,6 @@
           "importance": "high",
           "type": "group",
           "fields": [
-            {
-              "name": "aspectRatio",
-              "importance": "high",
-              "type": "text",
-              "optional": true,
-              "label": "Aspect Ratio"
-            },
             {
               "name": "elements",
               "importance": "high",
@@ -93,7 +79,8 @@
                       "H5P.ContinuousText 1.2",
                       "H5P.ExportableTextArea 1.3",
                       "H5P.NDLAChart 1.2",
-                      "H5P.Table 1.1"
+                      "H5P.Table 1.1",
+                      "H5P.InteractiveVideo 1.26"
                     ],
                     "optional": true
                   },
@@ -103,7 +90,10 @@
                     "type": "text",
                     "widget": "none",
                     "optional": true,
-                    "options": ["true", "false"]
+                    "options": [
+                      "true",
+                      "false"
+                    ]
                   },
                   {
                     "name": "solution",
@@ -183,10 +173,30 @@
                     "spectrum": {
                       "showPalette": true,
                       "palette": [
-                        ["#1d5cff", "black", "white", "gray"],
-                        ["red", "blue", "yellow", "green"],
-                        ["pink", "purple", "brown", "orange"],
-                        ["lime", "violet", "magenta", "cyan"]
+                        [
+                          "#1d5cff",
+                          "black",
+                          "white",
+                          "gray"
+                        ],
+                        [
+                          "red",
+                          "blue",
+                          "yellow",
+                          "green"
+                        ],
+                        [
+                          "pink",
+                          "purple",
+                          "brown",
+                          "orange"
+                        ],
+                        [
+                          "lime",
+                          "violet",
+                          "magenta",
+                          "cyan"
+                        ]
                       ]
                     }
                   },
@@ -847,6 +857,30 @@
         "type": "text",
         "label": "Exited fullscreen announcement for assistive technologies",
         "default": "Exited fullscreen"
+      },
+      {
+        "name": "confirmDialogHeader",
+        "type": "text",
+        "label": "Header of submit result confirmation dialog",
+        "default": "Submit your answers"
+      },
+      {
+        "name": "confirmDialogText",
+        "type": "text",
+        "label": "Text of submit result confirmation dialog",
+        "default": "This will submit your results, do you want to continue?"
+      },
+      {
+        "name": "confirmDialogConfirmText",
+        "type": "text",
+        "label": "Confirmation button of submit result confirmation dialog",
+        "default": "Submit and see results"
+      },
+      {
+        "name": "slideshowNavigationLabel",
+        "type": "text",
+        "label": "Label for Slideshow navigation",
+        "default": "Slideshow navigation"
       },
       {
         "name": "informationDialogClose",

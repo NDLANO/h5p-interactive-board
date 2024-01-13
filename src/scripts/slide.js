@@ -60,23 +60,22 @@ function Slide(parameters) {
 
 /**
  * Creates the HTML for a single slide.
- * @param {object} params Slide parameters.
- * @param parameters
+ *
+ * @param {Object} params Slide parameters.
  * @returns {string} HTML.
  */
 Slide.createHTML = function (parameters) {
-  const classNames = `h5p-slide ${
-    parameters.aspectRatio ? ` h5p-slide-${parameters.aspectRatio}` : ''
-  }`;
-  const style = `${
-    parameters.background ? `style="background:${parameters.background}"` : ''
-  }`;
-
-  return `<div
-  	role="document"
-  	class="${classNames}"
-  	${style}
-  	></div>`;
+  return '<div ' +
+      'role="tabpanel" ' +
+      'id="slide-' + parameters.index + '" ' +
+      'aria-labelledby="progressbar-part-' + parameters.index + '" ' +
+      'class="h5p-slide"> ' +
+      '<div ' +
+        'role="document" ' +
+        'tabindex="0" ' +
+        (parameters.background !== undefined ? ' style="background:' + parameters.background + '"' : '') + '>' +
+      '</div>' +
+    '</div>';
 };
 
 Slide.prototype.showSolutions = function () {

@@ -3,14 +3,8 @@
     {
       "fields": [
         {
-          "label": "Aspect Ratio"
-        },
-        {
           "field": {
             "fields": [
-              {
-                "label": "Aspect Ratio"
-              },
               {
                 "field": {
                   "fields": [
@@ -78,6 +72,9 @@
                         },
                         {
                           "label": "Link icon"
+                        },
+                        {
+                          "label": "Text icon"
                         }
                       ]
                     },
@@ -347,11 +344,32 @@
           "default": "Heu entrat en el mode pantalla completa"
         },
         {
+          "label": "Exited fullscreen announcement for assistive technologies",
+          "default": "Exited fullscreen"
+        },
+        {
+          "label": "Header of submit result confirmation dialog",
+          "default": "Submit your answers"
+        },
+        {
+          "label": "Text of submit result confirmation dialog",
+          "default": "This will submit your results, do you want to continue?"
+        },
+        {
+          "label": "Confirmation button of submit result confirmation dialog",
+          "default": "Submit and see results"
+        },
+        {
+          "label": "Label for Slideshow navigation",
+          "default": "Slideshow navigation"
+        },
+        {
           "label": "Anunci de sortida de la pantalla completa per a les tecnologies d’assistència",
           "default": "Heu sortit de la pantalla completa"
         },
         {
           "label": "Exit dialog action for assistive technologies",
+          "description": "Used for assistive technologies",
           "default": "Exit dialog"
         },
         {
