@@ -25,16 +25,21 @@ jobs:
 
       - name: Get and build dependencies
         run: |
+          COLOR_BLUE='\033[0;34m'
+
           mkdir -p dist
           cd dist
 
           # Clone dependencies
+          echo -e "${COLOR_BLUE}Cloning dependencies{COLOR_OFF}"
           while read -r repo; do git clone ${repo}; done < ../h5p-interactive-board/build_info/repos
 
           # Build distribution versions
+          echo -e "${COLOR_BLUE}Building dependencies{COLOR_OFF}"
           for dir in */ ; do
             if [ -d "$dir" ]; then
               pushd $dir
+              echo -e "${COLOR_BLUE}Building $dir{COLOR_OFF}"
               if test -f "package.json"; then
                 npm ci
                 npm run build
