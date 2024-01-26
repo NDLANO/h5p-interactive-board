@@ -138,7 +138,7 @@ const NavigationLine = (function ($) {
 
       // Add hover effect if not an ipad or iphone.
       if (!isIOS) {
-        H5P.Tooltip($li.get(0), { position: 'top' });
+        H5P.Tooltip?.($li.get(0), { position: 'top' });
       }
 
 
@@ -265,7 +265,7 @@ const NavigationLine = (function ($) {
       'html': '<span class="h5p-icon-menu"></span><span class="current-slide-title"></span>'
     }).appendTo($leftFooter);
 
-    H5P.Tooltip(this.cp.$keywordsButton.get(0));
+    H5P.Tooltip?.(this.cp.$keywordsButton.get(0));
 
     addClickAndKeyboardListeners(this.cp.$keywordsButton, (event) => {
       if (!that.cp.presentation.keywordListAlwaysShow) {
@@ -297,7 +297,9 @@ const NavigationLine = (function ($) {
       'aria-disabled': 'true'
     }).appendTo($centerFooter);
 
-    new H5P.Tooltip(this.cp.$prevSlideButton.get(0), { position: 'left' });
+    if (H5P.Tooltip) {
+      new H5P.Tooltip(this.cp.$prevSlideButton.get(0), { position: 'left' });
+    }
 
     addClickAndKeyboardListeners(this.cp.$prevSlideButton, () => this.cp.previousSlide(undefined, false));
 
@@ -343,7 +345,7 @@ const NavigationLine = (function ($) {
       'tabindex': '0'
     }).appendTo($centerFooter);
 
-    H5P.Tooltip(this.cp.$nextSlideButton.get(0), { position: 'right' });
+    H5P.Tooltip?.(this.cp.$nextSlideButton.get(0), { position: 'right' });
 
     addClickAndKeyboardListeners(this.cp.$nextSlideButton, () => this.cp.nextSlide(undefined, false));
 
@@ -362,7 +364,7 @@ const NavigationLine = (function ($) {
         'tabindex': '0'
       }).appendTo($rightFooter);
 
-      H5P.Tooltip(this.cp.$exitSolutionModeButton.get(0));
+      H5P.Tooltip?.(this.cp.$exitSolutionModeButton.get(0));
 
       addClickAndKeyboardListeners(this.cp.$exitSolutionModeButton, () => that.cp.jumpToSlide(that.cp.slides.length - 1));
 
@@ -374,7 +376,7 @@ const NavigationLine = (function ($) {
           'tabindex': '0'
         }).appendTo($rightFooter);
 
-        H5P.Tooltip(this.cp.$printButton.get(0));
+        H5P.Tooltip?.(this.cp.$printButton.get(0));
 
         addClickAndKeyboardListeners(this.cp.$printButton, () => that.openPrintDialog());
       }
@@ -388,7 +390,7 @@ const NavigationLine = (function ($) {
           'tabindex': '0'
         });
 
-        H5P.Tooltip(this.cp.$fullScreenButton.get(0), { position: 'left' });
+        H5P.Tooltip?.(this.cp.$fullScreenButton.get(0), { position: 'left' });
 
         addClickAndKeyboardListeners(this.cp.$fullScreenButton, () => that.cp.toggleFullScreen());
 
